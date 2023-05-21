@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 @PluginDescriptor(
 	name = "Xp Goals",
-	description = "Displays and tracks xp goal patterns for multiple skills."
+	description = "Track xp goals."
 )
 
 public class XpGoalsPlugin extends Plugin
@@ -61,7 +61,7 @@ public class XpGoalsPlugin extends Plugin
 	@Subscribe
 	public void onRuneScapeProfileChanged(RuneScapeProfileChanged e)
 	{
-
+		new DayScope(new DayScope());
 	}
 
 	@Provides
