@@ -1,9 +1,7 @@
 package com.ericversteeg.scope;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalField;
 import java.util.Date;
@@ -46,13 +44,19 @@ public abstract class Scope
     public Scope(Scope parent)
     {
         this.parent = parent;
-        parent.addChild(this);
+        if (parent != null)
+        {
+            parent.addChild(this);
+        }
     }
 
     public Scope(Scope parent, int value)
     {
         this.parent = parent;
-        parent.addChild(this);
+        if (parent != null)
+        {
+            parent.addChild(this);
+        }
 
         this.type = Type.FIXED;
 
@@ -62,7 +66,10 @@ public abstract class Scope
     public Scope(Scope parent, TemporalField temporalField, int value)
     {
         this.parent = parent;
-        parent.addChild(this);
+        if (parent != null)
+        {
+            parent.addChild(this);
+        }
 
         this.type = Type.FIXED;
 
@@ -75,7 +82,10 @@ public abstract class Scope
     public Scope(Scope parent, int offset, int interval)
     {
         this.parent = parent;
-        parent.addChild(this);
+        if (parent != null)
+        {
+            parent.addChild(this);
+        }
 
         this.type = Type.REPEAT;
 
@@ -103,7 +113,11 @@ public abstract class Scope
     {
         if (parent == null)
         {
-            if (this instanceof DayScope)
+            if (this instanceof  HourScope)
+            {
+                refLocalDate = estLocalDate.atTime(estLocalDate.get(ChronoField.HOUR_OF_DAY), 0);
+            }
+            else if (this instanceof DayScope)
             {
                 refLocalDate = estLocalDate.atStartOfDay();
             }
@@ -131,6 +145,10 @@ public abstract class Scope
         else if (parent instanceof WeekScope)
         {
             refLocalDate = nowLocalDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).atStartOfDay();
+        }
+        else if (parent instanceof DayScope)
+        {
+            refLocalDate = nowLocalDate.atStartOfDay();
         }
     }
 
@@ -172,7 +190,14 @@ public abstract class Scope
 
     protected boolean matchesFixed()
     {
-        return nowLocalDate.get(temporalField) == value;
+        if (this instanceof HourScope)
+        {
+            return nowLocalDate.atTime(LocalTime.now()).get(temporalField) == value;
+        }
+        else
+        {
+            return nowLocalDate.get(temporalField) == value;
+        }
     }
 
     abstract boolean matchesInterval(LocalDateTime estLocalDate, LocalDate nowLocalDate, int offset, int interval);

@@ -10,36 +10,99 @@ public interface XpGoalsConfig extends Config
 {
 	String GROUP = "xpgoals";
 
+	@ConfigItem(
+			keyName = "anchorX",
+			name = "Anchor X Position",
+			description = "Configures the x position for the xp bars."
+	)
+	default int anchorX() { return 0; }
+
+	@ConfigItem(
+			keyName = "anchorY",
+			name = "Anchor Y Position",
+			description = "Configures the y position for the xp bars."
+	)
+	default int anchorY() { return 0; }
+
 	@ConfigSection(
-			name = "Slayer",
-			description = "Slayer Goals",
+			name = "Mining",
+			description = "Mining Skill",
 			position = 0,
 			closedByDefault = true
 	)
-	String slayerSkill = "slayerSkill";
+	String miningSkill = "miningSkill";
 
 	@ConfigItem(
-			position = 0,
-			keyName = "enableSlayer",
-			name = "Enable Slayer",
-			description = "Configures whether or not slayer skill is enabled.",
-			section = slayerSkill
+			keyName = "enableMining",
+			name = "Enabled",
+			description = "Configures whether or not mining skill is enabled.",
+			section = miningSkill
 	)
-	default boolean enableSlayerSkill()
+	default boolean enableMiningSkill()
 	{
 		return false;
 	}
 
 	@ConfigItem(
-			position = 0,
-			keyName = "slayerPatterns",
-			name = "Slayer Patterns",
-			description = "Configures slayer xp patterns, each pattern format is [cyclic rotation](xp). " +
-					"To write patterns refer to the \"Example Skill\" section.",
-			section = slayerSkill
+			keyName = "miningXpGoal",
+			name = "Target Xp",
+			description = "Configures the xp goal.",
+			section = miningSkill
 	)
-	default String slayerPattens()
+	default int miningXpGoal()
 	{
-		return "[Sat,Sun](150000)";
+		return 0;
+	}
+
+	@ConfigItem(
+			keyName = "MiningVisibilityPatterns",
+			name = "Visibility Patterns",
+			description = "Configures visibility patterns.",
+			section = miningSkill
+	)
+	default String miningPattens()
+	{
+		return "";
+	}
+
+	@ConfigSection(
+			name = "Runecrafting",
+			description = "Runecrafting Skill",
+			position = 0,
+			closedByDefault = true
+	)
+	String runecraftingSkill = "runecraftingSkill";
+
+	@ConfigItem(
+			keyName = "enableRunecrafting",
+			name = "Enabled",
+			description = "Configures whether or not Runecrafting skill is enabled.",
+			section = runecraftingSkill
+	)
+	default boolean enableRunecraftingSkill()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "runecraftingXpGoal",
+			name = "Target Xp",
+			description = "Configures the xp goal.",
+			section = runecraftingSkill
+	)
+	default int runecraftingXpGoal()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
+			keyName = "runecraftingVisibilityPatterns",
+			name = "Visibility Patterns",
+			description = "Configures visibility patterns.",
+			section = runecraftingSkill
+	)
+	default String runecraftingPattens()
+	{
+		return "";
 	}
 }
