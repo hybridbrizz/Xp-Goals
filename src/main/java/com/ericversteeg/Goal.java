@@ -1,6 +1,7 @@
 package com.ericversteeg;
 
 import com.google.gson.annotations.SerializedName;
+import net.runelite.api.Skill;
 
 import java.util.LinkedList;
 import java.util.List;

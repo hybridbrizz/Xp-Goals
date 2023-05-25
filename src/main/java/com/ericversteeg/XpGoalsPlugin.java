@@ -18,10 +18,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
 import java.util.Arrays;
@@ -62,6 +59,12 @@ public class XpGoalsPlugin extends Plugin
 
 	private String profileKey = "";
 
+	ZoneOffset zoneOffset = ZoneId.systemDefault()
+		.getRules()
+		.getOffset(
+			LocalDate.now()
+				.atStartOfDay()
+		);
 	LocalDateTime lastDateTime = null;
 
 	@Override
@@ -74,6 +77,7 @@ public class XpGoalsPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		overlayManager.remove(overlay);
+		writeSavedData();
 	}
 
 	@Subscribe
@@ -85,13 +89,9 @@ public class XpGoalsPlugin extends Plugin
 			goalData = getSavedData();
 
 			lastDateTime = LocalDateTime.ofEpochSecond(
-					goalData.lastReset, 0,
-					ZoneId.systemDefault()
-						.getRules()
-						.getOffset(
-							LocalDate.now()
-								.atStartOfDay()
-						)
+				goalData.lastReset,
+				0,
+				zoneOffset
 			);
 
 			checkResets();
@@ -171,7 +171,7 @@ public class XpGoalsPlugin extends Plugin
 			writeSavedData();
 		}
 
-		lastDateTime = dateTIme;
+		goalData.lastCheck = dateTIme.toEpochSecond(zoneOffset);
 	}
 
 	private void resetGoals(int resetType)
@@ -242,84 +242,45 @@ public class XpGoalsPlugin extends Plugin
 
 		for (Goal goal: goalData.goals)
 		{
+			int skillId = goal.skillId;
+
+			boolean enabled = isGoalEnabled(skillId);
+			boolean track = false;
+			int goalXp = goalXp(skillId);
+
+			try {
+				String [] patterns = goalPatterns(skillId).split("\n");
+				for (String patternStr: patterns)
+				{
+					if (patternStr.trim().isEmpty()) continue;
+
+					String pattern = "";
+
+					if (patternStr.contains("="))
+					{
+						String [] patternParts = patternStr.split("=");
+						pattern = patternParts[0].trim();
+
+						goalXp = Integer.parseInt(patternParts[1].trim());
+					}
+					else
+					{
+						pattern = patternStr;
+					}
+
+					if (Pattern.parse(pattern, new Date()).matches())
+					{
+						track = true;
+						break;
+					}
+				}
+			}
+			catch (Exception exception) {}
+
 			goal.resetType = Goal.resetDaily;
-
-			if (goal.skillId == Skill.MINING.ordinal())
-			{
-				goal.enabled = config.enableMiningSkill();
-				goal.track = false;
-
-				String [] patterns = config.miningPattens().split("\n");
-
-				for (String patternStr: patterns)
-				{
-					if (patternStr.trim().isEmpty())
-					{
-						continue;
-					}
-
-					String pattern = "";
-					int goalXp = config.miningXpGoal();
-
-					if (patternStr.contains("="))
-					{
-						String [] patternParts = patternStr.split("=");
-						pattern = patternParts[0].trim();
-
-						goalXp = Integer.parseInt(patternParts[1].trim());
-					}
-					else
-					{
-						pattern = patternStr;
-					}
-
-					if (Pattern.parse(pattern, new Date()).matches())
-					{
-						goal.track = true;
-						goal.goalXp = goalXp;
-
-						break;
-					}
-				}
-			}
-			else if (goal.skillId == Skill.RUNECRAFT.ordinal())
-			{
-				goal.enabled = config.enableRunecraftingSkill();
-				goal.track = false;
-
-				String [] patterns = config.runecraftingPattens().split("\n");
-
-				for (String patternStr: patterns)
-				{
-					if (patternStr.trim().isEmpty())
-					{
-						continue;
-					}
-
-					String pattern = "";
-					int goalXp = config.runecraftingXpGoal();
-
-					if (patternStr.contains("="))
-					{
-						String [] patternParts = patternStr.split("=");
-						pattern = patternParts[0].trim();
-
-						goalXp = Integer.parseInt(patternParts[1].trim());
-					}
-					else
-					{
-						pattern = patternStr;
-					}
-
-					if (Pattern.parse(pattern, new Date()).matches())
-					{
-						goal.track = true;
-						goal.goalXp = goalXp;
-
-						break;
-					}
-				}
-			}
+			goal.enabled = enabled;
+			goal.track = track;
+			goal.goalXp = goalXp;
 		}
 	}
 
@@ -333,5 +294,38 @@ public class XpGoalsPlugin extends Plugin
 			}
 		}
 		return null;
+	}
+
+	boolean isGoalEnabled(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return config.enableMiningSkill();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.enableRunecraftingSkill();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.enableAgilitySkill();
+		else if (skillId == Skill.FISHING.ordinal()) return config.enableFishingSkill();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.enableWoodcuttingSkill();
+		else if (skillId == Skill.FARMING.ordinal()) return config.enableFarmingSkill();
+		else return false;
+	}
+
+	int goalXp(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return config.miningXpGoal();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingXpGoal();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityXpGoal();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingXpGoal();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingXpGoal();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingXpGoal();
+		else return 0;
+	}
+
+	String goalPatterns(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return config.miningPattens();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingPattens();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityPattens();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingPattens();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingPattens();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingPattens();
+		else return "";
 	}
 }
