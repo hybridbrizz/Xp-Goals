@@ -15,8 +15,10 @@ import javax.inject.Inject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 class XpGoalsOverlay extends Overlay {
@@ -70,7 +72,10 @@ class XpGoalsOverlay extends Overlay {
 			int bgX = config.anchorX() - 10;
 			int bgY = config.anchorY() - 10;
 			int bgW = ICON_SIZE + 5 + config.barWidth() + 20;
-			int bgH = ICON_SIZE * goals.size() + config.barVerticalSpacing() * (goals.size() - 1) + 20;
+			int bgH = ICON_SIZE * goals.size() +
+					config.barVerticalSpacing() *
+					(goals.size() - 1) + 20 -
+					(goals.size() -1 ) * ICON_SIZE;
 
 			renderBackground(graphics, bgX, bgY, bgW, bgH);
 		}
@@ -87,9 +92,15 @@ class XpGoalsOverlay extends Overlay {
 
 				renderSkillIcon(graphics, offsetY, goal);
 
-				renderXpBar(graphics, offsetY, progress);
+				renderXpBar(
+						graphics,
+						offsetY,
+						progress,
+						progressColor(goal.skillId)
+				);
 
-				renderProgressText(graphics, offsetY, progress);
+				int remainingXp = Math.max(goal.startXp + goal.goalXp - goal.currentXp, 0);
+				renderProgressText(graphics, offsetY, progress, remainingXp);
 
 				offsetY += config.barVerticalSpacing();
 			}
@@ -118,22 +129,18 @@ class XpGoalsOverlay extends Overlay {
 		BufferedImage icon = iconManager.getSkillImage(skill);
 		icon = ImageUtil.resizeImage(icon, ICON_SIZE, ICON_SIZE, true);
 
-//		graphics2D.setColor(Color.decode("#99000000"));
-//		graphics2D.fillRoundRect(config.anchorX() - 2, config.anchorY() - 2,
-//				icon.getWidth() + 4, icon.getHeight() + 4,
-//				(icon.getWidth() + 4) / 2, (icon.getHeight() + 4) / 2);
 		graphics2D.drawImage(icon, config.anchorX(), config.anchorY() + offsetY, null);
 	}
 
-	private void renderXpBar(Graphics2D graphics, int offsetY, float progress)
+	private void renderXpBar(Graphics2D graphics, int offsetY, float progress, Color progressColor)
 	{
 		Color backColor = Color.DARK_GRAY;
-		Color frontColor = Color.decode("#30FCAB");
+		Color frontColor = progressColor;
 		float relPercent = progress;
 
 		if (progress > 1)
 		{
-			backColor = Color.decode("#30FCAB");
+			backColor = progressColor;
 			frontColor = Color.decode("#A020F0");
 			relPercent = progress - 1;
 
@@ -202,8 +209,10 @@ class XpGoalsOverlay extends Overlay {
 		graphics.drawRect(x, y, w, h);
 	}
 
-	private void renderProgressText(Graphics2D graphics, int offsetY, float progress)
+	private void renderProgressText(Graphics2D graphics, int offsetY, float progress, int remainingXp)
 	{
+		if (!config.showText()) return;
+
 		TextComponent textComponent = new TextComponent();
 		graphics.setFont(font);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
@@ -220,7 +229,14 @@ class XpGoalsOverlay extends Overlay {
 			yMulti = -1;
 		}
 
-		String text = String.format("%.3f", progress * 100) + "%";
+		String textFormatStr = "%." + Math.min(config.textPrecision(), 20) + "f";
+
+		String text = String.format(textFormatStr, progress * 100) + "%";
+		if (config.showRemainingXp())
+		{
+			text = NumberFormat.getInstance(Locale.ENGLISH).format(remainingXp);
+		}
+
 		int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - fontMetrics.stringWidth(text) + config.textOffsetX() * xMulti;
 		int y = config.anchorY() + offsetY + ICON_SIZE / 2 - 3 + config.textOffsetY() * yMulti;
 
@@ -288,5 +304,17 @@ class XpGoalsOverlay extends Overlay {
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return Skill.WOODCUTTING;
 		else if (skillId == Skill.FARMING.ordinal()) return Skill.FARMING;
 		else return null;
+	}
+
+	Color progressColor(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return config.miningProgressColor();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingProgressColor();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityProgressColor();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingProgressColor();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingProgressColor();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingProgressColor();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedProgressColor();
+		else return Color.decode("#30FCAB");
 	}
 }

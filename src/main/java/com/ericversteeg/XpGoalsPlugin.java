@@ -23,9 +23,11 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @PluginDescriptor(
-	name = "Xp Goals",
+	name = "Xp Goalz",
 	description = "Track xp goals."
 )
 
@@ -66,6 +68,9 @@ public class XpGoalsPlugin extends Plugin
 				.atStartOfDay()
 		);
 	LocalDateTime lastDateTime = null;
+
+	// so the first hit after a reset is tracked
+	private Map<Integer, Integer> skillsXp = new HashMap<>();
 
 	@Override
 	protected void startUp() throws Exception
@@ -120,14 +125,26 @@ public class XpGoalsPlugin extends Plugin
 	public void onStatChanged(StatChanged statChanged)
 	{
 		Skill skill = statChanged.getSkill();
+		int xp = statChanged.getXp();
+
 		Goal goal = goalForSkillId(skill.ordinal());
 
 		if (goal != null && goal.track)
 		{
-			int xp = statChanged.getXp();
-			if (goal.startXp < 0) { goal.startXp = xp; }
+			int lastXp = xp;
+			if (skillsXp.containsKey(skill.ordinal()))
+			{
+				lastXp = skillsXp.get(skill.ordinal());
+			}
+
+			System.out.println(skill.getName() + "last xp = " + lastXp);
+			System.out.println(skill.getName() + "current xp = " + xp);
+
+			if (goal.startXp < 0) { goal.startXp = lastXp; }
 			goal.currentXp = xp;
 		}
+
+		skillsXp.put(skill.ordinal(), xp);
 	}
 
 	private void checkResets()
@@ -245,42 +262,69 @@ public class XpGoalsPlugin extends Plugin
 			int skillId = goal.skillId;
 
 			boolean enabled = isGoalEnabled(skillId);
-			boolean track = false;
+			boolean track = enabled;
 			int goalXp = goalXp(skillId);
+			ResetType resetType = goalResetType(skillId);
 
-			try {
-				String [] patterns = goalPatterns(skillId).split("\n");
-				for (String patternStr: patterns)
-				{
-					if (patternStr.trim().isEmpty()) continue;
+			boolean oneValidPattern = false;
+			boolean patternError = false;
 
-					String pattern = "";
+			if (enabled) {
+				track = false;
 
-					if (patternStr.contains("="))
+				try {
+					String [] patterns = goalPatterns(skillId).split("\n");
+					for (String patternStr: patterns)
 					{
-						String [] patternParts = patternStr.split("=");
-						pattern = patternParts[0].trim();
+						if (patternStr.trim().isEmpty()) continue;
 
-						goalXp = Integer.parseInt(patternParts[1].trim());
-					}
-					else
-					{
-						pattern = patternStr;
-					}
+						oneValidPattern = true;
 
-					if (Pattern.parse(pattern, new Date()).matches())
-					{
-						track = true;
-						break;
+						String pattern = "";
+
+						if (patternStr.contains("="))
+						{
+							String [] patternParts = patternStr.split("=");
+							pattern = patternParts[0].trim();
+
+							goalXp = Integer.parseInt(patternParts[1].trim());
+						}
+						else
+						{
+							pattern = patternStr;
+						}
+
+						if (Pattern.parse(pattern, new Date()).matches())
+						{
+							track = true;
+							break;
+						}
 					}
 				}
+				catch (Exception exception) {
+					patternError = true;
+				}
 			}
-			catch (Exception exception) {}
 
-			goal.resetType = Goal.resetDaily;
+			if (!oneValidPattern || patternError) {
+				track = enabled;
+			}
+
+//			if (goalXp <= 0)
+//			{
+//				track = false;
+//			}
+
+			goal.resetType = resetType.ordinal();
 			goal.enabled = enabled;
 			goal.track = track;
 			goal.goalXp = goalXp;
+
+			if (!enabled)
+			{
+				goal.startXp = -1;
+				goal.currentXp = -1;
+			}
 		}
 	}
 
@@ -304,7 +348,20 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FISHING.ordinal()) return config.enableFishingSkill();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.enableWoodcuttingSkill();
 		else if (skillId == Skill.FARMING.ordinal()) return config.enableFarmingSkill();
+		else if (skillId == Skill.RANGED.ordinal()) return config.enableRangedSkill();
 		else return false;
+	}
+
+	ResetType goalResetType(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return config.miningResetType();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingResetType();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityResetType();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingResetType();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingResetType();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingResetType();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedResetType();
+		else return ResetType.NONE;
 	}
 
 	int goalXp(int skillId)
@@ -315,6 +372,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FISHING.ordinal()) return config.fishingXpGoal();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingXpGoal();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingXpGoal();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedXpGoal();
 		else return 0;
 	}
 
@@ -326,6 +384,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FISHING.ordinal()) return config.fishingPattens();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingPattens();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingPattens();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedPattens();
 		else return "";
 	}
 }

@@ -31,6 +31,13 @@ public interface XpGoalsConfig extends Config
 	default int textOffsetX() { return 0; }
 
 	@ConfigItem(
+			keyName = "textPrecision",
+			name = "Text Precision",
+			description = "Configures the decimal places."
+	)
+	default int textPrecision() { return 3; }
+
+	@ConfigItem(
 			keyName = "textOffsetY",
 			name = "Text Offset Y Position",
 			description = "Configures the y position offset for text."
@@ -43,6 +50,20 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the x position offset for text."
 	)
 	default boolean textOffsetXNegative() { return false; }
+
+	@ConfigItem(
+			keyName = "remainingXp",
+			name = "Remaining Xp",
+			description = "Configures whether or not to show remaining xp."
+	)
+	default boolean showRemainingXp() { return false; }
+
+	@ConfigItem(
+			keyName = "showText",
+			name = "Show Text",
+			description = "Configures whether or not to show progress / remaining xp text."
+	)
+	default boolean showText() { return false; }
 
 	@ConfigItem(
 			keyName = "textOffsetYNegative",
@@ -116,6 +137,25 @@ public interface XpGoalsConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "miningResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = miningSkill
+	)
+	default ResetType miningResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "miningProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = miningSkill
+	)
+	default Color miningProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
 			keyName = "miningXpGoal",
 			name = "Target Xp",
 			description = "Configures the xp goal.",
@@ -154,6 +194,25 @@ public interface XpGoalsConfig extends Config
 	default boolean enableRunecraftingSkill()
 	{
 		return false;
+	}
+
+	@ConfigItem(
+			keyName = "runecraftingResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = runecraftingSkill
+	)
+	default ResetType runecraftingResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "runecraftingProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = runecraftingSkill
+	)
+	default Color runecraftingProgressColor()
+	{
+		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -198,6 +257,25 @@ public interface XpGoalsConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "agilityResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = agilitySkill
+	)
+	default ResetType agilityResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "agilityProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = agilitySkill
+	)
+	default Color agilityProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
 			keyName = "agilityXpGoal",
 			name = "Target Xp",
 			description = "Configures the xp goal.",
@@ -236,6 +314,25 @@ public interface XpGoalsConfig extends Config
 	default boolean enableFishingSkill()
 	{
 		return false;
+	}
+
+	@ConfigItem(
+			keyName = "fishingResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = fishingSkill
+	)
+	default ResetType fishingResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "fishingProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = fishingSkill
+	)
+	default Color fishingProgressColor()
+	{
+		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -280,6 +377,25 @@ public interface XpGoalsConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "woodcuttingResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = woodcuttingSkill
+	)
+	default ResetType woodcuttingResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "woodcuttingProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = woodcuttingSkill
+	)
+	default Color woodcuttingProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
 			keyName = "woodcuttingXpGoal",
 			name = "Target Xp",
 			description = "Configures the xp goal.",
@@ -321,6 +437,25 @@ public interface XpGoalsConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "farmingResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = farmingSkill
+	)
+	default ResetType farmingResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "farmingProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = farmingSkill
+	)
+	default Color farmingProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
 			keyName = "farmingXpGoal",
 			name = "Target Xp",
 			description = "Configures the xp goal.",
@@ -338,6 +473,66 @@ public interface XpGoalsConfig extends Config
 			section = farmingSkill
 	)
 	default String farmingPattens()
+	{
+		return "";
+	}
+
+	@ConfigSection(
+			name = "Ranged",
+			description = "Ranged Skill",
+			position = 0,
+			closedByDefault = true
+	)
+	String rangedSkill = "rangedSkill";
+
+	@ConfigItem(
+			keyName = "enableRanged",
+			name = "Enabled",
+			description = "Configures whether or not ranged skill is enabled.",
+			section = rangedSkill
+	)
+	default boolean enableRangedSkill()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "rangedResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = rangedSkill
+	)
+	default ResetType rangedResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "rangedProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = rangedSkill
+	)
+	default Color rangedProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
+			keyName = "rangedXpGoal",
+			name = "Target Xp",
+			description = "Configures the xp goal.",
+			section = rangedSkill
+	)
+	default int rangedXpGoal()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
+			keyName = "rangedVisibilityPatterns",
+			name = "Visibility Patterns",
+			description = "Configures visibility patterns.",
+			section = rangedSkill
+	)
+	default String rangedPattens()
 	{
 		return "";
 	}

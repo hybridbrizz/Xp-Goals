@@ -12,6 +12,7 @@ public class Goal {
     static final int resetWeekly = 2;
     static final int resetMonthly = 3;
     static final int resetYearly = 4;
+    static final int resetNone = 5;
 
     public Goal(int skillId)
     {
@@ -36,6 +37,9 @@ public class Goal {
     @SerializedName("previous_results")
     List<Boolean> previousResults = new LinkedList<>();
 
+    @SerializedName("past_progress")
+    List<Float> pastProgress = new LinkedList<>();
+
     int goalXp = 0;
 
     boolean enabled = false;
@@ -43,7 +47,10 @@ public class Goal {
 
     void reset()
     {
-        previousResults.add(currentXp >= startXp + goalXp);
+        pastProgress.add(
+                (currentXp - startXp) /
+                ((float) goalXp)
+        );
 
         startXp = -1;
         currentXp = -1;
