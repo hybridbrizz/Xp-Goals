@@ -120,9 +120,6 @@ public class XpGoalsPlugin extends Plugin
 				lastXp = skillsXp.get(skill.ordinal());
 			}
 
-			System.out.println(skill.getName() + "last xp = " + lastXp);
-			System.out.println(skill.getName() + "current xp = " + xp);
-
 			if (goal.startXp < 0) { goal.startXp = lastXp; }
 			goal.currentXp = xp;
 		}
@@ -341,6 +338,21 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FARMING.ordinal()) return config.enableFarmingSkill();
 		else if (skillId == Skill.RANGED.ordinal()) return config.enableRangedSkill();
 		else if (skillId == Skill.SLAYER.ordinal()) return config.enableSlayerSkill();
+		else if (skillId == Skill.ATTACK.ordinal()) return config.enableAttackSkill();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.enableDefenseSkill();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.enableStrengthSkill();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.enableMagicSkill();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.enablePrayerSkill();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.enableConstructionSkill();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.enableHitpointsSkill();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.enableHerbloreSkill();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.enableThievingSkill();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.enableCraftingSkill();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.enableFletchingSkill();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.enableHunterSkill();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.enableSmithingSkill();
+		else if (skillId == Skill.COOKING.ordinal()) return config.enableCookingSkill();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.enableFiremakingSkill();
 		else return false;
 	}
 
@@ -354,6 +366,21 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingResetType();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedResetType();
 		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerResetType();
+		else if (skillId == Skill.ATTACK.ordinal()) return config.attackResetType();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseResetType();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthResetType();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicResetType();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerResetType();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionResetType();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsResetType();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreResetType();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingResetType();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingResetType();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingResetType();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterResetType();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingResetType();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingResetType();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingResetType();
 		else return ResetType.NONE;
 	}
 
@@ -367,6 +394,21 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingXpGoal();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedXpGoal();
 		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerXpGoal();
+		else if (skillId == Skill.ATTACK.ordinal()) return config.attackXpGoal();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseXpGoal();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthXpGoal();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicXpGoal();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerXpGoal();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionXpGoal();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsXpGoal();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreXpGoal();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingXpGoal();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingXpGoal();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingXpGoal();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterXpGoal();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingXpGoal();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingXpGoal();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingXpGoal();
 		else return 0;
 	}
 
@@ -380,6 +422,21 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingPattens();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedPattens();
 		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerPattens();
+		else if (skillId == Skill.ATTACK.ordinal()) return config.attackPattens();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defensePattens();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthPattens();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicPattens();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerPattens();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionPattens();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsPattens();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herblorePattens();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingPattens();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingPattens();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingPattens();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterPattens();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingPattens();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingPattens();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingPattens();
 		else return "";
 	}
 }

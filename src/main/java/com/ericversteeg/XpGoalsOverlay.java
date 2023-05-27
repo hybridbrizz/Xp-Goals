@@ -15,10 +15,14 @@ import net.runelite.client.util.ImageUtil;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.time.Instant;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +31,8 @@ import java.util.stream.Collectors;
 class XpGoalsOverlay extends Overlay {
 
 	private final int ICON_SIZE = 16;
+	private final int VERTICAL_SPACING = 28;
+	private final int BAR_HEIGHT = 6;
 
 	private final Client client;
 	private final XpGoalsPlugin plugin;
@@ -37,13 +43,18 @@ class XpGoalsOverlay extends Overlay {
 
 	private Color outerBorderColor = new Color(57, 41, 13, 124);
 	private Color innerBorderColor = new Color(147, 141, 130, 37);
+	private Color pastProgressBgColor = new Color(30, 30, 30, 125);
+
+	int panelTopPadding = 7;
+	int panelBottomPadding = 7;
+	int panelHPadding = 4;
 
 	private int panelX;
 	private int panelY;
 	private int panelWidth;
 	private int panelHeight;
 
-	private int titleHeight = 18;
+	private int titleHeight;
 
 	@Inject
 	private XpGoalsOverlay(
@@ -80,28 +91,50 @@ class XpGoalsOverlay extends Overlay {
 	{
 		List<Goal> goals = getTrackedGoals();
 
+		net.runelite.api.Point mouse = client.getMouseCanvasPosition();
+		int mouseX = mouse.getX();
+		int mouseY = mouse.getY();
+
+		boolean hideLabel = config.hideLabel();
+		boolean hideText = config.hideText();
+
+		int barWidth = Math.min(config.barWidth(), 1000);
+
 		if (!goals.isEmpty())
 		{
-			int bgVPadding = 5;
-			int bgHPadding = 5;
-
-			if (config.showText())
+			if (hideLabel)
 			{
-				bgVPadding = 7;
+				titleHeight = 0;
+			}
+			else
+			{
+				titleHeight = 20;
 			}
 
-			panelX= config.anchorX() - bgHPadding;
-			panelY= config.anchorY() - bgVPadding;
-			panelWidth = ICON_SIZE + 5 + config.barWidth() + bgHPadding * 2;
-			panelHeight = ICON_SIZE * goals.size() +
-					config.barVerticalSpacing() *
-					(goals.size() - 1) + bgVPadding * 2 -
-					(goals.size() -1 ) * ICON_SIZE + titleHeight;
+			if (hideText)
+			{
+				panelTopPadding = 5;
+			}
+			else
+			{
+				panelTopPadding = 7;
+			}
+
+			panelX = config.anchorX() - panelHPadding;
+			panelY = config.anchorY() - panelTopPadding;
+			panelWidth = ICON_SIZE + 5 + barWidth + panelHPadding * 2;
+			panelHeight =  titleHeight + VERTICAL_SPACING *
+					goals.size() + panelTopPadding + panelBottomPadding - ICON_SIZE + 1;
 
 			renderPanel(graphics, panelX, panelY, panelWidth, panelHeight);
 
-			renderTitle(graphics);
+			if (!hideLabel)
+			{
+				renderLabel(graphics);
+			}
 		}
+
+		Goal tooltipGoal = null;
 
 		int offsetY = titleHeight;
 		for (int i = 0; i < goals.size(); i++)
@@ -117,21 +150,39 @@ class XpGoalsOverlay extends Overlay {
 
 				renderXpBar(
 						graphics,
+						barWidth,
 						offsetY,
 						progress,
 						progressColor(goal.skillId)
 				);
 
 				int remainingXp = Math.max(goal.startXp + goal.goalXp - goal.currentXp, 0);
-				int textWidth = renderProgressText(graphics, offsetY, progress, remainingXp);
+				renderProgressText(graphics, barWidth, offsetY, progress, remainingXp);
 
 				if (progress >= 1)
 				{
 					//renderDoneImage(graphics, offsetY, textWidth);
 				}
 
-				offsetY += config.barVerticalSpacing();
+				Rectangle2D rectangle = new Rectangle2D.Float(
+						panelX,
+						panelY + offsetY,
+						panelWidth,
+						VERTICAL_SPACING
+				);
+
+				if (rectangle.contains(mouseX, mouseY))
+				{
+					tooltipGoal = goal;
+				}
+
+				offsetY += VERTICAL_SPACING;
 			}
+		}
+
+		if (tooltipGoal != null)
+		{
+			renderPastProgressTooltip(graphics, mouseX + 5, mouseY + 5, tooltipGoal);
 		}
 
 		return null;
@@ -152,15 +203,16 @@ class XpGoalsOverlay extends Overlay {
 		graphics.drawRect(x + 1, y + 1, width - 2, height - 2);
 	}
 
-	private void renderTitle(Graphics2D graphics)
+	private void renderLabel(Graphics2D graphics)
 	{
+		String label = config.labelText();
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 
 		TextComponent textComponent = new TextComponent();
 		textComponent.setFont(FontManager.getRunescapeFont());
-		textComponent.setText(config.titleText());
+		textComponent.setText(label);
 		textComponent.setColor(Color.GREEN);
-		textComponent.setPosition(new Point(panelWidth / 2 - fontMetrics.stringWidth(config.titleText()) / 2 + panelX, panelY + 20));
+		textComponent.setPosition(new Point(panelWidth / 2 - fontMetrics.stringWidth(label) / 2 + panelX, panelY + 18));
 		textComponent.render(graphics);
 	}
 
@@ -175,7 +227,7 @@ class XpGoalsOverlay extends Overlay {
 		graphics2D.drawImage(icon, config.anchorX(), config.anchorY() + offsetY, null);
 	}
 
-	private void renderXpBar(Graphics2D graphics, int offsetY, float progress, Color progressColor)
+	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetY, float progress, Color progressColor)
 	{
 		Color backColor = Color.DARK_GRAY;
 		Color frontColor = progressColor;
@@ -193,84 +245,28 @@ class XpGoalsOverlay extends Overlay {
 			}
 		}
 
-//		if (progress < 0.25)
-//		{
-//			backColor = Color.DARK_GRAY;
-//			frontColor = Color.RED;
-//			relPercent = progress / 0.25f;
-//		}
-//		else if (progress < 0.50)
-//		{
-//			backColor = Color.RED;
-//			frontColor = Color.ORANGE;
-//			relPercent = (progress - 0.25f) / 0.25f;
-//		}
-//		else if (progress < 0.75)
-//		{
-//			backColor = Color.ORANGE;
-//			frontColor = Color.YELLOW;
-//			relPercent = (progress - 0.5f) / 0.25f;
-//		}
-//		else if (progress < 1)
-//		{
-//			backColor = Color.YELLOW;
-//			frontColor = Color.GREEN;
-//			relPercent = (progress - 0.75f) / 0.25f;
-//		}
-//		else if (progress < 1.25)
-//		{
-//			backColor = Color.GREEN;
-//			frontColor = Color.BLUE;
-//			relPercent = (progress - 1f) / 0.25f;
-//		}
-//		else if (progress <= 1.50)
-//		{
-//			backColor = Color.BLUE;
-//			frontColor = Color.decode("#A020F0");
-//			relPercent = (progress - 1.25f) / 0.25f;
-//		}
-//		else
-//		{
-//			backColor = Color.BLUE;
-//			frontColor = Color.decode("#A020F0");
-//			relPercent = 1f;
-//		}
-
-		int w = config.barWidth();
-		int h = config.barHeight();
+		int h = BAR_HEIGHT;
 
 		int x = config.anchorX() + ICON_SIZE + 5;
 		int y = config.anchorY() + offsetY + ICON_SIZE / 2 - h / 2;
 
 		graphics.setColor(backColor);
-		graphics.fillRect(x, y, w, h);
+		graphics.fillRect(x, y, barWidth, h);
 
 		graphics.setColor(frontColor);
-		graphics.fillRect(x, y, (int) (relPercent * w), h);
+		graphics.fillRect(x, y, (int) (relPercent * barWidth), h);
 
 		graphics.setColor(Color.decode("#0b0b0b"));
-		graphics.drawRect(x, y, w, h);
+		graphics.drawRect(x, y, barWidth, h);
 	}
 
-	private int renderProgressText(Graphics2D graphics, int offsetY, float progress, int remainingXp)
+	private int renderProgressText(Graphics2D graphics, int barWidth, int offsetY, float progress, int remainingXp)
 	{
-		if (!config.showText()) return 0;
+		if (config.hideText()) return 0;
 
 		TextComponent textComponent = new TextComponent();
 		graphics.setFont(font);
 		FontMetrics fontMetrics = graphics.getFontMetrics();
-
-		int xMulti = 1;
-		if (config.textOffsetXNegative())
-		{
-			xMulti = -1;
-		}
-
-		int yMulti = 1;
-		if (config.textOffsetYNegative())
-		{
-			yMulti = -1;
-		}
 
 		String textFormatStr = "%." + Math.min(config.textPrecision(), 20) + "f";
 
@@ -282,8 +278,8 @@ class XpGoalsOverlay extends Overlay {
 
 		int w = fontMetrics.stringWidth(text);
 
-		int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - w + config.textOffsetX() * xMulti;
-		int y = config.anchorY() + offsetY + ICON_SIZE / 2 - 3 + config.textOffsetY() * yMulti;
+		int x = config.anchorX() + ICON_SIZE + 5 + barWidth - w;
+		int y = config.anchorY() + offsetY + ICON_SIZE / 2 - 4;
 
 		textComponent.setText(text);
 		textComponent.setPosition(new Point(x, y));
@@ -293,19 +289,88 @@ class XpGoalsOverlay extends Overlay {
 		return w;
 	}
 
-	private void renderDoneImage(Graphics2D graphics, int offsetY, int textWidth)
+	private void renderPastProgressTooltip(Graphics2D graphics, int x, int y, Goal goal)
 	{
-		try
+		int w = 120;
+		int h = 120;
+
+		int border = 2;
+
+		int span = Math.min(config.pastProgressSpan(), 5);
+		span = Math.max(span, 1);
+
+		if (span > 4)
 		{
-			BufferedImage image = ImageIO.read(new File("done.png"));
-			image = ImageUtil.resizeImage(image, 9, 9, true);
-
-			int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - 9;
-			int y = config.anchorY() + offsetY + ICON_SIZE / 2 + 5;
-
-			graphics.drawImage(image, x, y, null);
+			w += 20;
+			h += 20;
 		}
-		catch (Exception error) {}
+
+		w -= (w - border * 2) % span;
+		h -= (h - border * 2) % span;
+
+		renderPanel(graphics, x, y, w, h);
+
+		int xx = x + border;
+		int yy = y + border;
+		int ww = w - border * 2;
+		int hh = h - border * 2;
+
+		int cW = ww / span;
+		int rH = hh / span;
+
+		List<Float> pastProgress = goal.pastProgress;
+
+		for (int r = 0; r < span; r++)
+		{
+			for (int c = 0; c < span; c++)
+			{
+				if (r * span + c < pastProgress.size())
+				{
+					float progress = pastProgress.get(pastProgress.size() - 1 - (r * span + c));
+
+					renderPastProgressItem(
+							graphics,
+							xx + cW * c,
+							yy + rH * r,
+							cW,
+							rH,
+							goal,
+							progress
+					);
+				}
+			}
+		}
+	}
+
+	private void renderPastProgressItem(Graphics2D graphics, int x, int y, int w, int h, Goal goal, float progress)
+	{
+		Color color = progressColor(goal.skillId);
+		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 125));
+
+		//System.out.println("x = " + x + ", y = " + y + ", w = " + w + ", h = " + h + "yy = " + y + (h - (int) (h * progress)) + ", hh = " + (int) (h * progress));
+
+		float percentToFill = Math.min(progress, 1);
+
+		graphics.fillRect(x, y + (h - (int) (h * percentToFill)), w, (int) (h * percentToFill));
+
+		graphics.setFont(FontManager.getRunescapeSmallFont());
+		FontMetrics fontMetrics = graphics.getFontMetrics();
+
+		String text = (int) (progress * 100) + "%";
+
+		TextComponent textComponent = new TextComponent();
+		textComponent.setFont(FontManager.getRunescapeSmallFont());
+		textComponent.setText(text);
+		textComponent.setPosition(new Point(x + (w - fontMetrics.stringWidth(text)) / 2, y + (h - fontMetrics.getHeight()) / 2 + 13));
+		if (progress >= 1)
+		{
+			textComponent.setColor(Color.GREEN);
+		}
+		else
+		{
+			textComponent.setColor(Color.RED);
+		}
+		textComponent.render(graphics);
 	}
 
 	private float getXpProgress(int startXp, int currentXp, int goalXp)
@@ -378,6 +443,21 @@ class XpGoalsOverlay extends Overlay {
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingProgressColor();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedProgressColor();
 		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerProgressColor();
+		else if (skillId == Skill.ATTACK.ordinal()) return config.attackProgressColor();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseProgressColor();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthProgressColor();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicProgressColor();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerProgressColor();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionProgressColor();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsProgressColor();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreProgressColor();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingProgressColor();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingProgressColor();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingProgressColor();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterProgressColor();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingProgressColor();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingProgressColor();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingProgressColor();
 		else return Color.decode("#30FCAB");
 	}
 }

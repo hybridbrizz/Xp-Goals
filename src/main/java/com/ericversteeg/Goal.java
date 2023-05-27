@@ -59,6 +59,8 @@ public class Goal {
                 ((float) goalXp)
         );
 
+        System.out.println("Reset goal skill id = " + skillId);
+
         startXp = -1;
         currentXp = -1;
     }
