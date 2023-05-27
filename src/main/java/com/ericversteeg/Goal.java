@@ -47,6 +47,13 @@ public class Goal {
 
     void reset()
     {
+        if (currentXp < 0) return;
+
+        if (pastProgress == null)
+        {
+            pastProgress = new LinkedList<>();
+        }
+
         pastProgress.add(
                 (currentXp - startXp) /
                 ((float) goalXp)

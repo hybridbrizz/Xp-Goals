@@ -33,29 +33,12 @@ import java.util.Map;
 
 public class XpGoalsPlugin extends Plugin
 {
-	@Inject
-	private XpGoalsOverlay overlay;
-
-	@Inject
-	private OverlayManager overlayManager;
-
-	@Inject
-	private Client client;
-
-	@Inject
-	private XpGoalsConfig config;
-
-	@Inject
-	private ClientThread clientThread;
-
-	@Inject
-	private ItemManager itemManager;
-
-	@Inject
-	private ConfigManager configManager;
-
-	@Inject
-	private Gson gson;
+	@Inject private XpGoalsOverlay overlay;
+	@Inject private OverlayManager overlayManager;
+	@Inject private Client client;
+	@Inject private XpGoalsConfig config;
+	@Inject private ConfigManager configManager;
+	@Inject private Gson gson;
 
 	GoalData goalData;
 
@@ -94,7 +77,7 @@ public class XpGoalsPlugin extends Plugin
 			goalData = getSavedData();
 
 			lastDateTime = LocalDateTime.ofEpochSecond(
-				goalData.lastReset,
+				goalData.lastCheck,
 				0,
 				zoneOffset
 			);
@@ -153,6 +136,8 @@ public class XpGoalsPlugin extends Plugin
 
 		LocalDateTime dateTIme = LocalDateTime.now();
 
+		boolean reset = false;
+
 		if (dateTIme.get(ChronoField.HOUR_OF_DAY) != lastDateTime.get(ChronoField.HOUR_OF_DAY)
 				|| (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH))
 				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
@@ -160,35 +145,41 @@ public class XpGoalsPlugin extends Plugin
 		{
 			resetGoals(Goal.resetHourly);
 			configSyncGoals();
+			reset = true;
 		}
 		if (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH)
 				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetDaily);
+			reset = true;
 		}
 		if (dateTIme.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) != lastDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetWeekly);
+			reset = true;
 		}
 		if (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR)
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetMonthly);
+			reset = true;
 		}
 		if (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR))
 		{
 			resetGoals(Goal.resetYearly);
+			reset = true;
 		}
 
 		// check save data
-		if (dateTIme.get(ChronoField.MINUTE_OF_HOUR) != lastDateTime.get(ChronoField.MINUTE_OF_HOUR))
+		if (dateTIme.get(ChronoField.MINUTE_OF_HOUR) != lastDateTime.get(ChronoField.MINUTE_OF_HOUR) || reset)
 		{
 			writeSavedData();
 		}
 
 		goalData.lastCheck = dateTIme.toEpochSecond(zoneOffset);
+		lastDateTime = dateTIme;
 	}
 
 	private void resetGoals(int resetType)
@@ -200,8 +191,6 @@ public class XpGoalsPlugin extends Plugin
 				goal.reset();
 			}
 		}
-
-		goalData.lastReset = Instant.now().toEpochMilli() / 1000;
 	}
 
 	GoalData getSavedData()
@@ -228,6 +217,8 @@ public class XpGoalsPlugin extends Plugin
 
 	void configSyncGoals()
 	{
+		if (goalData == null) return;
+
 		if (goalData.goals.isEmpty())
 		{
 			goalData.goals = Arrays.asList(
@@ -349,6 +340,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.enableWoodcuttingSkill();
 		else if (skillId == Skill.FARMING.ordinal()) return config.enableFarmingSkill();
 		else if (skillId == Skill.RANGED.ordinal()) return config.enableRangedSkill();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.enableSlayerSkill();
 		else return false;
 	}
 
@@ -361,6 +353,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingResetType();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingResetType();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedResetType();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerResetType();
 		else return ResetType.NONE;
 	}
 
@@ -373,6 +366,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingXpGoal();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingXpGoal();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedXpGoal();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerXpGoal();
 		else return 0;
 	}
 
@@ -385,6 +379,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingPattens();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingPattens();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedPattens();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerPattens();
 		else return "";
 	}
 }

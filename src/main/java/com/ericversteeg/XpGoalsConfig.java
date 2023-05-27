@@ -10,6 +10,13 @@ public interface XpGoalsConfig extends Config
 	String GROUP = "xpgoals";
 
 	@ConfigItem(
+			keyName = "titleText",
+			name = "Title",
+			description = "Configures the title text."
+	)
+	default String titleText() { return "My Goalz"; }
+
+	@ConfigItem(
 			keyName = "anchorX",
 			name = "Anchor X Position",
 			description = "Configures the x position for the xp bars."
@@ -99,7 +106,7 @@ public interface XpGoalsConfig extends Config
 			name = "Background Color",
 			description = "Configures the background color."
 	)
-	default Color bgColor() { return Color.decode("#1b1b1b"); }
+	default Color bgColor() { return ColorDecoder.decodeARGB("#cd393939"); }
 
 	@Alpha
 	@ConfigItem(
@@ -107,7 +114,7 @@ public interface XpGoalsConfig extends Config
 			name = "Outer Border Color",
 			description = "Configures the outer border color."
 	)
-	default Color bgOuterBorder() { return Color.decode("#1b1b1b"); }
+	default Color bgOuterBorder() { return Color.decode("#7c39290d"); }
 
 	@Alpha
 	@ConfigItem(
@@ -115,7 +122,7 @@ public interface XpGoalsConfig extends Config
 			name = "Inner Border Color",
 			description = "Configures the inner border color."
 	)
-	default Color bgInnerBorder() { return Color.decode("#1b1b1b"); }
+	default Color bgInnerBorder() { return Color.decode("#25938d82"); }
 
 	@ConfigSection(
 			name = "Mining",
@@ -536,4 +543,66 @@ public interface XpGoalsConfig extends Config
 	{
 		return "";
 	}
+
+	@ConfigSection(
+			name = "Slayer",
+			description = "Slayer Skill",
+			position = 0,
+			closedByDefault = true
+	)
+	String slayerSkill = "slayerSkill";
+
+	@ConfigItem(
+			keyName = "enableSlayer",
+			name = "Enabled",
+			description = "Configures whether or not slayer skill is enabled.",
+			section = slayerSkill
+	)
+	default boolean enableSlayerSkill()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "slayerResetType",
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = slayerSkill
+	)
+	default ResetType slayerResetType() { return ResetType.DAILY; }
+
+	@ConfigItem(
+			keyName = "slayerProgressColor",
+			name = "Progress Color",
+			description = "Configures the progress color.",
+			section = slayerSkill
+	)
+	default Color slayerProgressColor()
+	{
+		return Color.decode("#30FCAB");
+	}
+
+	@ConfigItem(
+			keyName = "slayerXpGoal",
+			name = "Target Xp",
+			description = "Configures the xp goal.",
+			section = slayerSkill
+	)
+	default int slayerXpGoal()
+	{
+		return 0;
+	}
+
+	@ConfigItem(
+			keyName = "slayerVisibilityPatterns",
+			name = "Visibility Patterns",
+			description = "Configures visibility patterns.",
+			section = slayerSkill
+	)
+	default String slayerPattens()
+	{
+		return "";
+	}
 }
+
+

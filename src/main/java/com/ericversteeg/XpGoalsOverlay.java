@@ -8,12 +8,15 @@ import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.client.ui.overlay.components.ComponentConstants;
 import net.runelite.client.ui.overlay.components.TextComponent;
 import net.runelite.client.util.ImageUtil;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -31,6 +34,16 @@ class XpGoalsOverlay extends Overlay {
 	private final SkillIconManager iconManager;
 
 	private Font font;
+
+	private Color outerBorderColor = new Color(57, 41, 13, 124);
+	private Color innerBorderColor = new Color(147, 141, 130, 37);
+
+	private int panelX;
+	private int panelY;
+	private int panelWidth;
+	private int panelHeight;
+
+	private int titleHeight = 18;
 
 	@Inject
 	private XpGoalsOverlay(
@@ -52,7 +65,7 @@ class XpGoalsOverlay extends Overlay {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			InputStream inRunescapeSmall = FontManager.class.getResourceAsStream("runescape_small.ttf");
 			Font smallFont = Font.createFont(Font.TRUETYPE_FONT, inRunescapeSmall)
-					.deriveFont(Font.PLAIN, 12);
+					.deriveFont(Font.PLAIN,  12);
 			ge.registerFont(smallFont);
 			font = smallFont;
 		}
@@ -69,18 +82,28 @@ class XpGoalsOverlay extends Overlay {
 
 		if (!goals.isEmpty())
 		{
-			int bgX = config.anchorX() - 10;
-			int bgY = config.anchorY() - 10;
-			int bgW = ICON_SIZE + 5 + config.barWidth() + 20;
-			int bgH = ICON_SIZE * goals.size() +
-					config.barVerticalSpacing() *
-					(goals.size() - 1) + 20 -
-					(goals.size() -1 ) * ICON_SIZE;
+			int bgVPadding = 5;
+			int bgHPadding = 5;
 
-			renderBackground(graphics, bgX, bgY, bgW, bgH);
+			if (config.showText())
+			{
+				bgVPadding = 7;
+			}
+
+			panelX= config.anchorX() - bgHPadding;
+			panelY= config.anchorY() - bgVPadding;
+			panelWidth = ICON_SIZE + 5 + config.barWidth() + bgHPadding * 2;
+			panelHeight = ICON_SIZE * goals.size() +
+					config.barVerticalSpacing() *
+					(goals.size() - 1) + bgVPadding * 2 -
+					(goals.size() -1 ) * ICON_SIZE + titleHeight;
+
+			renderPanel(graphics, panelX, panelY, panelWidth, panelHeight);
+
+			renderTitle(graphics);
 		}
 
-		int offsetY = 0;
+		int offsetY = titleHeight;
 		for (int i = 0; i < goals.size(); i++)
 		{
 			Goal goal = goals.get(i);
@@ -100,7 +123,12 @@ class XpGoalsOverlay extends Overlay {
 				);
 
 				int remainingXp = Math.max(goal.startXp + goal.goalXp - goal.currentXp, 0);
-				renderProgressText(graphics, offsetY, progress, remainingXp);
+				int textWidth = renderProgressText(graphics, offsetY, progress, remainingXp);
+
+				if (progress >= 1)
+				{
+					//renderDoneImage(graphics, offsetY, textWidth);
+				}
 
 				offsetY += config.barVerticalSpacing();
 			}
@@ -109,16 +137,31 @@ class XpGoalsOverlay extends Overlay {
 		return null;
 	}
 
-	private void renderBackground(Graphics2D graphics, int x, int y, int width, int height)
+	private void renderPanel(Graphics2D graphics, int x, int y, int width, int height)
 	{
-		graphics.setColor(config.bgColor());
+		graphics.setColor(ComponentConstants.STANDARD_BACKGROUND_COLOR);
 		graphics.fillRect(x, y, width, height);
 
-		graphics.setColor(config.bgOuterBorder());
+		graphics.setColor(outerBorderColor);
 		graphics.drawRect(x, y, width, height);
 
-		graphics.setColor(config.bgInnerBorder());
+		graphics.setColor(outerBorderColor);
+		graphics.drawRect(x - 1, y - 1, width + 2, height + 2);
+
+		graphics.setColor(innerBorderColor);
 		graphics.drawRect(x + 1, y + 1, width - 2, height - 2);
+	}
+
+	private void renderTitle(Graphics2D graphics)
+	{
+		FontMetrics fontMetrics = graphics.getFontMetrics();
+
+		TextComponent textComponent = new TextComponent();
+		textComponent.setFont(FontManager.getRunescapeFont());
+		textComponent.setText(config.titleText());
+		textComponent.setColor(Color.GREEN);
+		textComponent.setPosition(new Point(panelWidth / 2 - fontMetrics.stringWidth(config.titleText()) / 2 + panelX, panelY + 20));
+		textComponent.render(graphics);
 	}
 
 	private void renderSkillIcon(Graphics2D graphics2D, int offsetY, Goal goal)
@@ -209,9 +252,9 @@ class XpGoalsOverlay extends Overlay {
 		graphics.drawRect(x, y, w, h);
 	}
 
-	private void renderProgressText(Graphics2D graphics, int offsetY, float progress, int remainingXp)
+	private int renderProgressText(Graphics2D graphics, int offsetY, float progress, int remainingXp)
 	{
-		if (!config.showText()) return;
+		if (!config.showText()) return 0;
 
 		TextComponent textComponent = new TextComponent();
 		graphics.setFont(font);
@@ -237,13 +280,32 @@ class XpGoalsOverlay extends Overlay {
 			text = NumberFormat.getInstance(Locale.ENGLISH).format(remainingXp);
 		}
 
-		int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - fontMetrics.stringWidth(text) + config.textOffsetX() * xMulti;
+		int w = fontMetrics.stringWidth(text);
+
+		int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - w + config.textOffsetX() * xMulti;
 		int y = config.anchorY() + offsetY + ICON_SIZE / 2 - 3 + config.textOffsetY() * yMulti;
 
 		textComponent.setText(text);
 		textComponent.setPosition(new Point(x, y));
 		textComponent.setColor(Color.WHITE);
 		textComponent.render(graphics);
+
+		return w;
+	}
+
+	private void renderDoneImage(Graphics2D graphics, int offsetY, int textWidth)
+	{
+		try
+		{
+			BufferedImage image = ImageIO.read(new File("done.png"));
+			image = ImageUtil.resizeImage(image, 9, 9, true);
+
+			int x = config.anchorX() + ICON_SIZE + 5 + config.barWidth() - 9;
+			int y = config.anchorY() + offsetY + ICON_SIZE / 2 + 5;
+
+			graphics.drawImage(image, x, y, null);
+		}
+		catch (Exception error) {}
 	}
 
 	private float getXpProgress(int startXp, int currentXp, int goalXp)
@@ -315,6 +377,7 @@ class XpGoalsOverlay extends Overlay {
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingProgressColor();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingProgressColor();
 		else if (skillId == Skill.RANGED.ordinal()) return config.rangedProgressColor();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerProgressColor();
 		else return Color.decode("#30FCAB");
 	}
 }
