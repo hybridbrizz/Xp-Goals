@@ -19,14 +19,6 @@ public interface XpGoalsConfig extends Config
 
 	@ConfigItem(
 			position = 1,
-			keyName = "hideLabel",
-			name = "Hide Label",
-			description = "Configures whether or not to hide the label."
-	)
-	default boolean hideLabel() { return false; }
-
-	@ConfigItem(
-			position = 2,
 			keyName = "anchorX",
 			name = "X Position",
 			description = "Configures the x position."
@@ -34,7 +26,7 @@ public interface XpGoalsConfig extends Config
 	default int anchorX() { return 0; }
 
 	@ConfigItem(
-			position = 3,
+			position = 2,
 			keyName = "anchorY",
 			name = "Y Position",
 			description = "Configures the y position."
@@ -42,7 +34,7 @@ public interface XpGoalsConfig extends Config
 	default int anchorY() { return 0; }
 
 	@ConfigItem(
-			position = 4,
+			position = 3,
 			keyName = "barWidth",
 			name = "Bar Width",
 			description = "Configures the width of xp bars."
@@ -50,34 +42,50 @@ public interface XpGoalsConfig extends Config
 	default int barWidth() { return 80; }
 
 	@ConfigItem(
-			position = 5,
-			keyName = "remainingXp",
-			name = "Remaining Xp",
-			description = "Configures whether or not to show remaining xp instead of progress."
+			position = 4,
+			keyName = "barHeight",
+			name = "Bar Height",
+			description = "Configures the height of xp bars."
 	)
-	default boolean showRemainingXp() { return false; }
+	default int barHeight() { return 6; }
+
+	@ConfigItem(
+			position = 5,
+			keyName = "barSpacing",
+			name = "Bar Spacing",
+			description = "Configures the space between bars."
+	)
+	default int barSpacing() { return 28; }
 
 	@ConfigItem(
 			position = 6,
-			keyName = "textPrecision",
-			name = "Progress Precision",
-			description = "Configures the decimal places."
+			keyName = "barTextType",
+			name = "Text Type",
+			description = "Configures which type of value is displayed."
 	)
-	default int textPrecision() { return 3; }
+	default BarTextType barTextType() { return BarTextType.FRACTION; }
 
 	@ConfigItem(
 			position = 7,
-			keyName = "hideText",
-			name = "Hide Progress Text",
-			description = "Configures whether or not to hide progress text."
+			keyName = "barTextPosition",
+			name = "Text Position",
+			description = "Configures the bar text position."
 	)
-	default boolean hideText() { return false; }
+	default BarTextPosition barTextPosition() { return BarTextPosition.INSIDE; }
+
+	@ConfigItem(
+			position = 7,
+			keyName = "barTextSize",
+			name = "Text Size",
+			description = "Configures the bar text size."
+	)
+	default BarTextSize barTextSize() { return BarTextSize.LARGE; }
 
 	@ConfigItem(
 			position = 8,
 			keyName = "pastProgressSpan",
-			name = "Past Progress Grid Span",
-			description = "Configures number of rows and columns in the past progress tooltip."
+			name = "Grid Size",
+			description = "Configures the grid size for tooltip."
 	)
 	default int pastProgressSpan() { return 3; }
 
@@ -218,7 +226,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "attackCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = attackSkill
 	)
@@ -232,6 +240,16 @@ public interface XpGoalsConfig extends Config
 			section = attackSkill
 	)
 	default String attackPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "attackdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = attackSkill
+	)
+	default String attackDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Strength",
@@ -370,7 +388,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "strengthCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = strengthSkill
 	)
@@ -384,6 +402,16 @@ public interface XpGoalsConfig extends Config
 			section = strengthSkill
 	)
 	default String strengthPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "strengthdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = strengthSkill
+	)
+	default String strengthDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Defense",
@@ -522,7 +550,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "defenseCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = defenseSkill
 	)
@@ -536,6 +564,16 @@ public interface XpGoalsConfig extends Config
 			section = defenseSkill
 	)
 	default String defensePattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "defensedoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = defenseSkill
+	)
+	default String defenseDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Ranged",
@@ -674,7 +712,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "rangedCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = rangedSkill
 	)
@@ -688,6 +726,16 @@ public interface XpGoalsConfig extends Config
 			section = rangedSkill
 	)
 	default String rangedPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "rangeddoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = rangedSkill
+	)
+	default String rangedDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Prayer",
@@ -826,7 +874,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "prayerCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = prayerSkill
 	)
@@ -840,6 +888,16 @@ public interface XpGoalsConfig extends Config
 			section = prayerSkill
 	)
 	default String prayerPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "prayerdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = prayerSkill
+	)
+	default String prayerDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Magic",
@@ -978,7 +1036,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "magicCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = magicSkill
 	)
@@ -992,6 +1050,16 @@ public interface XpGoalsConfig extends Config
 			section = magicSkill
 	)
 	default String magicPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "magicdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = magicSkill
+	)
+	default String magicDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Runecrafting",
@@ -1130,7 +1198,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "runecraftingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = runecraftingSkill
 	)
@@ -1144,6 +1212,16 @@ public interface XpGoalsConfig extends Config
 			section = runecraftingSkill
 	)
 	default String runecraftingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "runecraftingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = runecraftingSkill
+	)
+	default String runecraftingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Construction",
@@ -1282,7 +1360,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "constructionCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = constructionSkill
 	)
@@ -1296,6 +1374,16 @@ public interface XpGoalsConfig extends Config
 			section = constructionSkill
 	)
 	default String constructionPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "constructiondoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = constructionSkill
+	)
+	default String constructionDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Hitpoints",
@@ -1434,7 +1522,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "hitpointsCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = hitpointsSkill
 	)
@@ -1448,6 +1536,16 @@ public interface XpGoalsConfig extends Config
 			section = hitpointsSkill
 	)
 	default String hitpointsPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "hitpointsdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = hitpointsSkill
+	)
+	default String hitpointsDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Agility",
@@ -1586,7 +1684,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "agilityCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = agilitySkill
 	)
@@ -1600,6 +1698,16 @@ public interface XpGoalsConfig extends Config
 			section = agilitySkill
 	)
 	default String agilityPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "agilitydoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = agilitySkill
+	)
+	default String agilityDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Herblore",
@@ -1738,7 +1846,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "herbloreCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = herbloreSkill
 	)
@@ -1752,6 +1860,16 @@ public interface XpGoalsConfig extends Config
 			section = herbloreSkill
 	)
 	default String herblorePattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "herbloredoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = herbloreSkill
+	)
+	default String herbloreDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Thieving",
@@ -1890,7 +2008,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "thievingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = thievingSkill
 	)
@@ -1904,6 +2022,16 @@ public interface XpGoalsConfig extends Config
 			section = thievingSkill
 	)
 	default String thievingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "thievingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = thievingSkill
+	)
+	default String thievingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Crafting",
@@ -2042,7 +2170,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "craftingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = craftingSkill
 	)
@@ -2056,6 +2184,16 @@ public interface XpGoalsConfig extends Config
 			section = craftingSkill
 	)
 	default String craftingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "craftingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = craftingSkill
+	)
+	default String craftingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Fletching",
@@ -2194,7 +2332,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "fletchingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = fletchingSkill
 	)
@@ -2208,6 +2346,16 @@ public interface XpGoalsConfig extends Config
 			section = fletchingSkill
 	)
 	default String fletchingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "fletchingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = fletchingSkill
+	)
+	default String fletchingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Slayer",
@@ -2346,7 +2494,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "slayerCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = slayerSkill
 	)
@@ -2360,6 +2508,16 @@ public interface XpGoalsConfig extends Config
 			section = slayerSkill
 	)
 	default String slayerPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "slayerdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = slayerSkill
+	)
+	default String slayerDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Hunter",
@@ -2498,7 +2656,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "hunterCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = hunterSkill
 	)
@@ -2512,6 +2670,16 @@ public interface XpGoalsConfig extends Config
 			section = hunterSkill
 	)
 	default String hunterPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "hunterdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = hunterSkill
+	)
+	default String hunterDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Mining",
@@ -2650,7 +2818,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "miningCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = miningSkill
 	)
@@ -2664,6 +2832,16 @@ public interface XpGoalsConfig extends Config
 			section = miningSkill
 	)
 	default String miningPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "miningdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = miningSkill
+	)
+	default String miningDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Smithing",
@@ -2802,7 +2980,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "smithingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = smithingSkill
 	)
@@ -2816,6 +2994,16 @@ public interface XpGoalsConfig extends Config
 			section = smithingSkill
 	)
 	default String smithingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "smithingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = smithingSkill
+	)
+	default String smithingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Fishing",
@@ -2954,7 +3142,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "fishingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = fishingSkill
 	)
@@ -2968,6 +3156,16 @@ public interface XpGoalsConfig extends Config
 			section = fishingSkill
 	)
 	default String fishingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "fishingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = fishingSkill
+	)
+	default String fishingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Cooking",
@@ -3106,7 +3304,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "cookingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = cookingSkill
 	)
@@ -3120,6 +3318,16 @@ public interface XpGoalsConfig extends Config
 			section = cookingSkill
 	)
 	default String cookingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "cookingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = cookingSkill
+	)
+	default String cookingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Firemaking",
@@ -3258,7 +3466,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "firemakingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = firemakingSkill
 	)
@@ -3272,6 +3480,16 @@ public interface XpGoalsConfig extends Config
 			section = firemakingSkill
 	)
 	default String firemakingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "firemakingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = firemakingSkill
+	)
+	default String firemakingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Woodcutting",
@@ -3410,7 +3628,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "woodcuttingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = woodcuttingSkill
 	)
@@ -3424,6 +3642,16 @@ public interface XpGoalsConfig extends Config
 			section = woodcuttingSkill
 	)
 	default String woodcuttingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "woodcuttingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = woodcuttingSkill
+	)
+	default String woodcuttingDoneText() { return "Complete"; }
+
 
 	@ConfigSection(
 			name = "Farming",
@@ -3562,7 +3790,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "farmingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = farmingSkill
 	)
@@ -3576,4 +3804,13 @@ public interface XpGoalsConfig extends Config
 			section = farmingSkill
 	)
 	default String farmingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "farmingdoneText",
+			position = 16,
+			name = "Complete Text",
+			description = "Configures the text displayed after completing the goal.",
+			section = farmingSkill
+	)
+	default String farmingDoneText() { return "Complete"; }
 }

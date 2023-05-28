@@ -21,10 +21,7 @@ import javax.inject.Inject;
 import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @PluginDescriptor(
 	name = "Xp Goalz",
@@ -261,7 +258,54 @@ public class XpGoalsPlugin extends Plugin
 				track = false;
 
 				try {
-					String [] patterns = goalPatterns(skillId).split("\n");
+					String [] patterns;
+					List<String> patternsList = new LinkedList<>();
+
+					String dayOfWeekPatternPart = dayOfWeekPatternPart(skillId);
+					String dayCadencePatternPart = dayCadencePatternPart(skillId);
+					String hourPatternPart = hourPatternPart(skillId);
+
+					String customPatterns = customPatterns(skillId);
+
+					if (!customPatterns.trim().isEmpty())
+					{
+						patterns = customPatterns.split("\n");
+					}
+					else
+					{
+						if (dayOfWeekPatternPart != null)
+						{
+							if (hourPatternPart != null)
+							{
+								patternsList.add(dayOfWeekPatternPart + "->" + hourPatternPart);
+							}
+							else
+							{
+								patternsList.add(dayOfWeekPatternPart);
+							}
+						}
+						if (dayCadencePatternPart != null)
+						{
+							if (hourPatternPart != null)
+							{
+								patternsList.add(dayCadencePatternPart + "->" + hourPatternPart);
+							}
+							else
+							{
+								patternsList.add(dayCadencePatternPart);
+							}
+						}
+						if (dayOfWeekPatternPart == null && dayCadencePatternPart == null)
+						{
+							if (hourPatternPart != null)
+							{
+								patternsList.add(hourPatternPart);
+							}
+						}
+
+						patterns = patternsList.toArray(new String[0]);
+					}
+
 					for (String patternStr: patterns)
 					{
 						if (patternStr.trim().isEmpty()) continue;
@@ -412,7 +456,7 @@ public class XpGoalsPlugin extends Plugin
 		else return 0;
 	}
 
-	String goalPatterns(int skillId)
+	String customPatterns(int skillId)
 	{
 		if (skillId == Skill.MINING.ordinal()) return config.miningPattens();
 		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingPattens();
@@ -438,5 +482,383 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.COOKING.ordinal()) return config.cookingPattens();
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingPattens();
 		else return "";
+	}
+
+	boolean isMonday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackMonday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthMonday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseMonday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedMonday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerMonday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicMonday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingMonday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionMonday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsMonday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityMonday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreMonday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingMonday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingMonday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingMonday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerMonday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterMonday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningMonday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingMonday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingMonday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingMonday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingMonday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingMonday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingMonday();
+		else return false;
+	}
+
+	boolean isTuesday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackTuesday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthTuesday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseTuesday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedTuesday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerTuesday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicTuesday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingTuesday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionTuesday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsTuesday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityTuesday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreTuesday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingTuesday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingTuesday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingTuesday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerTuesday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterTuesday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningTuesday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingTuesday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingTuesday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingTuesday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingTuesday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingTuesday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingTuesday();
+		else return false;
+	}
+
+	boolean isWednesday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackWednesday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthWednesday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseWednesday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedWednesday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerWednesday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicWednesday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingWednesday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionWednesday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsWednesday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityWednesday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreWednesday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingWednesday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingWednesday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingWednesday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerWednesday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterWednesday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningWednesday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingWednesday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingWednesday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingWednesday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingWednesday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingWednesday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingWednesday();
+		else return false;
+	}
+
+	boolean isThursday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackThursday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthThursday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseThursday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedThursday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerThursday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicThursday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingThursday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionThursday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsThursday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityThursday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreThursday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingThursday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingThursday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingThursday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerThursday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterThursday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningThursday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingThursday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingThursday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingThursday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingThursday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingThursday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingThursday();
+		else return false;
+	}
+
+	boolean isFriday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackFriday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthFriday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseFriday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedFriday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerFriday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicFriday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingFriday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionFriday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsFriday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityFriday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreFriday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingFriday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingFriday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingFriday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerFriday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterFriday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningFriday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingFriday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingFriday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingFriday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingFriday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingFriday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingFriday();
+		else return false;
+	}
+
+	boolean isSaturday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackSaturday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthSaturday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseSaturday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedSaturday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerSaturday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicSaturday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingSaturday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionSaturday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsSaturday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilitySaturday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreSaturday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingSaturday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingSaturday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingSaturday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerSaturday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterSaturday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningSaturday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingSaturday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingSaturday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingSaturday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingSaturday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingSaturday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingSaturday();
+		else return false;
+	}
+
+	boolean isSunday(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackSunday();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthSunday();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseSunday();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedSunday();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerSunday();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicSunday();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingSunday();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionSunday();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsSunday();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilitySunday();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreSunday();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingSunday();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingSunday();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingSunday();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerSunday();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterSunday();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningSunday();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingSunday();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingSunday();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingSunday();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingSunday();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingSunday();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingSunday();
+		else return false;
+	}
+
+	Hour startTime(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackStartTime();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthStartTime();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseStartTime();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedStartTime();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerStartTime();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicStartTime();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingStartTime();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionStartTime();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsStartTime();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityStartTime();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreStartTime();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingStartTime();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingStartTime();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingStartTime();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerStartTime();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterStartTime();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningStartTime();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingStartTime();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingStartTime();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingStartTime();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingStartTime();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingStartTime();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingStartTime();
+		else return Hour.NONE;
+	}
+
+	Hour endTime(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackEndTime();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthEndTime();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseEndTime();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedEndTime();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerEndTime();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicEndTime();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingEndTime();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionEndTime();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsEndTime();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityEndTime();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreEndTime();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingEndTime();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingEndTime();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingEndTime();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerEndTime();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterEndTime();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningEndTime();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingEndTime();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingEndTime();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingEndTime();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingEndTime();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingEndTime();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingEndTime();
+		else return Hour.NONE;
+	}
+
+	DayCadence dayCadence(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackDayCadence();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthDayCadence();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseDayCadence();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedDayCadence();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerDayCadence();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicDayCadence();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingDayCadence();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionDayCadence();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsDayCadence();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityDayCadence();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreDayCadence();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingDayCadence();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingDayCadence();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingDayCadence();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerDayCadence();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterDayCadence();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningDayCadence();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingDayCadence();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingDayCadence();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingDayCadence();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingDayCadence();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingDayCadence();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingDayCadence();
+		else return DayCadence.NONE;
+	}
+
+	DayCadence dayCadenceDay(int skillId)
+	{
+		if (skillId == Skill.ATTACK.ordinal()) return config.attackDayCadenceDay();
+		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthDayCadenceDay();
+		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseDayCadenceDay();
+		else if (skillId == Skill.RANGED.ordinal()) return config.rangedDayCadenceDay();
+		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerDayCadenceDay();
+		else if (skillId == Skill.MAGIC.ordinal()) return config.magicDayCadenceDay();
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingDayCadenceDay();
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionDayCadenceDay();
+		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsDayCadenceDay();
+		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityDayCadenceDay();
+		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreDayCadenceDay();
+		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingDayCadenceDay();
+		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingDayCadenceDay();
+		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingDayCadenceDay();
+		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerDayCadenceDay();
+		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterDayCadenceDay();
+		else if (skillId == Skill.MINING.ordinal()) return config.miningDayCadenceDay();
+		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingDayCadenceDay();
+		else if (skillId == Skill.FISHING.ordinal()) return config.fishingDayCadenceDay();
+		else if (skillId == Skill.COOKING.ordinal()) return config.cookingDayCadenceDay();
+		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingDayCadenceDay();
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingDayCadenceDay();
+		else if (skillId == Skill.FARMING.ordinal()) return config.farmingDayCadenceDay();
+		else return DayCadence.NONE;
+	}
+
+	String dayOfWeekPatternPart(int skillId)
+	{
+		StringBuilder daysOfWeekSb = new StringBuilder();
+		if (isMonday(skillId))
+		{
+			daysOfWeekSb.append("Mo,");
+		}
+		if (isTuesday(skillId))
+		{
+			daysOfWeekSb.append("Tu,");
+		}
+		if (isWednesday(skillId))
+		{
+			daysOfWeekSb.append("We,");
+		}
+		if (isThursday(skillId))
+		{
+			daysOfWeekSb.append("Th,");
+		}
+		if (isFriday(skillId))
+		{
+			daysOfWeekSb.append("Fr,");
+		}
+		if (isSaturday(skillId))
+		{
+			daysOfWeekSb.append("Sa,");
+		}
+		if (isSunday(skillId))
+		{
+			daysOfWeekSb.append("Su,");
+		}
+
+		String dayPart = null;
+		if (daysOfWeekSb.length() > 0)
+		{
+			String daysOfWeekCsv = daysOfWeekSb.substring(0, daysOfWeekSb.length() - 1);
+			dayPart = "[W]->["+ daysOfWeekCsv +"]";
+		}
+		return dayPart;
+	}
+
+	String dayCadencePatternPart(int skillId)
+	{
+		DayCadence dayCadence = dayCadence(skillId);
+		DayCadence cadenceDay = dayCadenceDay(skillId);
+
+		String dayPart = null;
+		if (dayCadence != DayCadence.NONE && cadenceDay != DayCadence.NONE
+				&& cadenceDay.ordinal() <= dayCadence.ordinal())
+		{
+			int cadence = dayCadence.ordinal();
+			int offset = cadenceDay.ordinal() - 1;
+			dayPart = "[2023]->[D|~"+ offset +"|" + cadence + "]";
+		}
+		return dayPart;
+	}
+
+	String hourPatternPart(int skillId)
+	{
+		Hour sHour = startTime(skillId);
+		Hour eHour = endTime(skillId);
+
+		String hourPart = null;
+		if (sHour != Hour.NONE && eHour != Hour.NONE)
+		{
+			hourPart = "[" + sHour.getName() + "-" + eHour.getName() + "]";
+		}
+		return hourPart;
 	}
 }

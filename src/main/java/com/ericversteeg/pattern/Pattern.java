@@ -613,12 +613,23 @@ public class Pattern {
         int lowNum = hourOfDayNumber(low);
         int highNum = hourOfDayNumber(high);
 
+        if (highNum == 0)
+        {
+            highNum = 24;
+        }
+
         if (highNum < lowNum)
         {
             int temp = highNum;
             highNum = lowNum;
             lowNum = temp;
         }
+        else if (highNum == lowNum)
+        {
+            return new String [] { hourOfDay(highNum) };
+        }
+
+        highNum -= 1;
 
         String [] values = new String [highNum - lowNum + 1];
         for (int i = lowNum; i <= highNum; i++)
