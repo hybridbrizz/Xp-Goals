@@ -24,17 +24,11 @@ public class Goal {
     @SerializedName("reset_type")
     int resetType = resetDaily;
 
-    @SerializedName("last_reset")
-    long lastReset = 0L;
-
     @SerializedName("start_xp")
     int startXp = -1;
 
     @SerializedName("current_xp")
     int currentXp = -1;
-
-    @SerializedName("previous_results")
-    List<Boolean> previousResults = new LinkedList<>();
 
     @SerializedName("past_progress")
     List<Float> pastProgress = new LinkedList<>();

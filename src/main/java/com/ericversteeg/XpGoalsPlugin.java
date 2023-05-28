@@ -39,14 +39,13 @@ public class XpGoalsPlugin extends Plugin
 
 	GoalData goalData;
 
-	private String profileKey = "";
-
 	ZoneOffset zoneOffset = ZoneId.systemDefault()
 		.getRules()
 		.getOffset(
 			LocalDate.now()
 				.atStartOfDay()
 		);
+
 	LocalDateTime lastDateTime = null;
 
 	// so the first hit after a reset is tracked
@@ -68,8 +67,8 @@ public class XpGoalsPlugin extends Plugin
 	@Subscribe
 	public void onRuneScapeProfileChanged(RuneScapeProfileChanged e)
 	{
-		profileKey = configManager.getRSProfileKey();
-		if (profileKey != null)
+		String profile = configManager.getRSProfileKey();
+		if (profile != null)
 		{
 			goalData = getSavedData();
 
@@ -80,6 +79,11 @@ public class XpGoalsPlugin extends Plugin
 			);
 
 			checkResets();
+		}
+		else
+		{
+			goalData = new GoalData();
+			configSyncGoals();
 		}
 	}
 
@@ -192,12 +196,18 @@ public class XpGoalsPlugin extends Plugin
 		String profile = configManager.getRSProfileKey();
 		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, "xp_goals_data");
 
+		if (json == null)
+		{
+			return new GoalData();
+		}
+
 		GoalData savedData = gson.fromJson(json, GoalData.class);
 
 		if (savedData == null)
 		{
 			return new GoalData();
 		}
+
 		return savedData;
 	}
 
@@ -205,8 +215,11 @@ public class XpGoalsPlugin extends Plugin
 	{
 		String profile = configManager.getRSProfileKey();
 
-		String json = gson.toJson(goalData);
-		configManager.setConfiguration(XpGoalsConfig.GROUP, profile, "xp_goals_data", json);
+		if (profile != null)
+		{
+			String json = gson.toJson(goalData);
+			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, "xp_goals_data", json);
+		}
 	}
 
 	void configSyncGoals()
@@ -342,21 +355,10 @@ public class XpGoalsPlugin extends Plugin
 				track = enabled;
 			}
 
-//			if (goalXp <= 0)
-//			{
-//				track = false;
-//			}
-
 			goal.resetType = resetType.ordinal();
 			goal.enabled = enabled;
 			goal.track = track;
 			goal.goalXp = goalXp;
-
-			if (!enabled)
-			{
-				goal.startXp = -1;
-				goal.currentXp = -1;
-			}
 		}
 	}
 

@@ -89,10 +89,18 @@ public interface XpGoalsConfig extends Config
 	)
 	default int pastProgressSpan() { return 3; }
 
+	@ConfigItem(
+			position = 8,
+			keyName = "doneTextType",
+			name = "Completion Text",
+			description = "Configures the completion text."
+	)
+	default DoneTextType doneTextType() { return DoneTextType.COMPLETE; }
+
 	@ConfigSection(
 			name = "Attack",
 			description = "Attack Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String attackSkill = "attackSkill";
@@ -113,7 +121,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = attackSkill
 	)
-	default Color attackProgressColor() { return Color.decode("#30FCAB"); }
+	default Color attackProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "attackXpGoal",
@@ -241,20 +249,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String attackPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "attackdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = attackSkill
-	)
-	default String attackDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Strength",
 			description = "Strength Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String strengthSkill = "strengthSkill";
@@ -275,7 +274,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = strengthSkill
 	)
-	default Color strengthProgressColor() { return Color.decode("#30FCAB"); }
+	default Color strengthProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "strengthXpGoal",
@@ -403,20 +402,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String strengthPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "strengthdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = strengthSkill
-	)
-	default String strengthDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Defense",
 			description = "Defense Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String defenseSkill = "defenseSkill";
@@ -437,7 +427,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = defenseSkill
 	)
-	default Color defenseProgressColor() { return Color.decode("#30FCAB"); }
+	default Color defenseProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "defenseXpGoal",
@@ -565,20 +555,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String defensePattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "defensedoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = defenseSkill
-	)
-	default String defenseDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Ranged",
 			description = "Ranged Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String rangedSkill = "rangedSkill";
@@ -599,7 +580,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = rangedSkill
 	)
-	default Color rangedProgressColor() { return Color.decode("#30FCAB"); }
+	default Color rangedProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "rangedXpGoal",
@@ -727,20 +708,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String rangedPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "rangeddoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = rangedSkill
-	)
-	default String rangedDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Prayer",
 			description = "Prayer Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String prayerSkill = "prayerSkill";
@@ -761,7 +733,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = prayerSkill
 	)
-	default Color prayerProgressColor() { return Color.decode("#30FCAB"); }
+	default Color prayerProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "prayerXpGoal",
@@ -889,20 +861,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String prayerPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "prayerdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = prayerSkill
-	)
-	default String prayerDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Magic",
 			description = "Magic Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String magicSkill = "magicSkill";
@@ -923,7 +886,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = magicSkill
 	)
-	default Color magicProgressColor() { return Color.decode("#30FCAB"); }
+	default Color magicProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "magicXpGoal",
@@ -1051,20 +1014,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String magicPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "magicdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = magicSkill
-	)
-	default String magicDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Runecrafting",
 			description = "Runecrafting Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String runecraftingSkill = "runecraftingSkill";
@@ -1085,7 +1039,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = runecraftingSkill
 	)
-	default Color runecraftingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color runecraftingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "runecraftingXpGoal",
@@ -1213,20 +1167,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String runecraftingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "runecraftingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = runecraftingSkill
-	)
-	default String runecraftingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Construction",
 			description = "Construction Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String constructionSkill = "constructionSkill";
@@ -1247,7 +1192,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = constructionSkill
 	)
-	default Color constructionProgressColor() { return Color.decode("#30FCAB"); }
+	default Color constructionProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "constructionXpGoal",
@@ -1375,20 +1320,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String constructionPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "constructiondoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = constructionSkill
-	)
-	default String constructionDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Hitpoints",
 			description = "Hitpoints Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String hitpointsSkill = "hitpointsSkill";
@@ -1409,7 +1345,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = hitpointsSkill
 	)
-	default Color hitpointsProgressColor() { return Color.decode("#30FCAB"); }
+	default Color hitpointsProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "hitpointsXpGoal",
@@ -1537,20 +1473,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String hitpointsPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "hitpointsdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = hitpointsSkill
-	)
-	default String hitpointsDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Agility",
 			description = "Agility Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String agilitySkill = "agilitySkill";
@@ -1571,7 +1498,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = agilitySkill
 	)
-	default Color agilityProgressColor() { return Color.decode("#30FCAB"); }
+	default Color agilityProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "agilityXpGoal",
@@ -1699,20 +1626,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String agilityPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "agilitydoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = agilitySkill
-	)
-	default String agilityDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Herblore",
 			description = "Herblore Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String herbloreSkill = "herbloreSkill";
@@ -1733,7 +1651,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = herbloreSkill
 	)
-	default Color herbloreProgressColor() { return Color.decode("#30FCAB"); }
+	default Color herbloreProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "herbloreXpGoal",
@@ -1861,20 +1779,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String herblorePattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "herbloredoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = herbloreSkill
-	)
-	default String herbloreDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Thieving",
 			description = "Thieving Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String thievingSkill = "thievingSkill";
@@ -1895,7 +1804,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = thievingSkill
 	)
-	default Color thievingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color thievingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "thievingXpGoal",
@@ -2023,20 +1932,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String thievingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "thievingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = thievingSkill
-	)
-	default String thievingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Crafting",
 			description = "Crafting Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String craftingSkill = "craftingSkill";
@@ -2057,7 +1957,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = craftingSkill
 	)
-	default Color craftingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color craftingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "craftingXpGoal",
@@ -2185,20 +2085,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String craftingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "craftingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = craftingSkill
-	)
-	default String craftingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Fletching",
 			description = "Fletching Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String fletchingSkill = "fletchingSkill";
@@ -2219,7 +2110,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = fletchingSkill
 	)
-	default Color fletchingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color fletchingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "fletchingXpGoal",
@@ -2347,20 +2238,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String fletchingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "fletchingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = fletchingSkill
-	)
-	default String fletchingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Slayer",
 			description = "Slayer Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String slayerSkill = "slayerSkill";
@@ -2381,7 +2263,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = slayerSkill
 	)
-	default Color slayerProgressColor() { return Color.decode("#30FCAB"); }
+	default Color slayerProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "slayerXpGoal",
@@ -2509,20 +2391,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String slayerPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "slayerdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = slayerSkill
-	)
-	default String slayerDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Hunter",
 			description = "Hunter Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String hunterSkill = "hunterSkill";
@@ -2543,7 +2416,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = hunterSkill
 	)
-	default Color hunterProgressColor() { return Color.decode("#30FCAB"); }
+	default Color hunterProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "hunterXpGoal",
@@ -2671,20 +2544,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String hunterPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "hunterdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = hunterSkill
-	)
-	default String hunterDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Mining",
 			description = "Mining Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String miningSkill = "miningSkill";
@@ -2705,7 +2569,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = miningSkill
 	)
-	default Color miningProgressColor() { return Color.decode("#30FCAB"); }
+	default Color miningProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "miningXpGoal",
@@ -2833,20 +2697,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String miningPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "miningdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = miningSkill
-	)
-	default String miningDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Smithing",
 			description = "Smithing Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String smithingSkill = "smithingSkill";
@@ -2867,7 +2722,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = smithingSkill
 	)
-	default Color smithingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color smithingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "smithingXpGoal",
@@ -2995,20 +2850,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String smithingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "smithingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = smithingSkill
-	)
-	default String smithingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Fishing",
 			description = "Fishing Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String fishingSkill = "fishingSkill";
@@ -3029,7 +2875,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = fishingSkill
 	)
-	default Color fishingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color fishingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "fishingXpGoal",
@@ -3157,20 +3003,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String fishingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "fishingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = fishingSkill
-	)
-	default String fishingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Cooking",
 			description = "Cooking Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String cookingSkill = "cookingSkill";
@@ -3191,7 +3028,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = cookingSkill
 	)
-	default Color cookingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color cookingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "cookingXpGoal",
@@ -3319,20 +3156,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String cookingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "cookingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = cookingSkill
-	)
-	default String cookingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Firemaking",
 			description = "Firemaking Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String firemakingSkill = "firemakingSkill";
@@ -3353,7 +3181,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = firemakingSkill
 	)
-	default Color firemakingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color firemakingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "firemakingXpGoal",
@@ -3481,20 +3309,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String firemakingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "firemakingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = firemakingSkill
-	)
-	default String firemakingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Woodcutting",
 			description = "Woodcutting Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String woodcuttingSkill = "woodcuttingSkill";
@@ -3515,7 +3334,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = woodcuttingSkill
 	)
-	default Color woodcuttingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color woodcuttingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "woodcuttingXpGoal",
@@ -3643,20 +3462,11 @@ public interface XpGoalsConfig extends Config
 	)
 	default String woodcuttingPattens() { return ""; }
 
-	@ConfigItem(
-			keyName = "woodcuttingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = woodcuttingSkill
-	)
-	default String woodcuttingDoneText() { return "Complete"; }
-
 
 	@ConfigSection(
 			name = "Farming",
 			description = "Farming Skill",
-			position = 9,
+			position = 20,
 			closedByDefault = true
 	)
 	String farmingSkill = "farmingSkill";
@@ -3677,7 +3487,7 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the progress color.",
 			section = farmingSkill
 	)
-	default Color farmingProgressColor() { return Color.decode("#30FCAB"); }
+	default Color farmingProgressColor() { return Color.decode("#1D855C"); }
 
 	@ConfigItem(
 			keyName = "farmingXpGoal",
@@ -3804,13 +3614,4 @@ public interface XpGoalsConfig extends Config
 			section = farmingSkill
 	)
 	default String farmingPattens() { return ""; }
-
-	@ConfigItem(
-			keyName = "farmingdoneText",
-			position = 16,
-			name = "Complete Text",
-			description = "Configures the text displayed after completing the goal.",
-			section = farmingSkill
-	)
-	default String farmingDoneText() { return "Complete"; }
 }
