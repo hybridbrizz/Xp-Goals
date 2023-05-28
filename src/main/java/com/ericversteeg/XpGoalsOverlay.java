@@ -2,7 +2,8 @@ package com.ericversteeg;
 
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
-import net.runelite.client.game.ItemManager;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.Overlay;
@@ -12,17 +13,12 @@ import net.runelite.client.ui.overlay.components.ComponentConstants;
 import net.runelite.client.ui.overlay.components.TextComponent;
 import net.runelite.client.util.ImageUtil;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.InputStream;
 import java.text.NumberFormat;
-import java.time.Instant;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +32,8 @@ class XpGoalsOverlay extends Overlay {
 	private final XpGoalsPlugin plugin;
 	private final XpGoalsConfig config;
 	private final SkillIconManager iconManager;
+
+	Widget viewportWidget;
 
 	private Font font;
 
@@ -57,6 +55,12 @@ class XpGoalsOverlay extends Overlay {
 	boolean textOutsideOverride = false;
 	boolean hideTextOverride = false;
 
+	private int anchorX;
+	private int anchorY;
+
+	private int tooltipWidth = 120;
+	int tooltipHeight = 120;
+
 	@Inject
 	private XpGoalsOverlay(
 			Client client,
@@ -70,7 +74,6 @@ class XpGoalsOverlay extends Overlay {
 		this.client = client;
 		this.plugin = plugin;
 		this.config = config;
-
 		this.iconManager = iconManager;
 
 		try {
@@ -90,6 +93,8 @@ class XpGoalsOverlay extends Overlay {
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		viewportWidget = getViewportWidget();
+
 		List<Goal> goals = getTrackedGoals();
 
 		net.runelite.api.Point mouse = client.getMouseCanvasPosition();
@@ -105,6 +110,8 @@ class XpGoalsOverlay extends Overlay {
 		{
 			ICON_SIZE = 16;
 		}
+
+		AnchorType anchorType = config.anchorType();
 
 		BarTextType textType = config.barTextType();
 		BarTextPosition textPosition = config.barTextPosition();
@@ -128,6 +135,12 @@ class XpGoalsOverlay extends Overlay {
 		else if (barHeight < ICON_SIZE + 4)
 		{
 			minBarSpacing = (ICON_SIZE - barHeight) / 2 + 2;
+		}
+
+		if (config.pastProgressSpan() > 4)
+		{
+			tooltipWidth = 140;
+			tooltipHeight = 140;
 		}
 
 		int barSpacing = config.barSpacing() + minBarSpacing;
@@ -177,9 +190,6 @@ class XpGoalsOverlay extends Overlay {
 				extraBottomPadding = (ICON_SIZE - barHeight) / 2;
 			}
 
-			panelX = config.anchorX() - panelHPadding;
-			panelY = config.anchorY() - panelTopPadding;
-
 			int iconSizeWPadding = ICON_SIZE + 5;
 			if (ICON_SIZE == 0)
 			{
@@ -189,6 +199,21 @@ class XpGoalsOverlay extends Overlay {
 			panelWidth = iconSizeWPadding + barWidth + panelHPadding * 2;
 			panelHeight =  panelTopPadding + topSectionHeight + barHeight * goals.size() + barSpacing *
 					Math.max(goals.size() - 1, 0) + panelBottomPadding + extraBottomPadding;
+
+			anchorX = config.anchorX();
+			if (anchorType == AnchorType.TOP_RIGHT || anchorType == AnchorType.BOTTOM_RIGHT)
+			{
+				anchorX = viewportWidget.getCanvasLocation().getX() + viewportWidget.getWidth() + 28 - anchorX - panelWidth;
+			}
+
+			anchorY = config.anchorY();
+			if (anchorType == AnchorType.BOTTOM_LEFT || anchorType == AnchorType.BOTTOM_RIGHT)
+			{
+				anchorY = viewportWidget.getCanvasLocation().getY() + viewportWidget.getHeight() + 41 - anchorY - panelHeight;
+			}
+
+			panelX = anchorX - panelHPadding;
+			panelY = anchorY - panelTopPadding;
 
 			renderPanel(graphics, panelX, panelY, panelWidth, panelHeight);
 
@@ -227,7 +252,7 @@ class XpGoalsOverlay extends Overlay {
 				{
 					rectangle = new Rectangle2D.Float(
 							panelX,
-							config.anchorY() + offsetY - (ICON_SIZE - barHeight) / 2f,
+							anchorY + offsetY - (ICON_SIZE - barHeight) / 2f,
 							panelWidth,
 							ICON_SIZE
 					);
@@ -236,7 +261,7 @@ class XpGoalsOverlay extends Overlay {
 				{
 					rectangle = new Rectangle2D.Float(
 							panelX,
-							config.anchorY() + offsetY,
+							anchorY + offsetY,
 							panelWidth,
 							barHeight
 					);
@@ -253,7 +278,20 @@ class XpGoalsOverlay extends Overlay {
 
 		if (tooltipGoal != null)
 		{
-			renderPastProgressTooltip(graphics, mouseX + 15, mouseY + 15, tooltipGoal);
+			int x = mouseX + 15;
+			int y = mouseY + 15;
+
+			if (anchorType == AnchorType.TOP_RIGHT || anchorType == AnchorType.BOTTOM_RIGHT)
+			{
+				x -= tooltipWidth + 30;
+			}
+
+			if (anchorType == AnchorType.BOTTOM_LEFT || anchorType == AnchorType.BOTTOM_RIGHT)
+			{
+				y -= tooltipHeight + 30;
+			}
+
+			renderTooltip(graphics, x, y, tooltipGoal);
 		}
 
 		return null;
@@ -285,7 +323,7 @@ class XpGoalsOverlay extends Overlay {
 		textComponent.setColor(Color.GREEN);
 		textComponent.setPosition(new Point(
 				panelWidth / 2 - fontMetrics.stringWidth(label) / 2 + panelX,
-				config.anchorY() + panelTopPadding + fontMetrics.getHeight() - 2)
+				anchorY + panelTopPadding + fontMetrics.getHeight() - 2)
 		);
 		textComponent.render(graphics);
 	}
@@ -301,9 +339,9 @@ class XpGoalsOverlay extends Overlay {
 		icon = ImageUtil.resizeImage(icon, ICON_SIZE, ICON_SIZE, true);
 
 		int barHeight = Math.max(config.barHeight(), 2);
-		int y = config.anchorY() + offsetY - (ICON_SIZE - barHeight) / 2;
+		int y = anchorY + offsetY - (ICON_SIZE - barHeight) / 2;
 
-		graphics2D.drawImage(icon, config.anchorX(), y, null);
+		graphics2D.drawImage(icon, anchorX, y, null);
 	}
 
 	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetY, float progress, Color progressColor)
@@ -326,13 +364,13 @@ class XpGoalsOverlay extends Overlay {
 
 		int h = Math.max(config.barHeight(), 2);
 
-		int x = config.anchorX() + ICON_SIZE + 5;
+		int x = anchorX + ICON_SIZE + 5;
 		if (config.hideSkillIcons())
 		{
 			x -= 5;
 		}
 
-		int y = config.anchorY() + offsetY;
+		int y = anchorY + offsetY;
 
 		graphics.setColor(backColor);
 		graphics.fillRect(x, y, barWidth, h);
@@ -441,13 +479,13 @@ class XpGoalsOverlay extends Overlay {
 
 		if (position == BarTextPosition.OUTSIDE || textOutsideOverride)
 		{
-			x = config.anchorX() + ICON_SIZE + iconPadding + barWidth - w;
-			y = config.anchorY() + offsetY - 1;
+			x = anchorX + ICON_SIZE + iconPadding + barWidth - w;
+			y = anchorY + offsetY - 1;
 		}
 		else
 		{
-			x = config.anchorX() + ICON_SIZE + iconPadding + (barW - w) / 2;
-			y = config.anchorY() + offsetY + (barH - h) / 2 + h;
+			x = anchorX + ICON_SIZE + iconPadding + (barW - w) / 2;
+			y = anchorY + offsetY + (barH - h) / 2 + h;
 		}
 
 		textComponent.setText(text);
@@ -456,10 +494,10 @@ class XpGoalsOverlay extends Overlay {
 		textComponent.render(graphics);
 	}
 
-	private void renderPastProgressTooltip(Graphics2D graphics, int x, int y, Goal goal)
+	private void renderTooltip(Graphics2D graphics, int x, int y, Goal goal)
 	{
-		int w = 120;
-		int h = 120;
+		int w = tooltipWidth;
+		int h = tooltipHeight;
 
 		int border = 2;
 
@@ -539,6 +577,22 @@ class XpGoalsOverlay extends Overlay {
 			textComponent.setColor(Color.WHITE);
 		}
 		textComponent.render(graphics);
+	}
+
+	private Widget getViewportWidget()
+	{
+		Widget widget;
+
+		widget = client.getWidget(WidgetInfo.RESIZABLE_VIEWPORT_INTERFACE_CONTAINER);
+		if (widget != null) return widget;
+
+		widget = client.getWidget(WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INTERFACE_CONTAINER);
+		if (widget != null) return widget;
+
+		widget = client.getWidget(WidgetInfo.FIXED_VIEWPORT_INTERFACE_CONTAINER);
+		if (widget != null) return widget;
+
+		return client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
 	}
 
 	private float getXpProgress(int startXp, int currentXp, int goalXp)

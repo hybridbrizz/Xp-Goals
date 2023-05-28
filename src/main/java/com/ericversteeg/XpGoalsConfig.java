@@ -19,11 +19,19 @@ public interface XpGoalsConfig extends Config
 
 	@ConfigItem(
 			position = 1,
+			keyName = "anchorType",
+			name = "Anchor",
+			description = "Configures the anchor for the panel."
+	)
+	default AnchorType anchorType() { return AnchorType.TOP_LEFT; }
+
+	@ConfigItem(
+			position = 1,
 			keyName = "anchorX",
 			name = "X Position",
 			description = "Configures the x position."
 	)
-	default int anchorX() { return 0; }
+	default int anchorX() { return 10; }
 
 	@ConfigItem(
 			position = 2,
@@ -31,7 +39,7 @@ public interface XpGoalsConfig extends Config
 			name = "Y Position",
 			description = "Configures the y position."
 	)
-	default int anchorY() { return 0; }
+	default int anchorY() { return 120; }
 
 	@ConfigItem(
 			position = 3,
@@ -39,7 +47,7 @@ public interface XpGoalsConfig extends Config
 			name = "Bar Width",
 			description = "Configures the width of xp bars."
 	)
-	default int barWidth() { return 80; }
+	default int barWidth() { return 115; }
 
 	@ConfigItem(
 			position = 4,
@@ -47,7 +55,7 @@ public interface XpGoalsConfig extends Config
 			name = "Bar Height",
 			description = "Configures the height of xp bars."
 	)
-	default int barHeight() { return 6; }
+	default int barHeight() { return 20; }
 
 	@ConfigItem(
 			position = 5,
@@ -55,7 +63,7 @@ public interface XpGoalsConfig extends Config
 			name = "Bar Spacing",
 			description = "Configures the space between bars."
 	)
-	default int barSpacing() { return 28; }
+	default int barSpacing() { return 10; }
 
 	@ConfigItem(
 			position = 6,
