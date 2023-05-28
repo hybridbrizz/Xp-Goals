@@ -30,8 +30,7 @@ import java.util.stream.Collectors;
 
 class XpGoalsOverlay extends Overlay {
 
-	private final int ICON_SIZE = 16;
-	private final int MIN_BAR_SPACING = 16;
+	private int ICON_SIZE = 16;
 
 	private final Client client;
 	private final XpGoalsPlugin plugin;
@@ -97,21 +96,48 @@ class XpGoalsOverlay extends Overlay {
 		int mouseX = mouse.getX();
 		int mouseY = mouse.getY();
 
-		int barWidth = Math.max(Math.min(config.barWidth(), 1000), 45);
-		int barHeight = Math.max(config.barHeight(), 2);
-		int barSpacing = config.barSpacing() + MIN_BAR_SPACING;
-
-		boolean hideLabel = config.labelText().trim().isEmpty();
+		boolean hideIcons = config.hideSkillIcons();
+		if (hideIcons)
+		{
+			ICON_SIZE = 0;
+		}
+		else
+		{
+			ICON_SIZE = 16;
+		}
 
 		BarTextType textType = config.barTextType();
 		BarTextPosition textPosition = config.barTextPosition();
 		BarTextSize textSize = config.barTextSize();
 
+		int barWidth = Math.max(Math.min(config.barWidth(), 1000), 45);
+		int barHeight = Math.max(config.barHeight(), 2);
+
+		int minBarSpacing = 0;
+		if ((textPosition == BarTextPosition.OUTSIDE || textOutsideOverride) && textType != BarTextType.NONE)
+		{
+			if (textSize == BarTextSize.SMALL)
+			{
+				minBarSpacing = 13;
+			}
+			else
+			{
+				minBarSpacing = 16;
+			}
+		}
+		else if (barHeight < ICON_SIZE + 4)
+		{
+			minBarSpacing = (ICON_SIZE - barHeight) / 2 + 2;
+		}
+
+		int barSpacing = config.barSpacing() + minBarSpacing;
+
+		boolean hideLabel = config.labelText().trim().isEmpty();
+
 		if (!goals.isEmpty())
 		{
 			if (hideLabel)
 			{
-
 				if (textPosition == BarTextPosition.OUTSIDE)
 				{
 					if (textSize == BarTextSize.SMALL)
@@ -153,7 +179,14 @@ class XpGoalsOverlay extends Overlay {
 
 			panelX = config.anchorX() - panelHPadding;
 			panelY = config.anchorY() - panelTopPadding;
-			panelWidth = ICON_SIZE + 5 + barWidth + panelHPadding * 2;
+
+			int iconSizeWPadding = ICON_SIZE + 5;
+			if (ICON_SIZE == 0)
+			{
+				iconSizeWPadding = 0;
+			}
+
+			panelWidth = iconSizeWPadding + barWidth + panelHPadding * 2;
 			panelHeight =  panelTopPadding + topSectionHeight + barHeight * goals.size() + barSpacing *
 					Math.max(goals.size() - 1, 0) + panelBottomPadding + extraBottomPadding;
 
@@ -259,6 +292,8 @@ class XpGoalsOverlay extends Overlay {
 
 	private void renderSkillIcon(Graphics2D graphics2D, int offsetY, Goal goal)
 	{
+		if (ICON_SIZE == 0) return;
+
 		Skill skill = getSkillForId(goal.skillId);
 		if (skill == null) return;
 
@@ -292,6 +327,11 @@ class XpGoalsOverlay extends Overlay {
 		int h = Math.max(config.barHeight(), 2);
 
 		int x = config.anchorX() + ICON_SIZE + 5;
+		if (config.hideSkillIcons())
+		{
+			x -= 5;
+		}
+
 		int y = config.anchorY() + offsetY;
 
 		graphics.setColor(backColor);
@@ -393,14 +433,20 @@ class XpGoalsOverlay extends Overlay {
 		int x;
 		int y;
 
+		int iconPadding = 5;
+		if (config.hideSkillIcons())
+		{
+			iconPadding = 0;
+		}
+
 		if (position == BarTextPosition.OUTSIDE || textOutsideOverride)
 		{
-			x = config.anchorX() + ICON_SIZE + 5 + barWidth - w;
+			x = config.anchorX() + ICON_SIZE + iconPadding + barWidth - w;
 			y = config.anchorY() + offsetY - 1;
 		}
 		else
 		{
-			x = config.anchorX() + ICON_SIZE + 5 + (barW - w) / 2;
+			x = config.anchorX() + ICON_SIZE + iconPadding + (barW - w) / 2;
 			y = config.anchorY() + offsetY + (barH - h) / 2 + h;
 		}
 
@@ -525,18 +571,27 @@ class XpGoalsOverlay extends Overlay {
 				tracked.add(goal);
 			}
 		}
-		return tracked.stream().sorted((obj, other) ->
-				(int) (getXpProgress(
-						other.startXp,
-						other.currentXp,
-						other.startXp + other.goalXp
-				) * 100) -
-				(int) (getXpProgress(
-						obj.startXp,
-						obj.currentXp,
-						obj.startXp + obj.goalXp
-				) * 100)
-		).collect(Collectors.toList());
+		return tracked.stream().sorted((obj, other) -> {
+			int progress = (int) (getXpProgress(
+					obj.startXp,
+					obj.currentXp,
+					obj.startXp + obj.goalXp
+			) * 100);
+
+			if (progress >= 100 && progress < 200) progress = -2;
+			else if (progress >= 200) progress = -1;
+
+			int otherProgress = (int) (getXpProgress(
+					other.startXp,
+					other.currentXp,
+					other.startXp + other.goalXp
+			) * 100);
+
+			if (otherProgress >= 100 && otherProgress < 200) otherProgress = -2;
+			else if (otherProgress >= 200) otherProgress = -1;
+
+			return otherProgress - progress;
+		}).collect(Collectors.toList());
 	}
 
 	Skill getSkillForId(int skillId)

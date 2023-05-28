@@ -97,6 +97,14 @@ public interface XpGoalsConfig extends Config
 	)
 	default DoneTextType doneTextType() { return DoneTextType.COMPLETE; }
 
+	@ConfigItem(
+			position = 9,
+			keyName = "hideIcons",
+			name = "Hide Icons",
+			description = "Configures whether or not to hide skill icons."
+	)
+	default boolean hideSkillIcons() { return false; }
+
 	@ConfigSection(
 			name = "Attack",
 			description = "Attack Skill",
