@@ -232,8 +232,7 @@ class XpGoalsOverlay extends Overlay {
 			if (goal.enabled)
 			{
 				float progress = getXpProgress(
-						goal.startXp, goal.currentXp,
-						goal.goalXp + goal.startXp);
+						goal.progressXp, goal.goalXp);
 
 				renderSkillIcon(graphics, offsetY, goal);
 
@@ -435,8 +434,8 @@ class XpGoalsOverlay extends Overlay {
 		switch (textType)
 		{
 			case FRACTION:
-				text = NumberFormat.getInstance(Locale.ENGLISH).format(goal.currentXp - goal.startXp) +
-						" / " + NumberFormat.getInstance(Locale.ENGLISH).format(goal.startXp + goal.goalXp - goal.startXp);
+				text = NumberFormat.getInstance(Locale.ENGLISH).format(Math.max(goal.progressXp, 0)) +
+						" / " + NumberFormat.getInstance(Locale.ENGLISH).format(goal.goalXp);
 				break;
 			case PERCENTAGE:
 				text = (int) (progress * 100) + "%";
@@ -445,10 +444,10 @@ class XpGoalsOverlay extends Overlay {
 				text = String.format(preciseFormatStr, progress * 100);
 				break;
 			case GAINED:
-				text = NumberFormat.getInstance(Locale.ENGLISH).format(goal.currentXp - goal.startXp);
+				text = NumberFormat.getInstance(Locale.ENGLISH).format(Math.max(goal.progressXp, 0));
 				break;
 			case REMAINING:
-				text = NumberFormat.getInstance(Locale.ENGLISH).format(goal.startXp + goal.goalXp - goal.currentXp);
+				text = NumberFormat.getInstance(Locale.ENGLISH).format(goal.goalXp - Math.max(goal.progressXp, 0));
 				break;
 		}
 
@@ -595,11 +594,11 @@ class XpGoalsOverlay extends Overlay {
 		return client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
 	}
 
-	private float getXpProgress(int startXp, int currentXp, int goalXp)
+	private float getXpProgress(int progressXp, int goalXp)
 	{
-		if (goalXp - startXp == 0)
+		if (goalXp == 0)
 		{
-			if (currentXp - startXp == 0)
+			if (progressXp - goalXp <= 0)
 			{
 				return 1f;
 			}
@@ -609,9 +608,7 @@ class XpGoalsOverlay extends Overlay {
 			}
 		}
 
-		if (startXp < 0) return 0f;
-		else if (goalXp < startXp) return 0f;
-		return (currentXp - startXp) * 1f / (goalXp - startXp);
+		return Math.max(progressXp, 0) / (float) goalXp;
 	}
 
 	List<Goal> getTrackedGoals()
@@ -627,18 +624,16 @@ class XpGoalsOverlay extends Overlay {
 		}
 		return tracked.stream().sorted((obj, other) -> {
 			int progress = (int) (getXpProgress(
-					obj.startXp,
-					obj.currentXp,
-					obj.startXp + obj.goalXp
+					obj.progressXp,
+					obj.goalXp
 			) * 100);
 
 			if (progress >= 100 && progress < 200) progress = -2;
 			else if (progress >= 200) progress = -1;
 
 			int otherProgress = (int) (getXpProgress(
-					other.startXp,
-					other.currentXp,
-					other.startXp + other.goalXp
+					other.progressXp,
+					other.goalXp
 			) * 100);
 
 			if (otherProgress >= 100 && otherProgress < 200) otherProgress = -2;

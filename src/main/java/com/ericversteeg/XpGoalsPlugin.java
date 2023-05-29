@@ -121,8 +121,8 @@ public class XpGoalsPlugin extends Plugin
 				lastXp = skillsXp.get(skill.ordinal());
 			}
 
-			if (goal.startXp < 0) { goal.startXp = lastXp; }
-			goal.currentXp = xp;
+			if (goal.progressXp < 0) goal.progressXp = 0;
+			goal.progressXp += xp - lastXp;
 		}
 
 		skillsXp.put(skill.ordinal(), xp);

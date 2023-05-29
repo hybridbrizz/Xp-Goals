@@ -11,7 +11,7 @@ public interface XpGoalsConfig extends Config
 
 	@ConfigItem(
 			position = 0,
-			keyName = "labelText",
+			keyName = "Text",
 			name = "Label",
 			description = "Configures the label."
 	)
@@ -29,7 +29,7 @@ public interface XpGoalsConfig extends Config
 			position = 1,
 			keyName = "anchorX",
 			name = "X Position",
-			description = "Configures the x position."
+			description = "Configures the anchor x position relative to the anchor."
 	)
 	default int anchorX() { return 10; }
 
@@ -37,7 +37,7 @@ public interface XpGoalsConfig extends Config
 			position = 2,
 			keyName = "anchorY",
 			name = "Y Position",
-			description = "Configures the y position."
+			description = "Configures the y position relative to the anchor."
 	)
 	default int anchorY() { return 120; }
 
@@ -45,7 +45,7 @@ public interface XpGoalsConfig extends Config
 			position = 3,
 			keyName = "barWidth",
 			name = "Bar Width",
-			description = "Configures the width of xp bars."
+			description = "Configures the width of bars."
 	)
 	default int barWidth() { return 115; }
 
@@ -53,7 +53,7 @@ public interface XpGoalsConfig extends Config
 			position = 4,
 			keyName = "barHeight",
 			name = "Bar Height",
-			description = "Configures the height of xp bars."
+			description = "Configures the height of bars."
 	)
 	default int barHeight() { return 20; }
 
@@ -68,7 +68,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			position = 6,
 			keyName = "barTextType",
-			name = "Text Type",
+			name = "Value Text Type",
 			description = "Configures which type of value is displayed."
 	)
 	default BarTextType barTextType() { return BarTextType.FRACTION; }
@@ -76,7 +76,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			position = 7,
 			keyName = "barTextPosition",
-			name = "Text Position",
+			name = "Value Text Position",
 			description = "Configures the bar text position."
 	)
 	default BarTextPosition barTextPosition() { return BarTextPosition.INSIDE; }
@@ -84,7 +84,7 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			position = 7,
 			keyName = "barTextSize",
-			name = "Text Size",
+			name = "Value Text Size",
 			description = "Configures the bar text size."
 	)
 	default BarTextSize barTextSize() { return BarTextSize.LARGE; }
@@ -93,7 +93,7 @@ public interface XpGoalsConfig extends Config
 			position = 8,
 			keyName = "pastProgressSpan",
 			name = "Grid Size",
-			description = "Configures the grid size for tooltip."
+			description = "Configures the grid size in the tooltip."
 	)
 	default int pastProgressSpan() { return 3; }
 
@@ -101,7 +101,7 @@ public interface XpGoalsConfig extends Config
 			position = 8,
 			keyName = "doneTextType",
 			name = "Completion Text",
-			description = "Configures the completion text."
+			description = "Configures the completion text for each gaol."
 	)
 	default DoneTextType doneTextType() { return DoneTextType.COMPLETE; }
 

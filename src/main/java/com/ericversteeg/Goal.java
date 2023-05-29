@@ -24,11 +24,8 @@ public class Goal {
     @SerializedName("reset_type")
     int resetType = resetDaily;
 
-    @SerializedName("start_xp")
-    int startXp = -1;
-
-    @SerializedName("current_xp")
-    int currentXp = -1;
+    @SerializedName("progress_xp")
+    int progressXp = -1;
 
     @SerializedName("past_progress")
     List<Float> pastProgress = new LinkedList<>();
@@ -40,7 +37,7 @@ public class Goal {
 
     void reset()
     {
-        if (currentXp < 0) return;
+        if (progressXp < 0) return;
 
         if (pastProgress == null)
         {
@@ -48,13 +45,12 @@ public class Goal {
         }
 
         pastProgress.add(
-                (currentXp - startXp) /
+                (progressXp) /
                 ((float) goalXp)
         );
 
         System.out.println("Reset goal skill id = " + skillId);
 
-        startXp = -1;
-        currentXp = -1;
+        progressXp = -1;
     }
 }
