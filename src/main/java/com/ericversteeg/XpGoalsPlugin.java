@@ -367,6 +367,34 @@ public class XpGoalsPlugin extends Plugin
 		}
 	}
 
+	Skill skillForSkillId(int skillId)
+	{
+		if (skillId == Skill.MINING.ordinal()) return Skill.MINING;
+		else if (skillId == Skill.RUNECRAFT.ordinal()) return Skill.RUNECRAFT;
+		else if (skillId == Skill.AGILITY.ordinal()) return Skill.AGILITY;
+		else if (skillId == Skill.FISHING.ordinal()) return Skill.FISHING;
+		else if (skillId == Skill.WOODCUTTING.ordinal()) return Skill.WOODCUTTING;
+		else if (skillId == Skill.FARMING.ordinal()) return Skill.FARMING;
+		else if (skillId == Skill.RANGED.ordinal()) return Skill.RANGED;
+		else if (skillId == Skill.SLAYER.ordinal()) return Skill.SLAYER;
+		else if (skillId == Skill.ATTACK.ordinal()) return Skill.ATTACK;
+		else if (skillId == Skill.DEFENCE.ordinal()) return Skill.DEFENCE;
+		else if (skillId == Skill.STRENGTH.ordinal()) return Skill.STRENGTH;
+		else if (skillId == Skill.MAGIC.ordinal()) return Skill.MAGIC;
+		else if (skillId == Skill.PRAYER.ordinal()) return Skill.PRAYER;
+		else if (skillId == Skill.CONSTRUCTION.ordinal()) return Skill.CONSTRUCTION;
+		else if (skillId == Skill.HITPOINTS.ordinal()) return Skill.HITPOINTS;
+		else if (skillId == Skill.HERBLORE.ordinal()) return Skill.HERBLORE;
+		else if (skillId == Skill.THIEVING.ordinal()) return Skill.THIEVING;
+		else if (skillId == Skill.CRAFTING.ordinal()) return Skill.CRAFTING;
+		else if (skillId == Skill.FLETCHING.ordinal()) return Skill.FLETCHING;
+		else if (skillId == Skill.HUNTER.ordinal()) return Skill.HUNTER;
+		else if (skillId == Skill.SMITHING.ordinal()) return Skill.SMITHING;
+		else if (skillId == Skill.COOKING.ordinal()) return Skill.COOKING;
+		else if (skillId == Skill.FIREMAKING.ordinal()) return Skill.FIREMAKING;
+		else return null;
+	}
+
 	Goal goalForSkillId(int skillId)
 	{
 		for (Goal goal: goalData.goals)

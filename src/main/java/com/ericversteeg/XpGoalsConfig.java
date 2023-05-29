@@ -1,9 +1,6 @@
 package com.ericversteeg;
 
-import com.ericversteeg.bar.BarTextPosition;
-import com.ericversteeg.bar.BarTextSize;
-import com.ericversteeg.bar.BarTextType;
-import com.ericversteeg.bar.DoneTextType;
+import com.ericversteeg.bar.*;
 import com.ericversteeg.config.AnchorType;
 import com.ericversteeg.config.DayCadence;
 import com.ericversteeg.config.Hour;
@@ -21,15 +18,15 @@ public interface XpGoalsConfig extends Config
 			position = 0,
 			keyName = "Text",
 			name = "Label",
-			description = "Configures the label."
+			description = "Configures label."
 	)
-	default String labelText() { return "Goalz"; }
+	default String labelText() { return "Goals"; }
 
 	@ConfigItem(
 			position = 1,
 			keyName = "anchorType",
 			name = "Anchor",
-			description = "Configures the anchor for the panel."
+			description = "Configures anchor for the panel."
 	)
 	default AnchorType anchorType() { return AnchorType.TOP_LEFT; }
 
@@ -37,7 +34,7 @@ public interface XpGoalsConfig extends Config
 			position = 1,
 			keyName = "anchorX",
 			name = "X Position",
-			description = "Configures the anchor x position relative to the anchor."
+			description = "Configures x position relative to the anchor."
 	)
 	default int anchorX() { return 10; }
 
@@ -45,7 +42,7 @@ public interface XpGoalsConfig extends Config
 			position = 2,
 			keyName = "anchorY",
 			name = "Y Position",
-			description = "Configures the y position relative to the anchor."
+			description = "Configures y position relative to the anchor."
 	)
 	default int anchorY() { return 120; }
 
@@ -53,7 +50,7 @@ public interface XpGoalsConfig extends Config
 			position = 3,
 			keyName = "barWidth",
 			name = "Bar Width",
-			description = "Configures the width of bars."
+			description = "Configures width of bars."
 	)
 	default int barWidth() { return 115; }
 
@@ -61,7 +58,7 @@ public interface XpGoalsConfig extends Config
 			position = 4,
 			keyName = "barHeight",
 			name = "Bar Height",
-			description = "Configures the height of bars."
+			description = "Configures height of bars."
 	)
 	default int barHeight() { return 20; }
 
@@ -69,7 +66,7 @@ public interface XpGoalsConfig extends Config
 			position = 5,
 			keyName = "barSpacing",
 			name = "Bar Spacing",
-			description = "Configures the space between bars."
+			description = "Configures space between bars."
 	)
 	default int barSpacing() { return 5; }
 
@@ -77,7 +74,7 @@ public interface XpGoalsConfig extends Config
 			position = 6,
 			keyName = "barTextType",
 			name = "Value Text Type",
-			description = "Configures which type of value is displayed."
+			description = "Configures what type of value is displayed."
 	)
 	default BarTextType barTextType() { return BarTextType.FRACTION; }
 
@@ -85,7 +82,7 @@ public interface XpGoalsConfig extends Config
 			position = 7,
 			keyName = "barTextPosition",
 			name = "Value Text Position",
-			description = "Configures the bar text position."
+			description = "Configures bar text position."
 	)
 	default BarTextPosition barTextPosition() { return BarTextPosition.INSIDE; }
 
@@ -93,15 +90,23 @@ public interface XpGoalsConfig extends Config
 			position = 7,
 			keyName = "barTextSize",
 			name = "Value Text Size",
-			description = "Configures the bar text size."
+			description = "Configures bar text size."
 	)
 	default BarTextSize barTextSize() { return BarTextSize.LARGE; }
 
 	@ConfigItem(
+			position = 7,
+			keyName = "barTextAlignment",
+			name = "Value Text Alignment",
+			description = "Configures bar text alignment."
+	)
+	default BarTextAlignment barTextAlignment() { return BarTextAlignment.CENTER; }
+
+	@ConfigItem(
 			position = 8,
 			keyName = "pastProgressSpan",
-			name = "Grid Size",
-			description = "Configures the grid size in the tooltip."
+			name = "Tooltip Grid Size",
+			description = "Configures grid size in the tooltip."
 	)
 	default int pastProgressSpan() { return 3; }
 
@@ -109,7 +114,7 @@ public interface XpGoalsConfig extends Config
 			position = 8,
 			keyName = "doneTextType",
 			name = "Completion Text",
-			description = "Configures the completion text for each gaol."
+			description = "Configures completion text for each gaol."
 	)
 	default DoneTextType doneTextType() { return DoneTextType.COMPLETE; }
 
@@ -125,9 +130,25 @@ public interface XpGoalsConfig extends Config
 			position = 10,
 			keyName = "includeResetType",
 			name = "Include Reset Label",
-			description = "Configures whether or not to include the reset type label in bar text."
+			description = "Configures whether or not to include reset label in bar text."
 	)
 	default boolean includeResetType() { return false; }
+
+	@ConfigItem(
+			position = 11,
+			keyName = "enableOverfill",
+			name = "Enable Bar Overfill",
+			description = "Configures whether or not bar overfills to 200%."
+	)
+	default boolean enableOverfill() { return true; }
+
+	@ConfigItem(
+			position = 12,
+			keyName = "overfillColor",
+			name = "Overfill Color",
+			description = "Configures bar overfill color."
+	)
+	default Color overfillColor() { return Color.decode("#A020F0"); }
 
 	@ConfigSection(
 			name = "Attack",
@@ -145,15 +166,6 @@ public interface XpGoalsConfig extends Config
 			section = attackSkill
 	)
 	default boolean enableAttackSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "attackProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = attackSkill
-	)
-	default Color attackProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "attackXpGoal",
@@ -300,15 +312,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableStrengthSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "strengthProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = strengthSkill
-	)
-	default Color strengthProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "strengthXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -451,15 +454,6 @@ public interface XpGoalsConfig extends Config
 			section = defenseSkill
 	)
 	default boolean enableDefenseSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "defenseProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = defenseSkill
-	)
-	default Color defenseProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "defenseXpGoal",
@@ -606,15 +600,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableRangedSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "rangedProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = rangedSkill
-	)
-	default Color rangedProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "rangedXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -757,15 +742,6 @@ public interface XpGoalsConfig extends Config
 			section = prayerSkill
 	)
 	default boolean enablePrayerSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "prayerProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = prayerSkill
-	)
-	default Color prayerProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "prayerXpGoal",
@@ -912,15 +888,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableMagicSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "magicProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = magicSkill
-	)
-	default Color magicProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "magicXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -1063,15 +1030,6 @@ public interface XpGoalsConfig extends Config
 			section = runecraftingSkill
 	)
 	default boolean enableRunecraftingSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "runecraftingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = runecraftingSkill
-	)
-	default Color runecraftingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "runecraftingXpGoal",
@@ -1218,15 +1176,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableConstructionSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "constructionProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = constructionSkill
-	)
-	default Color constructionProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "constructionXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -1369,15 +1318,6 @@ public interface XpGoalsConfig extends Config
 			section = hitpointsSkill
 	)
 	default boolean enableHitpointsSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "hitpointsProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = hitpointsSkill
-	)
-	default Color hitpointsProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "hitpointsXpGoal",
@@ -1524,15 +1464,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableAgilitySkill() { return false; }
 
 	@ConfigItem(
-			keyName = "agilityProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = agilitySkill
-	)
-	default Color agilityProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "agilityXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -1675,15 +1606,6 @@ public interface XpGoalsConfig extends Config
 			section = herbloreSkill
 	)
 	default boolean enableHerbloreSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "herbloreProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = herbloreSkill
-	)
-	default Color herbloreProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "herbloreXpGoal",
@@ -1830,15 +1752,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableThievingSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "thievingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = thievingSkill
-	)
-	default Color thievingProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "thievingXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -1981,15 +1894,6 @@ public interface XpGoalsConfig extends Config
 			section = craftingSkill
 	)
 	default boolean enableCraftingSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "craftingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = craftingSkill
-	)
-	default Color craftingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "craftingXpGoal",
@@ -2136,15 +2040,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableFletchingSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "fletchingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = fletchingSkill
-	)
-	default Color fletchingProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "fletchingXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -2287,15 +2182,6 @@ public interface XpGoalsConfig extends Config
 			section = slayerSkill
 	)
 	default boolean enableSlayerSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "slayerProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = slayerSkill
-	)
-	default Color slayerProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "slayerXpGoal",
@@ -2442,15 +2328,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableHunterSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "hunterProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = hunterSkill
-	)
-	default Color hunterProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "hunterXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -2593,15 +2470,6 @@ public interface XpGoalsConfig extends Config
 			section = miningSkill
 	)
 	default boolean enableMiningSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "miningProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = miningSkill
-	)
-	default Color miningProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "miningXpGoal",
@@ -2748,15 +2616,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableSmithingSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "smithingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = smithingSkill
-	)
-	default Color smithingProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "smithingXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -2899,15 +2758,6 @@ public interface XpGoalsConfig extends Config
 			section = fishingSkill
 	)
 	default boolean enableFishingSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "fishingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = fishingSkill
-	)
-	default Color fishingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "fishingXpGoal",
@@ -3054,15 +2904,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableCookingSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "cookingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = cookingSkill
-	)
-	default Color cookingProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "cookingXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -3205,15 +3046,6 @@ public interface XpGoalsConfig extends Config
 			section = firemakingSkill
 	)
 	default boolean enableFiremakingSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "firemakingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = firemakingSkill
-	)
-	default Color firemakingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "firemakingXpGoal",
@@ -3360,15 +3192,6 @@ public interface XpGoalsConfig extends Config
 	default boolean enableWoodcuttingSkill() { return false; }
 
 	@ConfigItem(
-			keyName = "woodcuttingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = woodcuttingSkill
-	)
-	default Color woodcuttingProgressColor() { return Color.decode("#B8A633"); }
-
-	@ConfigItem(
 			keyName = "woodcuttingXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -3511,15 +3334,6 @@ public interface XpGoalsConfig extends Config
 			section = farmingSkill
 	)
 	default boolean enableFarmingSkill() { return false; }
-
-	@ConfigItem(
-			keyName = "farmingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress bar color.",
-			section = farmingSkill
-	)
-	default Color farmingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "farmingXpGoal",

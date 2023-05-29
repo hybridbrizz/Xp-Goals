@@ -1,9 +1,6 @@
 package com.ericversteeg;
 
-import com.ericversteeg.bar.BarTextPosition;
-import com.ericversteeg.bar.BarTextSize;
-import com.ericversteeg.bar.BarTextType;
-import com.ericversteeg.bar.DoneTextType;
+import com.ericversteeg.bar.*;
 import com.ericversteeg.config.AnchorType;
 import com.ericversteeg.goal.Goal;
 import net.runelite.api.Client;
@@ -12,6 +9,7 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.FontManager;
+import net.runelite.client.ui.SkillColor;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -46,6 +44,8 @@ class XpGoalsOverlay extends Overlay {
 	private Color outerBorderColor = new Color(57, 41, 13, 124);
 	private Color innerBorderColor = new Color(147, 141, 130, 37);
 	private Color pastProgressBgColor = new Color(30, 30, 30, 125);
+	private Color barBackgroundColor = Color.decode("#1b1b1b");
+	private Color barBorderColor = Color.decode("#0b0b0b");
 
 	int panelTopPadding = 4;
 	int panelBottomPadding = 4;
@@ -247,7 +247,7 @@ class XpGoalsOverlay extends Overlay {
 						barWidth,
 						offsetY,
 						progress,
-						progressColor(goal.skillId)
+						goal
 				);
 
 				renderBarText(graphics, barWidth, offsetY, goal, progress);
@@ -349,22 +349,40 @@ class XpGoalsOverlay extends Overlay {
 		graphics2D.drawImage(icon, anchorX, y, null);
 	}
 
-	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetY, float progress, Color progressColor)
+	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetY, float progress, Goal goal)
 	{
-		Color backColor = Color.DARK_GRAY;
+		Color progressColor;
+
+		Skill skill = plugin.skillForSkillId(goal.skillId);
+		if (skill != null)
+		{
+			progressColor = SkillColor.find(skill).getColor();
+		}
+		else
+		{
+			progressColor = Color.YELLOW;
+		}
+
+		Color backColor = barBackgroundColor;
 		Color frontColor = progressColor;
+		Color overfillColor = config.overfillColor();
+
 		float relPercent = progress;
 
-		if (progress > 1)
+		if (progress > 1 && config.enableOverfill())
 		{
 			backColor = progressColor;
-			frontColor = Color.decode("#A020F0");
+			frontColor = overfillColor;
 			relPercent = progress - 1;
 
 			if (relPercent > 1)
 			{
 				relPercent = 1;
 			}
+		}
+		else if (progress > 1)
+		{
+			relPercent = 1;
 		}
 
 		int h = Math.max(config.barHeight(), 2);
@@ -383,7 +401,7 @@ class XpGoalsOverlay extends Overlay {
 		graphics.setColor(frontColor);
 		graphics.fillRect(x, y, (int) (relPercent * barWidth), h);
 
-		graphics.setColor(Color.decode("#0b0b0b"));
+		graphics.setColor(barBorderColor);
 		graphics.drawRect(x, y, barWidth, h);
 	}
 
@@ -394,6 +412,7 @@ class XpGoalsOverlay extends Overlay {
 
 		BarTextSize textSize = config.barTextSize();
 		BarTextPosition position = config.barTextPosition();
+		BarTextAlignment textAlignment = config.barTextAlignment();
 
 		if (textSize == BarTextSize.SMALL)
 		{
@@ -492,6 +511,18 @@ class XpGoalsOverlay extends Overlay {
 			text += " (" + label + ")";
 		}
 
+		if (position == BarTextPosition.INSIDE)
+		{
+			if (textAlignment == BarTextAlignment.LEADING)
+			{
+				text = "  " + text;
+			}
+			else if (textAlignment == BarTextAlignment.TRAILING)
+			{
+				text = text + "  ";
+			}
+		}
+
 		int barW = Math.max(Math.min(config.barWidth(), 1000), 45);
 		int w = fontMetrics.stringWidth(text);
 
@@ -510,7 +541,7 @@ class XpGoalsOverlay extends Overlay {
 			}
 		}
 
-		int x;
+		int x = 0;
 		int y;
 
 		int iconPadding = 5;
@@ -519,14 +550,24 @@ class XpGoalsOverlay extends Overlay {
 			iconPadding = 0;
 		}
 
+		switch (textAlignment)
+		{
+			case LEADING:
+				x = anchorX + ICON_SIZE + iconPadding + 1;
+				break;
+			case CENTER:
+				x = anchorX + ICON_SIZE + iconPadding + (barW - w) / 2;
+				break;
+			case TRAILING:
+				x = anchorX + ICON_SIZE + iconPadding + barW - w;
+		}
+
 		if (position == BarTextPosition.OUTSIDE || textOutsideOverride)
 		{
-			x = anchorX + ICON_SIZE + iconPadding + barWidth - w;
 			y = anchorY + offsetY - 1;
 		}
 		else
 		{
-			x = anchorX + ICON_SIZE + iconPadding + (barW - w) / 2;
 			y = anchorY + offsetY + (barH - h) / 2 + h;
 		}
 
@@ -610,7 +651,7 @@ class XpGoalsOverlay extends Overlay {
 
 	private void renderPastProgressItem(Graphics2D graphics, int x, int y, int w, int h, Goal goal, float progress)
 	{
-		Color color = progressColor(goal.skillId);
+		Color color = SkillColor.find(plugin.skillForSkillId(goal.skillId)).getColor();
 		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 125));
 
 		//System.out.println("x = " + x + ", y = " + y + ", w = " + w + ", h = " + h + "yy = " + y + (h - (int) (h * progress)) + ", hh = " + (int) (h * progress));
@@ -730,33 +771,5 @@ class XpGoalsOverlay extends Overlay {
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return Skill.WOODCUTTING;
 		else if (skillId == Skill.FARMING.ordinal()) return Skill.FARMING;
 		else return null;
-	}
-
-	Color progressColor(int skillId)
-	{
-		if (skillId == Skill.MINING.ordinal()) return config.miningProgressColor();
-		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.runecraftingProgressColor();
-		else if (skillId == Skill.AGILITY.ordinal()) return config.agilityProgressColor();
-		else if (skillId == Skill.FISHING.ordinal()) return config.fishingProgressColor();
-		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingProgressColor();
-		else if (skillId == Skill.FARMING.ordinal()) return config.farmingProgressColor();
-		else if (skillId == Skill.RANGED.ordinal()) return config.rangedProgressColor();
-		else if (skillId == Skill.SLAYER.ordinal()) return config.slayerProgressColor();
-		else if (skillId == Skill.ATTACK.ordinal()) return config.attackProgressColor();
-		else if (skillId == Skill.DEFENCE.ordinal()) return config.defenseProgressColor();
-		else if (skillId == Skill.STRENGTH.ordinal()) return config.strengthProgressColor();
-		else if (skillId == Skill.MAGIC.ordinal()) return config.magicProgressColor();
-		else if (skillId == Skill.PRAYER.ordinal()) return config.prayerProgressColor();
-		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.constructionProgressColor();
-		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hitpointsProgressColor();
-		else if (skillId == Skill.HERBLORE.ordinal()) return config.herbloreProgressColor();
-		else if (skillId == Skill.THIEVING.ordinal()) return config.thievingProgressColor();
-		else if (skillId == Skill.CRAFTING.ordinal()) return config.craftingProgressColor();
-		else if (skillId == Skill.FLETCHING.ordinal()) return config.fletchingProgressColor();
-		else if (skillId == Skill.HUNTER.ordinal()) return config.hunterProgressColor();
-		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingProgressColor();
-		else if (skillId == Skill.COOKING.ordinal()) return config.cookingProgressColor();
-		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingProgressColor();
-		else return Color.decode("#30FCAB");
 	}
 }
