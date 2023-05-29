@@ -1,4 +1,4 @@
-package com.ericversteeg;
+package com.ericversteeg.config;
 
 import java.awt.*;
 

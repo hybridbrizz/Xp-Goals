@@ -1,5 +1,10 @@
 package com.ericversteeg;
 
+import com.ericversteeg.config.DayCadence;
+import com.ericversteeg.config.Hour;
+import com.ericversteeg.goal.Goal;
+import com.ericversteeg.goal.GoalData;
+import com.ericversteeg.goal.ResetType;
 import com.ericversteeg.pattern.Pattern;
 import com.google.gson.Gson;
 import com.google.inject.Provides;
@@ -7,12 +12,10 @@ import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.StatChanged;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.events.RuneScapeProfileChanged;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
@@ -36,6 +39,8 @@ public class XpGoalsPlugin extends Plugin
 	@Inject private XpGoalsConfig config;
 	@Inject private ConfigManager configManager;
 	@Inject private Gson gson;
+
+	private static String DATA_KEY = "xp_goals_data_3";
 
 	GoalData goalData;
 
@@ -194,7 +199,7 @@ public class XpGoalsPlugin extends Plugin
 	GoalData getSavedData()
 	{
 		String profile = configManager.getRSProfileKey();
-		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, "xp_goals_data");
+		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY);
 
 		if (json == null)
 		{
@@ -218,7 +223,7 @@ public class XpGoalsPlugin extends Plugin
 		if (profile != null)
 		{
 			String json = gson.toJson(goalData);
-			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, "xp_goals_data", json);
+			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY, json);
 		}
 	}
 

@@ -1,5 +1,11 @@
 package com.ericversteeg;
 
+import com.ericversteeg.bar.BarTextPosition;
+import com.ericversteeg.bar.BarTextSize;
+import com.ericversteeg.bar.BarTextType;
+import com.ericversteeg.bar.DoneTextType;
+import com.ericversteeg.config.AnchorType;
+import com.ericversteeg.goal.Goal;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
@@ -457,14 +463,51 @@ class XpGoalsOverlay extends Overlay {
 			text = doneTextType.getText();
 		}
 
+		if (config.includeResetType())
+		{
+			String label;
+			switch (goal.resetType)
+			{
+				case Goal.resetHourly:
+					label = "H";
+					break;
+				case Goal.resetDaily:
+					label = "D";
+					break;
+				case Goal.resetWeekly:
+					label = "W";
+					break;
+				case Goal.resetMonthly:
+					label = "M";
+					break;
+				case Goal.resetYearly:
+					label = "Y";
+					break;
+				case Goal.resetNone:
+					label = "N";
+					break;
+				default:
+					label = "";
+			}
+			text += " (" + label + ")";
+		}
+
 		int barW = Math.max(Math.min(config.barWidth(), 1000), 45);
 		int w = fontMetrics.stringWidth(text);
 
 		hideTextOverride = false;
 		if (w > barW)
 		{
-			hideTextOverride = true;
-			text = "";
+			graphics.setFont(font);
+			fontMetrics = graphics.getFontMetrics();
+
+			w = fontMetrics.stringWidth(text);
+
+			if (w > barW)
+			{
+				hideTextOverride = true;
+				text = "";
+			}
 		}
 
 		int x;
@@ -523,7 +566,25 @@ class XpGoalsOverlay extends Overlay {
 		int rH = hh / span;
 
 		List<Float> pastProgress = goal.pastProgress;
-		if (pastProgress == null) return;
+		if (pastProgress == null || pastProgress.isEmpty())
+		{
+			String text = "No resets yet";
+
+			TextComponent textComponent = new TextComponent();
+			textComponent.setFont(FontManager.getRunescapeSmallFont());
+			textComponent.setText(text);
+			textComponent.setColor(Color.WHITE);
+
+			graphics.setFont(FontManager.getRunescapeSmallFont());
+			FontMetrics fontMetrics = graphics.getFontMetrics();
+
+			textComponent.setPosition(new Point(
+					x + (w - fontMetrics.stringWidth(text)) / 2,
+					y + (h - fontMetrics.getHeight()) / 2 + fontMetrics.getHeight()
+			));
+
+			textComponent.render(graphics);
+		}
 
 		for (int r = 0; r < span; r++)
 		{
@@ -561,7 +622,7 @@ class XpGoalsOverlay extends Overlay {
 		graphics.setFont(FontManager.getRunescapeSmallFont());
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 
-		String text = (int) (progress * 100) + "%";
+		String text = (int) (Math.min(progress, 9.99f) * 100) + "%";
 
 		TextComponent textComponent = new TextComponent();
 		textComponent.setFont(FontManager.getRunescapeSmallFont());

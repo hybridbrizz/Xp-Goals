@@ -1,4 +1,4 @@
-package com.ericversteeg;
+package com.ericversteeg.goal;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Goal {
-    static final int resetHourly = 0;
-    static final int resetDaily = 1;
-    static final int resetWeekly = 2;
-    static final int resetMonthly = 3;
-    static final int resetYearly = 4;
-    static final int resetNone = 5;
+    public static final int resetHourly = 0;
+    public static final int resetDaily = 1;
+    public static final int resetWeekly = 2;
+    public static final int resetMonthly = 3;
+    public static final int resetYearly = 4;
+    public static final int resetNone = 5;
 
     public Goal(int skillId)
     {
@@ -19,23 +19,23 @@ public class Goal {
     }
 
     @SerializedName("skill_id")
-    int skillId = 0;
+    public int skillId = 0;
 
     @SerializedName("reset_type")
-    int resetType = resetDaily;
+    public int resetType = resetDaily;
 
     @SerializedName("progress_xp")
-    int progressXp = -1;
+    public int progressXp = -1;
 
     @SerializedName("past_progress")
-    List<Float> pastProgress = new LinkedList<>();
+    public List<Float> pastProgress = new LinkedList<>();
 
-    int goalXp = 0;
+    public int goalXp = 0;
 
-    boolean enabled = false;
-    boolean track = false;
+    public boolean enabled = false;
+    public boolean track = false;
 
-    void reset()
+    public void reset()
     {
         if (progressXp < 0) return;
 

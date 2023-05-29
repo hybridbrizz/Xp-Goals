@@ -1,5 +1,13 @@
 package com.ericversteeg;
 
+import com.ericversteeg.bar.BarTextPosition;
+import com.ericversteeg.bar.BarTextSize;
+import com.ericversteeg.bar.BarTextType;
+import com.ericversteeg.bar.DoneTextType;
+import com.ericversteeg.config.AnchorType;
+import com.ericversteeg.config.DayCadence;
+import com.ericversteeg.config.Hour;
+import com.ericversteeg.goal.ResetType;
 import net.runelite.client.config.*;
 
 import java.awt.*;
@@ -7,7 +15,7 @@ import java.awt.*;
 @ConfigGroup(XpGoalsConfig.GROUP)
 public interface XpGoalsConfig extends Config
 {
-	String GROUP = "xpgoals";
+	String GROUP = "xpgoals_3";
 
 	@ConfigItem(
 			position = 0,
@@ -63,7 +71,7 @@ public interface XpGoalsConfig extends Config
 			name = "Bar Spacing",
 			description = "Configures the space between bars."
 	)
-	default int barSpacing() { return 10; }
+	default int barSpacing() { return 5; }
 
 	@ConfigItem(
 			position = 6,
@@ -113,6 +121,14 @@ public interface XpGoalsConfig extends Config
 	)
 	default boolean hideSkillIcons() { return false; }
 
+	@ConfigItem(
+			position = 10,
+			keyName = "includeResetType",
+			name = "Include Reset Label",
+			description = "Configures whether or not to include the reset type label in bar text."
+	)
+	default boolean includeResetType() { return false; }
+
 	@ConfigSection(
 			name = "Attack",
 			description = "Attack Skill",
@@ -125,7 +141,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableAttack",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not attack skill is enabled.",
+			description = "Configures whether or not attack is enabled.",
 			section = attackSkill
 	)
 	default boolean enableAttackSkill() { return false; }
@@ -134,10 +150,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = attackSkill
 	)
-	default Color attackProgressColor() { return Color.decode("#1D855C"); }
+	default Color attackProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "attackXpGoal",
@@ -146,13 +162,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = attackSkill
 	)
-	default int attackXpGoal() { return 0; }
+	default int attackXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "attackResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = attackSkill
 	)
 	default ResetType attackResetType() { return ResetType.DAILY; }
@@ -278,7 +294,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableStrength",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not strength skill is enabled.",
+			description = "Configures whether or not strength is enabled.",
 			section = strengthSkill
 	)
 	default boolean enableStrengthSkill() { return false; }
@@ -287,10 +303,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = strengthSkill
 	)
-	default Color strengthProgressColor() { return Color.decode("#1D855C"); }
+	default Color strengthProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "strengthXpGoal",
@@ -299,13 +315,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = strengthSkill
 	)
-	default int strengthXpGoal() { return 0; }
+	default int strengthXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "strengthResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = strengthSkill
 	)
 	default ResetType strengthResetType() { return ResetType.DAILY; }
@@ -431,7 +447,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableDefense",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not defense skill is enabled.",
+			description = "Configures whether or not defense is enabled.",
 			section = defenseSkill
 	)
 	default boolean enableDefenseSkill() { return false; }
@@ -440,10 +456,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = defenseSkill
 	)
-	default Color defenseProgressColor() { return Color.decode("#1D855C"); }
+	default Color defenseProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "defenseXpGoal",
@@ -452,13 +468,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = defenseSkill
 	)
-	default int defenseXpGoal() { return 0; }
+	default int defenseXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "defenseResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = defenseSkill
 	)
 	default ResetType defenseResetType() { return ResetType.DAILY; }
@@ -584,7 +600,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableRanged",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not ranged skill is enabled.",
+			description = "Configures whether or not ranged is enabled.",
 			section = rangedSkill
 	)
 	default boolean enableRangedSkill() { return false; }
@@ -593,10 +609,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = rangedSkill
 	)
-	default Color rangedProgressColor() { return Color.decode("#1D855C"); }
+	default Color rangedProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "rangedXpGoal",
@@ -605,13 +621,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = rangedSkill
 	)
-	default int rangedXpGoal() { return 0; }
+	default int rangedXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "rangedResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = rangedSkill
 	)
 	default ResetType rangedResetType() { return ResetType.DAILY; }
@@ -737,7 +753,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enablePrayer",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not prayer skill is enabled.",
+			description = "Configures whether or not prayer is enabled.",
 			section = prayerSkill
 	)
 	default boolean enablePrayerSkill() { return false; }
@@ -746,10 +762,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = prayerSkill
 	)
-	default Color prayerProgressColor() { return Color.decode("#1D855C"); }
+	default Color prayerProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "prayerXpGoal",
@@ -758,13 +774,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = prayerSkill
 	)
-	default int prayerXpGoal() { return 0; }
+	default int prayerXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "prayerResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = prayerSkill
 	)
 	default ResetType prayerResetType() { return ResetType.DAILY; }
@@ -890,7 +906,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableMagic",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not magic skill is enabled.",
+			description = "Configures whether or not magic is enabled.",
 			section = magicSkill
 	)
 	default boolean enableMagicSkill() { return false; }
@@ -899,10 +915,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = magicSkill
 	)
-	default Color magicProgressColor() { return Color.decode("#1D855C"); }
+	default Color magicProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "magicXpGoal",
@@ -911,13 +927,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = magicSkill
 	)
-	default int magicXpGoal() { return 0; }
+	default int magicXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "magicResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = magicSkill
 	)
 	default ResetType magicResetType() { return ResetType.DAILY; }
@@ -1043,7 +1059,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableRunecrafting",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not runecrafting skill is enabled.",
+			description = "Configures whether or not runecrafting is enabled.",
 			section = runecraftingSkill
 	)
 	default boolean enableRunecraftingSkill() { return false; }
@@ -1052,10 +1068,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = runecraftingSkill
 	)
-	default Color runecraftingProgressColor() { return Color.decode("#1D855C"); }
+	default Color runecraftingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "runecraftingXpGoal",
@@ -1064,13 +1080,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = runecraftingSkill
 	)
-	default int runecraftingXpGoal() { return 0; }
+	default int runecraftingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "runecraftingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = runecraftingSkill
 	)
 	default ResetType runecraftingResetType() { return ResetType.DAILY; }
@@ -1196,7 +1212,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableConstruction",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not construction skill is enabled.",
+			description = "Configures whether or not construction is enabled.",
 			section = constructionSkill
 	)
 	default boolean enableConstructionSkill() { return false; }
@@ -1205,10 +1221,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = constructionSkill
 	)
-	default Color constructionProgressColor() { return Color.decode("#1D855C"); }
+	default Color constructionProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "constructionXpGoal",
@@ -1217,13 +1233,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = constructionSkill
 	)
-	default int constructionXpGoal() { return 0; }
+	default int constructionXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "constructionResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = constructionSkill
 	)
 	default ResetType constructionResetType() { return ResetType.DAILY; }
@@ -1349,7 +1365,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableHitpoints",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not hitpoints skill is enabled.",
+			description = "Configures whether or not hitpoints is enabled.",
 			section = hitpointsSkill
 	)
 	default boolean enableHitpointsSkill() { return false; }
@@ -1358,10 +1374,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = hitpointsSkill
 	)
-	default Color hitpointsProgressColor() { return Color.decode("#1D855C"); }
+	default Color hitpointsProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "hitpointsXpGoal",
@@ -1370,13 +1386,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = hitpointsSkill
 	)
-	default int hitpointsXpGoal() { return 0; }
+	default int hitpointsXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "hitpointsResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = hitpointsSkill
 	)
 	default ResetType hitpointsResetType() { return ResetType.DAILY; }
@@ -1502,7 +1518,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableAgility",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not agility skill is enabled.",
+			description = "Configures whether or not agility is enabled.",
 			section = agilitySkill
 	)
 	default boolean enableAgilitySkill() { return false; }
@@ -1511,10 +1527,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = agilitySkill
 	)
-	default Color agilityProgressColor() { return Color.decode("#1D855C"); }
+	default Color agilityProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "agilityXpGoal",
@@ -1523,13 +1539,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = agilitySkill
 	)
-	default int agilityXpGoal() { return 0; }
+	default int agilityXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "agilityResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = agilitySkill
 	)
 	default ResetType agilityResetType() { return ResetType.DAILY; }
@@ -1655,7 +1671,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableHerblore",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not herblore skill is enabled.",
+			description = "Configures whether or not herblore is enabled.",
 			section = herbloreSkill
 	)
 	default boolean enableHerbloreSkill() { return false; }
@@ -1664,10 +1680,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = herbloreSkill
 	)
-	default Color herbloreProgressColor() { return Color.decode("#1D855C"); }
+	default Color herbloreProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "herbloreXpGoal",
@@ -1676,13 +1692,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = herbloreSkill
 	)
-	default int herbloreXpGoal() { return 0; }
+	default int herbloreXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "herbloreResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = herbloreSkill
 	)
 	default ResetType herbloreResetType() { return ResetType.DAILY; }
@@ -1808,7 +1824,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableThieving",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not thieving skill is enabled.",
+			description = "Configures whether or not thieving is enabled.",
 			section = thievingSkill
 	)
 	default boolean enableThievingSkill() { return false; }
@@ -1817,10 +1833,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = thievingSkill
 	)
-	default Color thievingProgressColor() { return Color.decode("#1D855C"); }
+	default Color thievingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "thievingXpGoal",
@@ -1829,13 +1845,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = thievingSkill
 	)
-	default int thievingXpGoal() { return 0; }
+	default int thievingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "thievingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = thievingSkill
 	)
 	default ResetType thievingResetType() { return ResetType.DAILY; }
@@ -1961,7 +1977,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableCrafting",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not crafting skill is enabled.",
+			description = "Configures whether or not crafting is enabled.",
 			section = craftingSkill
 	)
 	default boolean enableCraftingSkill() { return false; }
@@ -1970,10 +1986,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = craftingSkill
 	)
-	default Color craftingProgressColor() { return Color.decode("#1D855C"); }
+	default Color craftingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "craftingXpGoal",
@@ -1982,13 +1998,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = craftingSkill
 	)
-	default int craftingXpGoal() { return 0; }
+	default int craftingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "craftingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = craftingSkill
 	)
 	default ResetType craftingResetType() { return ResetType.DAILY; }
@@ -2114,7 +2130,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableFletching",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not fletching skill is enabled.",
+			description = "Configures whether or not fletching is enabled.",
 			section = fletchingSkill
 	)
 	default boolean enableFletchingSkill() { return false; }
@@ -2123,10 +2139,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = fletchingSkill
 	)
-	default Color fletchingProgressColor() { return Color.decode("#1D855C"); }
+	default Color fletchingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "fletchingXpGoal",
@@ -2135,13 +2151,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = fletchingSkill
 	)
-	default int fletchingXpGoal() { return 0; }
+	default int fletchingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "fletchingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = fletchingSkill
 	)
 	default ResetType fletchingResetType() { return ResetType.DAILY; }
@@ -2267,7 +2283,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableSlayer",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not slayer skill is enabled.",
+			description = "Configures whether or not slayer is enabled.",
 			section = slayerSkill
 	)
 	default boolean enableSlayerSkill() { return false; }
@@ -2276,10 +2292,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = slayerSkill
 	)
-	default Color slayerProgressColor() { return Color.decode("#1D855C"); }
+	default Color slayerProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "slayerXpGoal",
@@ -2288,13 +2304,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = slayerSkill
 	)
-	default int slayerXpGoal() { return 0; }
+	default int slayerXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "slayerResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = slayerSkill
 	)
 	default ResetType slayerResetType() { return ResetType.DAILY; }
@@ -2420,7 +2436,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableHunter",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not hunter skill is enabled.",
+			description = "Configures whether or not hunter is enabled.",
 			section = hunterSkill
 	)
 	default boolean enableHunterSkill() { return false; }
@@ -2429,10 +2445,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = hunterSkill
 	)
-	default Color hunterProgressColor() { return Color.decode("#1D855C"); }
+	default Color hunterProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "hunterXpGoal",
@@ -2441,13 +2457,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = hunterSkill
 	)
-	default int hunterXpGoal() { return 0; }
+	default int hunterXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "hunterResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = hunterSkill
 	)
 	default ResetType hunterResetType() { return ResetType.DAILY; }
@@ -2573,7 +2589,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableMining",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not mining skill is enabled.",
+			description = "Configures whether or not mining is enabled.",
 			section = miningSkill
 	)
 	default boolean enableMiningSkill() { return false; }
@@ -2582,10 +2598,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = miningSkill
 	)
-	default Color miningProgressColor() { return Color.decode("#1D855C"); }
+	default Color miningProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "miningXpGoal",
@@ -2594,13 +2610,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = miningSkill
 	)
-	default int miningXpGoal() { return 0; }
+	default int miningXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "miningResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = miningSkill
 	)
 	default ResetType miningResetType() { return ResetType.DAILY; }
@@ -2726,7 +2742,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableSmithing",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not smithing skill is enabled.",
+			description = "Configures whether or not smithing is enabled.",
 			section = smithingSkill
 	)
 	default boolean enableSmithingSkill() { return false; }
@@ -2735,10 +2751,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = smithingSkill
 	)
-	default Color smithingProgressColor() { return Color.decode("#1D855C"); }
+	default Color smithingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "smithingXpGoal",
@@ -2747,13 +2763,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = smithingSkill
 	)
-	default int smithingXpGoal() { return 0; }
+	default int smithingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "smithingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = smithingSkill
 	)
 	default ResetType smithingResetType() { return ResetType.DAILY; }
@@ -2879,7 +2895,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableFishing",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not fishing skill is enabled.",
+			description = "Configures whether or not fishing is enabled.",
 			section = fishingSkill
 	)
 	default boolean enableFishingSkill() { return false; }
@@ -2888,10 +2904,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = fishingSkill
 	)
-	default Color fishingProgressColor() { return Color.decode("#1D855C"); }
+	default Color fishingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "fishingXpGoal",
@@ -2900,13 +2916,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = fishingSkill
 	)
-	default int fishingXpGoal() { return 0; }
+	default int fishingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "fishingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = fishingSkill
 	)
 	default ResetType fishingResetType() { return ResetType.DAILY; }
@@ -3032,7 +3048,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableCooking",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not cooking skill is enabled.",
+			description = "Configures whether or not cooking is enabled.",
 			section = cookingSkill
 	)
 	default boolean enableCookingSkill() { return false; }
@@ -3041,10 +3057,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = cookingSkill
 	)
-	default Color cookingProgressColor() { return Color.decode("#1D855C"); }
+	default Color cookingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "cookingXpGoal",
@@ -3053,13 +3069,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = cookingSkill
 	)
-	default int cookingXpGoal() { return 0; }
+	default int cookingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "cookingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = cookingSkill
 	)
 	default ResetType cookingResetType() { return ResetType.DAILY; }
@@ -3185,7 +3201,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableFiremaking",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not firemaking skill is enabled.",
+			description = "Configures whether or not firemaking is enabled.",
 			section = firemakingSkill
 	)
 	default boolean enableFiremakingSkill() { return false; }
@@ -3194,10 +3210,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = firemakingSkill
 	)
-	default Color firemakingProgressColor() { return Color.decode("#1D855C"); }
+	default Color firemakingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "firemakingXpGoal",
@@ -3206,13 +3222,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = firemakingSkill
 	)
-	default int firemakingXpGoal() { return 0; }
+	default int firemakingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "firemakingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = firemakingSkill
 	)
 	default ResetType firemakingResetType() { return ResetType.DAILY; }
@@ -3338,7 +3354,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableWoodcutting",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not woodcutting skill is enabled.",
+			description = "Configures whether or not woodcutting is enabled.",
 			section = woodcuttingSkill
 	)
 	default boolean enableWoodcuttingSkill() { return false; }
@@ -3347,10 +3363,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = woodcuttingSkill
 	)
-	default Color woodcuttingProgressColor() { return Color.decode("#1D855C"); }
+	default Color woodcuttingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "woodcuttingXpGoal",
@@ -3359,13 +3375,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = woodcuttingSkill
 	)
-	default int woodcuttingXpGoal() { return 0; }
+	default int woodcuttingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "woodcuttingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = woodcuttingSkill
 	)
 	default ResetType woodcuttingResetType() { return ResetType.DAILY; }
@@ -3491,7 +3507,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "enableFarming",
 			position = 0,
 			name = "Enabled",
-			description = "Configures whether or not farming skill is enabled.",
+			description = "Configures whether or not farming is enabled.",
 			section = farmingSkill
 	)
 	default boolean enableFarmingSkill() { return false; }
@@ -3500,10 +3516,10 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingProgressColor",
 			position = 1,
 			name = "Progress Color",
-			description = "Configures the progress color.",
+			description = "Configures the progress bar color.",
 			section = farmingSkill
 	)
-	default Color farmingProgressColor() { return Color.decode("#1D855C"); }
+	default Color farmingProgressColor() { return Color.decode("#B8A633"); }
 
 	@ConfigItem(
 			keyName = "farmingXpGoal",
@@ -3512,13 +3528,13 @@ public interface XpGoalsConfig extends Config
 			description = "Configures the xp goal.",
 			section = farmingSkill
 	)
-	default int farmingXpGoal() { return 0; }
+	default int farmingXpGoal() { return 1; }
 
 	@ConfigItem(
 			keyName = "farmingResetType",
 			position = 3,
 			name = "Reset Interval",
-			description = "Configured how often skill progress resets.",
+			description = "Configures how often progress resets.",
 			section = farmingSkill
 	)
 	default ResetType farmingResetType() { return ResetType.DAILY; }
