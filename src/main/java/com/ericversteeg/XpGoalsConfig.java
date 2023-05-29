@@ -15,15 +15,15 @@ public interface XpGoalsConfig extends Config
 	String GROUP = "xpgoals_3";
 
 	@ConfigItem(
-			position = 0,
-			keyName = "Text",
+			position = 1,
+			keyName = "labelText",
 			name = "Label",
 			description = "Configures label."
 	)
 	default String labelText() { return "Goals"; }
 
 	@ConfigItem(
-			position = 1,
+			position = 3,
 			keyName = "anchorType",
 			name = "Anchor",
 			description = "Configures anchor for the panel."
@@ -31,7 +31,7 @@ public interface XpGoalsConfig extends Config
 	default AnchorType anchorType() { return AnchorType.TOP_LEFT; }
 
 	@ConfigItem(
-			position = 1,
+			position = 3,
 			keyName = "anchorX",
 			name = "X Position",
 			description = "Configures x position relative to the anchor."
@@ -39,7 +39,7 @@ public interface XpGoalsConfig extends Config
 	default int anchorX() { return 10; }
 
 	@ConfigItem(
-			position = 2,
+			position = 4,
 			keyName = "anchorY",
 			name = "Y Position",
 			description = "Configures y position relative to the anchor."
@@ -47,7 +47,7 @@ public interface XpGoalsConfig extends Config
 	default int anchorY() { return 120; }
 
 	@ConfigItem(
-			position = 3,
+			position = 5,
 			keyName = "barWidth",
 			name = "Bar Width",
 			description = "Configures width of bars."
@@ -55,7 +55,7 @@ public interface XpGoalsConfig extends Config
 	default int barWidth() { return 115; }
 
 	@ConfigItem(
-			position = 4,
+			position = 6,
 			keyName = "barHeight",
 			name = "Bar Height",
 			description = "Configures height of bars."
@@ -63,7 +63,7 @@ public interface XpGoalsConfig extends Config
 	default int barHeight() { return 20; }
 
 	@ConfigItem(
-			position = 5,
+			position = 7,
 			keyName = "barSpacing",
 			name = "Bar Spacing",
 			description = "Configures space between bars."
@@ -71,7 +71,7 @@ public interface XpGoalsConfig extends Config
 	default int barSpacing() { return 5; }
 
 	@ConfigItem(
-			position = 6,
+			position = 8,
 			keyName = "barTextType",
 			name = "Value Text Type",
 			description = "Configures what type of value is displayed."
@@ -79,7 +79,7 @@ public interface XpGoalsConfig extends Config
 	default BarTextType barTextType() { return BarTextType.FRACTION; }
 
 	@ConfigItem(
-			position = 7,
+			position = 9,
 			keyName = "barTextPosition",
 			name = "Value Text Position",
 			description = "Configures bar text position."
@@ -87,7 +87,7 @@ public interface XpGoalsConfig extends Config
 	default BarTextPosition barTextPosition() { return BarTextPosition.INSIDE; }
 
 	@ConfigItem(
-			position = 7,
+			position = 9,
 			keyName = "barTextSize",
 			name = "Value Text Size",
 			description = "Configures bar text size."
@@ -95,7 +95,7 @@ public interface XpGoalsConfig extends Config
 	default BarTextSize barTextSize() { return BarTextSize.LARGE; }
 
 	@ConfigItem(
-			position = 7,
+			position = 9,
 			keyName = "barTextAlignment",
 			name = "Value Text Alignment",
 			description = "Configures bar text alignment."
@@ -103,7 +103,7 @@ public interface XpGoalsConfig extends Config
 	default BarTextAlignment barTextAlignment() { return BarTextAlignment.CENTER; }
 
 	@ConfigItem(
-			position = 8,
+			position = 10,
 			keyName = "pastProgressSpan",
 			name = "Tooltip Grid Size",
 			description = "Configures grid size in the tooltip."
@@ -111,7 +111,7 @@ public interface XpGoalsConfig extends Config
 	default int pastProgressSpan() { return 3; }
 
 	@ConfigItem(
-			position = 8,
+			position = 10,
 			keyName = "doneTextType",
 			name = "Completion Text",
 			description = "Configures completion text for each gaol."
@@ -119,7 +119,15 @@ public interface XpGoalsConfig extends Config
 	default DoneTextType doneTextType() { return DoneTextType.COMPLETE; }
 
 	@ConfigItem(
-			position = 9,
+			position = 11,
+			keyName = "hideLabel",
+			name = "Hide Label",
+			description = "Configures whether or not the label is hidden."
+	)
+	default boolean hideLabel() { return false; }
+
+	@ConfigItem(
+			position = 12,
 			keyName = "hideIcons",
 			name = "Hide Icons",
 			description = "Configures whether or not to hide skill icons."
@@ -127,15 +135,15 @@ public interface XpGoalsConfig extends Config
 	default boolean hideSkillIcons() { return false; }
 
 	@ConfigItem(
-			position = 10,
+			position = 13,
 			keyName = "includeResetType",
-			name = "Include Reset Label",
+			name = "Reset Text",
 			description = "Configures whether or not to include reset label in bar text."
 	)
 	default boolean includeResetType() { return false; }
 
 	@ConfigItem(
-			position = 11,
+			position = 14,
 			keyName = "enableOverfill",
 			name = "Enable Bar Overfill",
 			description = "Configures whether or not bar overfills to 200%."
@@ -143,7 +151,7 @@ public interface XpGoalsConfig extends Config
 	default boolean enableOverfill() { return true; }
 
 	@ConfigItem(
-			position = 12,
+			position = 15,
 			keyName = "overfillColor",
 			name = "Overfill Color",
 			description = "Configures bar overfill color."

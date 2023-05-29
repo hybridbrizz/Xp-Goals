@@ -294,42 +294,39 @@ public class XpGoalsPlugin extends Plugin
 
 					if (!customPatterns.trim().isEmpty())
 					{
-						patterns = customPatterns.split("\n");
+						patternsList.addAll(Arrays.asList(customPatterns.split("\n")));
 					}
-					else
+					if (dayOfWeekPatternPart != null)
 					{
-						if (dayOfWeekPatternPart != null)
+						if (hourPatternPart != null)
 						{
-							if (hourPatternPart != null)
-							{
-								patternsList.add(dayOfWeekPatternPart + "->" + hourPatternPart);
-							}
-							else
-							{
-								patternsList.add(dayOfWeekPatternPart);
-							}
+							patternsList.add(dayOfWeekPatternPart + "->" + hourPatternPart);
 						}
-						if (dayCadencePatternPart != null)
+						else
 						{
-							if (hourPatternPart != null)
-							{
-								patternsList.add(dayCadencePatternPart + "->" + hourPatternPart);
-							}
-							else
-							{
-								patternsList.add(dayCadencePatternPart);
-							}
+							patternsList.add(dayOfWeekPatternPart);
 						}
-						if (dayOfWeekPatternPart == null && dayCadencePatternPart == null)
-						{
-							if (hourPatternPart != null)
-							{
-								patternsList.add(hourPatternPart);
-							}
-						}
-
-						patterns = patternsList.toArray(new String[0]);
 					}
+					if (dayCadencePatternPart != null)
+					{
+						if (hourPatternPart != null)
+						{
+							patternsList.add(dayCadencePatternPart + "->" + hourPatternPart);
+						}
+						else
+						{
+							patternsList.add(dayCadencePatternPart);
+						}
+					}
+					if (dayOfWeekPatternPart == null && dayCadencePatternPart == null)
+					{
+						if (hourPatternPart != null)
+						{
+							patternsList.add(hourPatternPart);
+						}
+					}
+
+					patterns = patternsList.toArray(new String[0]);
 
 					for (String patternStr: patterns)
 					{

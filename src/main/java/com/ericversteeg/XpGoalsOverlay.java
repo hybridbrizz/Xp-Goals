@@ -151,7 +151,7 @@ class XpGoalsOverlay extends Overlay {
 
 		int barSpacing = config.barSpacing() + minBarSpacing;
 
-		boolean hideLabel = config.labelText().trim().isEmpty();
+		boolean hideLabel = config.hideLabel();
 
 		if (!goals.isEmpty())
 		{
