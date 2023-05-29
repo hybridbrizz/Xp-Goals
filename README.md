@@ -1,6 +1,6 @@
 # Xp Goalz
 
-![goals_7 - Copy](https://github.com/erversteeg/Xp-Goals/assets/2341316/aae7c4e2-68ad-408a-881c-3b323623f574)
+![goalz_8](https://github.com/erversteeg/Xp-Goals/assets/2341316/9200b49e-93b2-4fa3-89f8-66f8faa32f0f)
 
 Track xp goals
 
