@@ -46,8 +46,3 @@ For cadences the format is [(M,W,D,H)|~offet|interval]
 
 #### Example 8 - Monday, Wednesday, and Friday in July
 [Jul]->[W]->[D^(1, 3, 5)]
-
-#### Example 9 - October - December, 3rd week and the 5th day of December only
-[Oct-Dec]->[W^3]
-
-[Dec]->[D^5]
