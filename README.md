@@ -59,10 +59,10 @@ For cadences the format is [(M,W,D,H)|~offet|interval]
 #### Example 7 - Monday, Wednesday, and Friday in July
 [Jul]->[W]->[D^(1, 3, 5)]
 
-#### Example 8 - Monday from 3pm-5pm 10,000 XP & Wednesday from 3pm-7pm 20,000 XP
-[Mon]->[3pm-5pm]=10000
+#### Example 8 - Monday from 3pm-5pm 20,000 XP & Wednesday from 7pm-10pm 30,000 XP
+[Mon]->[3pm-5pm]=20000
 
-[Wed]->[3pm-7pm]=20000
+[Wed]->[7pm-10pm]=30000
 
 #### Example 9 - October - December, 3rd week and the 5th day of December only
 [Oct-Dec]->[W^3]
