@@ -1,25 +1,8 @@
 # Xp Goalz
 
-Set XP goals. For example:
+![goals_7 - Copy](https://github.com/erversteeg/Xp-Goals/assets/2341316/aae7c4e2-68ad-408a-881c-3b323623f574)
 
-- 50,000 Firemaking xp / hour only on Saturday and Sunday between noon and 3pm
-- 25,000 Strength xp / day on Mondays, Wednesdays, and Fridays
-- Rotate between Runecrafting, Smithing, and Herblore each day starting at 8pm
-
-Optionally configure the follwing for each skill:
-- Target Xp
-- Reset Interval
-  - Hourly
-  - Daily
-  - Weekly
-  - Monthly
-  - Yearly
-- Days of the Week
-- Start Time
-- End Time
-- Day Cadence
-
-More advanced configurations with custom patterns.
+Track xp goals
 
 ## Custom Patterns
 
