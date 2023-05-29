@@ -21,7 +21,10 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoField;
 import java.time.temporal.IsoFields;
 import java.util.*;
@@ -176,7 +179,11 @@ public class XpGoalsPlugin extends Plugin
 		}
 
 		// check save data
-		if (dateTIme.get(ChronoField.MINUTE_OF_HOUR) != lastDateTime.get(ChronoField.MINUTE_OF_HOUR) || reset)
+		if (dateTIme.get(ChronoField.MINUTE_OF_HOUR) != lastDateTime.get(ChronoField.MINUTE_OF_HOUR) ||
+				dateTIme.get(ChronoField.HOUR_OF_DAY) != lastDateTime.get(ChronoField.HOUR_OF_DAY)
+				|| (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH))
+				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
+				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)) || reset)
 		{
 			writeSavedData();
 		}
@@ -337,7 +344,10 @@ public class XpGoalsPlugin extends Plugin
 							String [] patternParts = patternStr.split("=");
 							pattern = patternParts[0].trim();
 
-							goalXp = Integer.parseInt(patternParts[1].trim());
+							if (patternParts.length > 1)
+							{
+								goalXp = Integer.parseInt(patternParts[1].replace(",", "").replace(" ", "").trim());
+							}
 						}
 						else
 						{

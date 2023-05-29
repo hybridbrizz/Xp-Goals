@@ -171,7 +171,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = attackSkill
 	)
 	default int attackXpGoal() { return 1; }
@@ -189,7 +189,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = attackSkill
 	)
 	default boolean attackMonday() { return false; }
@@ -198,7 +198,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = attackSkill
 	)
 	default boolean attackTuesday() { return false; }
@@ -207,7 +207,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = attackSkill
 	)
 	default boolean attackWednesday() { return false; }
@@ -216,7 +216,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = attackSkill
 	)
 	default boolean attackThursday() { return false; }
@@ -225,7 +225,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = attackSkill
 	)
 	default boolean attackFriday() { return false; }
@@ -234,7 +234,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = attackSkill
 	)
 	default boolean attackSaturday() { return false; }
@@ -243,7 +243,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = attackSkill
 	)
 	default boolean attackSunday() { return false; }
@@ -252,7 +252,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = attackSkill
 	)
 	default Hour attackStartTime() { return Hour.NONE; }
@@ -261,7 +261,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = attackSkill
 	)
 	default Hour attackEndTime() { return Hour.NONE; }
@@ -270,7 +270,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = attackSkill
 	)
 	default DayCadence attackDayCadence() { return DayCadence.NONE; }
@@ -279,7 +279,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "attackCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = attackSkill
 	)
 	default DayCadence attackDayCadenceDay() { return DayCadence.NONE; }
@@ -288,7 +288,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "AttackCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = attackSkill
 	)
 	default String attackPattens() { return ""; }
@@ -315,7 +315,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = strengthSkill
 	)
 	default int strengthXpGoal() { return 1; }
@@ -333,7 +333,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = strengthSkill
 	)
 	default boolean strengthMonday() { return false; }
@@ -342,7 +342,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = strengthSkill
 	)
 	default boolean strengthTuesday() { return false; }
@@ -351,7 +351,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = strengthSkill
 	)
 	default boolean strengthWednesday() { return false; }
@@ -360,7 +360,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = strengthSkill
 	)
 	default boolean strengthThursday() { return false; }
@@ -369,7 +369,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = strengthSkill
 	)
 	default boolean strengthFriday() { return false; }
@@ -378,7 +378,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = strengthSkill
 	)
 	default boolean strengthSaturday() { return false; }
@@ -387,7 +387,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = strengthSkill
 	)
 	default boolean strengthSunday() { return false; }
@@ -396,7 +396,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = strengthSkill
 	)
 	default Hour strengthStartTime() { return Hour.NONE; }
@@ -405,7 +405,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = strengthSkill
 	)
 	default Hour strengthEndTime() { return Hour.NONE; }
@@ -414,7 +414,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = strengthSkill
 	)
 	default DayCadence strengthDayCadence() { return DayCadence.NONE; }
@@ -423,7 +423,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "strengthCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = strengthSkill
 	)
 	default DayCadence strengthDayCadenceDay() { return DayCadence.NONE; }
@@ -432,7 +432,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "StrengthCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = strengthSkill
 	)
 	default String strengthPattens() { return ""; }
@@ -459,7 +459,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = defenseSkill
 	)
 	default int defenseXpGoal() { return 1; }
@@ -477,7 +477,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = defenseSkill
 	)
 	default boolean defenseMonday() { return false; }
@@ -486,7 +486,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = defenseSkill
 	)
 	default boolean defenseTuesday() { return false; }
@@ -495,7 +495,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = defenseSkill
 	)
 	default boolean defenseWednesday() { return false; }
@@ -504,7 +504,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = defenseSkill
 	)
 	default boolean defenseThursday() { return false; }
@@ -513,7 +513,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = defenseSkill
 	)
 	default boolean defenseFriday() { return false; }
@@ -522,7 +522,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = defenseSkill
 	)
 	default boolean defenseSaturday() { return false; }
@@ -531,7 +531,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = defenseSkill
 	)
 	default boolean defenseSunday() { return false; }
@@ -540,7 +540,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = defenseSkill
 	)
 	default Hour defenseStartTime() { return Hour.NONE; }
@@ -549,7 +549,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = defenseSkill
 	)
 	default Hour defenseEndTime() { return Hour.NONE; }
@@ -558,7 +558,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = defenseSkill
 	)
 	default DayCadence defenseDayCadence() { return DayCadence.NONE; }
@@ -567,7 +567,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "defenseCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = defenseSkill
 	)
 	default DayCadence defenseDayCadenceDay() { return DayCadence.NONE; }
@@ -576,7 +576,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "DefenseCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = defenseSkill
 	)
 	default String defensePattens() { return ""; }
@@ -603,7 +603,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = rangedSkill
 	)
 	default int rangedXpGoal() { return 1; }
@@ -621,7 +621,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = rangedSkill
 	)
 	default boolean rangedMonday() { return false; }
@@ -630,7 +630,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = rangedSkill
 	)
 	default boolean rangedTuesday() { return false; }
@@ -639,7 +639,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = rangedSkill
 	)
 	default boolean rangedWednesday() { return false; }
@@ -648,7 +648,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = rangedSkill
 	)
 	default boolean rangedThursday() { return false; }
@@ -657,7 +657,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = rangedSkill
 	)
 	default boolean rangedFriday() { return false; }
@@ -666,7 +666,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = rangedSkill
 	)
 	default boolean rangedSaturday() { return false; }
@@ -675,7 +675,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = rangedSkill
 	)
 	default boolean rangedSunday() { return false; }
@@ -684,7 +684,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = rangedSkill
 	)
 	default Hour rangedStartTime() { return Hour.NONE; }
@@ -693,7 +693,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = rangedSkill
 	)
 	default Hour rangedEndTime() { return Hour.NONE; }
@@ -702,7 +702,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = rangedSkill
 	)
 	default DayCadence rangedDayCadence() { return DayCadence.NONE; }
@@ -711,7 +711,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "rangedCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = rangedSkill
 	)
 	default DayCadence rangedDayCadenceDay() { return DayCadence.NONE; }
@@ -720,7 +720,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "RangedCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = rangedSkill
 	)
 	default String rangedPattens() { return ""; }
@@ -747,7 +747,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = prayerSkill
 	)
 	default int prayerXpGoal() { return 1; }
@@ -765,7 +765,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = prayerSkill
 	)
 	default boolean prayerMonday() { return false; }
@@ -774,7 +774,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = prayerSkill
 	)
 	default boolean prayerTuesday() { return false; }
@@ -783,7 +783,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = prayerSkill
 	)
 	default boolean prayerWednesday() { return false; }
@@ -792,7 +792,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = prayerSkill
 	)
 	default boolean prayerThursday() { return false; }
@@ -801,7 +801,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = prayerSkill
 	)
 	default boolean prayerFriday() { return false; }
@@ -810,7 +810,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = prayerSkill
 	)
 	default boolean prayerSaturday() { return false; }
@@ -819,7 +819,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = prayerSkill
 	)
 	default boolean prayerSunday() { return false; }
@@ -828,7 +828,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = prayerSkill
 	)
 	default Hour prayerStartTime() { return Hour.NONE; }
@@ -837,7 +837,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = prayerSkill
 	)
 	default Hour prayerEndTime() { return Hour.NONE; }
@@ -846,7 +846,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = prayerSkill
 	)
 	default DayCadence prayerDayCadence() { return DayCadence.NONE; }
@@ -855,7 +855,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "prayerCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = prayerSkill
 	)
 	default DayCadence prayerDayCadenceDay() { return DayCadence.NONE; }
@@ -864,7 +864,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "PrayerCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = prayerSkill
 	)
 	default String prayerPattens() { return ""; }
@@ -891,7 +891,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = magicSkill
 	)
 	default int magicXpGoal() { return 1; }
@@ -909,7 +909,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = magicSkill
 	)
 	default boolean magicMonday() { return false; }
@@ -918,7 +918,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = magicSkill
 	)
 	default boolean magicTuesday() { return false; }
@@ -927,7 +927,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = magicSkill
 	)
 	default boolean magicWednesday() { return false; }
@@ -936,7 +936,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = magicSkill
 	)
 	default boolean magicThursday() { return false; }
@@ -945,7 +945,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = magicSkill
 	)
 	default boolean magicFriday() { return false; }
@@ -954,7 +954,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = magicSkill
 	)
 	default boolean magicSaturday() { return false; }
@@ -963,7 +963,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = magicSkill
 	)
 	default boolean magicSunday() { return false; }
@@ -972,7 +972,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = magicSkill
 	)
 	default Hour magicStartTime() { return Hour.NONE; }
@@ -981,7 +981,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = magicSkill
 	)
 	default Hour magicEndTime() { return Hour.NONE; }
@@ -990,7 +990,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = magicSkill
 	)
 	default DayCadence magicDayCadence() { return DayCadence.NONE; }
@@ -999,7 +999,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "magicCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = magicSkill
 	)
 	default DayCadence magicDayCadenceDay() { return DayCadence.NONE; }
@@ -1008,7 +1008,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "MagicCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = magicSkill
 	)
 	default String magicPattens() { return ""; }
@@ -1035,7 +1035,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = runecraftingSkill
 	)
 	default int runecraftingXpGoal() { return 1; }
@@ -1053,7 +1053,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingMonday() { return false; }
@@ -1062,7 +1062,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingTuesday() { return false; }
@@ -1071,7 +1071,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingWednesday() { return false; }
@@ -1080,7 +1080,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingThursday() { return false; }
@@ -1089,7 +1089,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingFriday() { return false; }
@@ -1098,7 +1098,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingSaturday() { return false; }
@@ -1107,7 +1107,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = runecraftingSkill
 	)
 	default boolean runecraftingSunday() { return false; }
@@ -1116,7 +1116,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = runecraftingSkill
 	)
 	default Hour runecraftingStartTime() { return Hour.NONE; }
@@ -1125,7 +1125,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = runecraftingSkill
 	)
 	default Hour runecraftingEndTime() { return Hour.NONE; }
@@ -1134,7 +1134,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = runecraftingSkill
 	)
 	default DayCadence runecraftingDayCadence() { return DayCadence.NONE; }
@@ -1143,7 +1143,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "runecraftingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = runecraftingSkill
 	)
 	default DayCadence runecraftingDayCadenceDay() { return DayCadence.NONE; }
@@ -1152,7 +1152,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "RunecraftingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = runecraftingSkill
 	)
 	default String runecraftingPattens() { return ""; }
@@ -1179,7 +1179,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = constructionSkill
 	)
 	default int constructionXpGoal() { return 1; }
@@ -1197,7 +1197,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = constructionSkill
 	)
 	default boolean constructionMonday() { return false; }
@@ -1206,7 +1206,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = constructionSkill
 	)
 	default boolean constructionTuesday() { return false; }
@@ -1215,7 +1215,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = constructionSkill
 	)
 	default boolean constructionWednesday() { return false; }
@@ -1224,7 +1224,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = constructionSkill
 	)
 	default boolean constructionThursday() { return false; }
@@ -1233,7 +1233,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = constructionSkill
 	)
 	default boolean constructionFriday() { return false; }
@@ -1242,7 +1242,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = constructionSkill
 	)
 	default boolean constructionSaturday() { return false; }
@@ -1251,7 +1251,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = constructionSkill
 	)
 	default boolean constructionSunday() { return false; }
@@ -1260,7 +1260,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = constructionSkill
 	)
 	default Hour constructionStartTime() { return Hour.NONE; }
@@ -1269,7 +1269,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = constructionSkill
 	)
 	default Hour constructionEndTime() { return Hour.NONE; }
@@ -1278,7 +1278,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = constructionSkill
 	)
 	default DayCadence constructionDayCadence() { return DayCadence.NONE; }
@@ -1287,7 +1287,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "constructionCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = constructionSkill
 	)
 	default DayCadence constructionDayCadenceDay() { return DayCadence.NONE; }
@@ -1296,7 +1296,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "ConstructionCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = constructionSkill
 	)
 	default String constructionPattens() { return ""; }
@@ -1323,7 +1323,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = hitpointsSkill
 	)
 	default int hitpointsXpGoal() { return 1; }
@@ -1341,7 +1341,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsMonday() { return false; }
@@ -1350,7 +1350,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsTuesday() { return false; }
@@ -1359,7 +1359,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsWednesday() { return false; }
@@ -1368,7 +1368,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsThursday() { return false; }
@@ -1377,7 +1377,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsFriday() { return false; }
@@ -1386,7 +1386,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsSaturday() { return false; }
@@ -1395,7 +1395,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = hitpointsSkill
 	)
 	default boolean hitpointsSunday() { return false; }
@@ -1404,7 +1404,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = hitpointsSkill
 	)
 	default Hour hitpointsStartTime() { return Hour.NONE; }
@@ -1413,7 +1413,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = hitpointsSkill
 	)
 	default Hour hitpointsEndTime() { return Hour.NONE; }
@@ -1422,7 +1422,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = hitpointsSkill
 	)
 	default DayCadence hitpointsDayCadence() { return DayCadence.NONE; }
@@ -1431,7 +1431,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hitpointsCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = hitpointsSkill
 	)
 	default DayCadence hitpointsDayCadenceDay() { return DayCadence.NONE; }
@@ -1440,7 +1440,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "HitpointsCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = hitpointsSkill
 	)
 	default String hitpointsPattens() { return ""; }
@@ -1467,7 +1467,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = agilitySkill
 	)
 	default int agilityXpGoal() { return 1; }
@@ -1485,7 +1485,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = agilitySkill
 	)
 	default boolean agilityMonday() { return false; }
@@ -1494,7 +1494,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = agilitySkill
 	)
 	default boolean agilityTuesday() { return false; }
@@ -1503,7 +1503,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = agilitySkill
 	)
 	default boolean agilityWednesday() { return false; }
@@ -1512,7 +1512,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = agilitySkill
 	)
 	default boolean agilityThursday() { return false; }
@@ -1521,7 +1521,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = agilitySkill
 	)
 	default boolean agilityFriday() { return false; }
@@ -1530,7 +1530,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilitySaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = agilitySkill
 	)
 	default boolean agilitySaturday() { return false; }
@@ -1539,7 +1539,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilitySunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = agilitySkill
 	)
 	default boolean agilitySunday() { return false; }
@@ -1548,7 +1548,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = agilitySkill
 	)
 	default Hour agilityStartTime() { return Hour.NONE; }
@@ -1557,7 +1557,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = agilitySkill
 	)
 	default Hour agilityEndTime() { return Hour.NONE; }
@@ -1566,7 +1566,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = agilitySkill
 	)
 	default DayCadence agilityDayCadence() { return DayCadence.NONE; }
@@ -1575,7 +1575,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "agilityCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = agilitySkill
 	)
 	default DayCadence agilityDayCadenceDay() { return DayCadence.NONE; }
@@ -1584,7 +1584,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "AgilityCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = agilitySkill
 	)
 	default String agilityPattens() { return ""; }
@@ -1611,7 +1611,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = herbloreSkill
 	)
 	default int herbloreXpGoal() { return 1; }
@@ -1629,7 +1629,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreMonday() { return false; }
@@ -1638,7 +1638,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreTuesday() { return false; }
@@ -1647,7 +1647,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreWednesday() { return false; }
@@ -1656,7 +1656,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreThursday() { return false; }
@@ -1665,7 +1665,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreFriday() { return false; }
@@ -1674,7 +1674,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreSaturday() { return false; }
@@ -1683,7 +1683,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = herbloreSkill
 	)
 	default boolean herbloreSunday() { return false; }
@@ -1692,7 +1692,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = herbloreSkill
 	)
 	default Hour herbloreStartTime() { return Hour.NONE; }
@@ -1701,7 +1701,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = herbloreSkill
 	)
 	default Hour herbloreEndTime() { return Hour.NONE; }
@@ -1710,7 +1710,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = herbloreSkill
 	)
 	default DayCadence herbloreDayCadence() { return DayCadence.NONE; }
@@ -1719,7 +1719,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "herbloreCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = herbloreSkill
 	)
 	default DayCadence herbloreDayCadenceDay() { return DayCadence.NONE; }
@@ -1728,7 +1728,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "HerbloreCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = herbloreSkill
 	)
 	default String herblorePattens() { return ""; }
@@ -1755,7 +1755,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = thievingSkill
 	)
 	default int thievingXpGoal() { return 1; }
@@ -1773,7 +1773,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = thievingSkill
 	)
 	default boolean thievingMonday() { return false; }
@@ -1782,7 +1782,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = thievingSkill
 	)
 	default boolean thievingTuesday() { return false; }
@@ -1791,7 +1791,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = thievingSkill
 	)
 	default boolean thievingWednesday() { return false; }
@@ -1800,7 +1800,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = thievingSkill
 	)
 	default boolean thievingThursday() { return false; }
@@ -1809,7 +1809,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = thievingSkill
 	)
 	default boolean thievingFriday() { return false; }
@@ -1818,7 +1818,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = thievingSkill
 	)
 	default boolean thievingSaturday() { return false; }
@@ -1827,7 +1827,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = thievingSkill
 	)
 	default boolean thievingSunday() { return false; }
@@ -1836,7 +1836,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = thievingSkill
 	)
 	default Hour thievingStartTime() { return Hour.NONE; }
@@ -1845,7 +1845,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = thievingSkill
 	)
 	default Hour thievingEndTime() { return Hour.NONE; }
@@ -1854,7 +1854,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = thievingSkill
 	)
 	default DayCadence thievingDayCadence() { return DayCadence.NONE; }
@@ -1863,7 +1863,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "thievingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = thievingSkill
 	)
 	default DayCadence thievingDayCadenceDay() { return DayCadence.NONE; }
@@ -1872,7 +1872,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "ThievingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = thievingSkill
 	)
 	default String thievingPattens() { return ""; }
@@ -1899,7 +1899,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = craftingSkill
 	)
 	default int craftingXpGoal() { return 1; }
@@ -1917,7 +1917,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = craftingSkill
 	)
 	default boolean craftingMonday() { return false; }
@@ -1926,7 +1926,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = craftingSkill
 	)
 	default boolean craftingTuesday() { return false; }
@@ -1935,7 +1935,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = craftingSkill
 	)
 	default boolean craftingWednesday() { return false; }
@@ -1944,7 +1944,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = craftingSkill
 	)
 	default boolean craftingThursday() { return false; }
@@ -1953,7 +1953,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = craftingSkill
 	)
 	default boolean craftingFriday() { return false; }
@@ -1962,7 +1962,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = craftingSkill
 	)
 	default boolean craftingSaturday() { return false; }
@@ -1971,7 +1971,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = craftingSkill
 	)
 	default boolean craftingSunday() { return false; }
@@ -1980,7 +1980,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = craftingSkill
 	)
 	default Hour craftingStartTime() { return Hour.NONE; }
@@ -1989,7 +1989,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = craftingSkill
 	)
 	default Hour craftingEndTime() { return Hour.NONE; }
@@ -1998,7 +1998,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = craftingSkill
 	)
 	default DayCadence craftingDayCadence() { return DayCadence.NONE; }
@@ -2007,7 +2007,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "craftingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = craftingSkill
 	)
 	default DayCadence craftingDayCadenceDay() { return DayCadence.NONE; }
@@ -2016,7 +2016,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "CraftingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = craftingSkill
 	)
 	default String craftingPattens() { return ""; }
@@ -2043,7 +2043,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = fletchingSkill
 	)
 	default int fletchingXpGoal() { return 1; }
@@ -2061,7 +2061,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingMonday() { return false; }
@@ -2070,7 +2070,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingTuesday() { return false; }
@@ -2079,7 +2079,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingWednesday() { return false; }
@@ -2088,7 +2088,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingThursday() { return false; }
@@ -2097,7 +2097,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingFriday() { return false; }
@@ -2106,7 +2106,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingSaturday() { return false; }
@@ -2115,7 +2115,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = fletchingSkill
 	)
 	default boolean fletchingSunday() { return false; }
@@ -2124,7 +2124,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = fletchingSkill
 	)
 	default Hour fletchingStartTime() { return Hour.NONE; }
@@ -2133,7 +2133,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = fletchingSkill
 	)
 	default Hour fletchingEndTime() { return Hour.NONE; }
@@ -2142,7 +2142,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = fletchingSkill
 	)
 	default DayCadence fletchingDayCadence() { return DayCadence.NONE; }
@@ -2151,7 +2151,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fletchingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = fletchingSkill
 	)
 	default DayCadence fletchingDayCadenceDay() { return DayCadence.NONE; }
@@ -2160,7 +2160,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "FletchingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = fletchingSkill
 	)
 	default String fletchingPattens() { return ""; }
@@ -2187,7 +2187,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = slayerSkill
 	)
 	default int slayerXpGoal() { return 1; }
@@ -2205,7 +2205,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = slayerSkill
 	)
 	default boolean slayerMonday() { return false; }
@@ -2214,7 +2214,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = slayerSkill
 	)
 	default boolean slayerTuesday() { return false; }
@@ -2223,7 +2223,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = slayerSkill
 	)
 	default boolean slayerWednesday() { return false; }
@@ -2232,7 +2232,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = slayerSkill
 	)
 	default boolean slayerThursday() { return false; }
@@ -2241,7 +2241,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = slayerSkill
 	)
 	default boolean slayerFriday() { return false; }
@@ -2250,7 +2250,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = slayerSkill
 	)
 	default boolean slayerSaturday() { return false; }
@@ -2259,7 +2259,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = slayerSkill
 	)
 	default boolean slayerSunday() { return false; }
@@ -2268,7 +2268,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = slayerSkill
 	)
 	default Hour slayerStartTime() { return Hour.NONE; }
@@ -2277,7 +2277,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = slayerSkill
 	)
 	default Hour slayerEndTime() { return Hour.NONE; }
@@ -2286,7 +2286,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = slayerSkill
 	)
 	default DayCadence slayerDayCadence() { return DayCadence.NONE; }
@@ -2295,7 +2295,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "slayerCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = slayerSkill
 	)
 	default DayCadence slayerDayCadenceDay() { return DayCadence.NONE; }
@@ -2304,7 +2304,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "SlayerCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = slayerSkill
 	)
 	default String slayerPattens() { return ""; }
@@ -2331,7 +2331,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = hunterSkill
 	)
 	default int hunterXpGoal() { return 1; }
@@ -2349,7 +2349,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = hunterSkill
 	)
 	default boolean hunterMonday() { return false; }
@@ -2358,7 +2358,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = hunterSkill
 	)
 	default boolean hunterTuesday() { return false; }
@@ -2367,7 +2367,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = hunterSkill
 	)
 	default boolean hunterWednesday() { return false; }
@@ -2376,7 +2376,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = hunterSkill
 	)
 	default boolean hunterThursday() { return false; }
@@ -2385,7 +2385,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = hunterSkill
 	)
 	default boolean hunterFriday() { return false; }
@@ -2394,7 +2394,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = hunterSkill
 	)
 	default boolean hunterSaturday() { return false; }
@@ -2403,7 +2403,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = hunterSkill
 	)
 	default boolean hunterSunday() { return false; }
@@ -2412,7 +2412,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = hunterSkill
 	)
 	default Hour hunterStartTime() { return Hour.NONE; }
@@ -2421,7 +2421,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = hunterSkill
 	)
 	default Hour hunterEndTime() { return Hour.NONE; }
@@ -2430,7 +2430,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = hunterSkill
 	)
 	default DayCadence hunterDayCadence() { return DayCadence.NONE; }
@@ -2439,7 +2439,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "hunterCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = hunterSkill
 	)
 	default DayCadence hunterDayCadenceDay() { return DayCadence.NONE; }
@@ -2448,7 +2448,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "HunterCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = hunterSkill
 	)
 	default String hunterPattens() { return ""; }
@@ -2475,7 +2475,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = miningSkill
 	)
 	default int miningXpGoal() { return 1; }
@@ -2493,7 +2493,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = miningSkill
 	)
 	default boolean miningMonday() { return false; }
@@ -2502,7 +2502,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = miningSkill
 	)
 	default boolean miningTuesday() { return false; }
@@ -2511,7 +2511,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = miningSkill
 	)
 	default boolean miningWednesday() { return false; }
@@ -2520,7 +2520,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = miningSkill
 	)
 	default boolean miningThursday() { return false; }
@@ -2529,7 +2529,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = miningSkill
 	)
 	default boolean miningFriday() { return false; }
@@ -2538,7 +2538,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = miningSkill
 	)
 	default boolean miningSaturday() { return false; }
@@ -2547,7 +2547,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = miningSkill
 	)
 	default boolean miningSunday() { return false; }
@@ -2556,7 +2556,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = miningSkill
 	)
 	default Hour miningStartTime() { return Hour.NONE; }
@@ -2565,7 +2565,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = miningSkill
 	)
 	default Hour miningEndTime() { return Hour.NONE; }
@@ -2574,7 +2574,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = miningSkill
 	)
 	default DayCadence miningDayCadence() { return DayCadence.NONE; }
@@ -2583,7 +2583,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "miningCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = miningSkill
 	)
 	default DayCadence miningDayCadenceDay() { return DayCadence.NONE; }
@@ -2592,7 +2592,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "MiningCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = miningSkill
 	)
 	default String miningPattens() { return ""; }
@@ -2619,7 +2619,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = smithingSkill
 	)
 	default int smithingXpGoal() { return 1; }
@@ -2637,7 +2637,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = smithingSkill
 	)
 	default boolean smithingMonday() { return false; }
@@ -2646,7 +2646,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = smithingSkill
 	)
 	default boolean smithingTuesday() { return false; }
@@ -2655,7 +2655,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = smithingSkill
 	)
 	default boolean smithingWednesday() { return false; }
@@ -2664,7 +2664,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = smithingSkill
 	)
 	default boolean smithingThursday() { return false; }
@@ -2673,7 +2673,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = smithingSkill
 	)
 	default boolean smithingFriday() { return false; }
@@ -2682,7 +2682,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = smithingSkill
 	)
 	default boolean smithingSaturday() { return false; }
@@ -2691,7 +2691,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = smithingSkill
 	)
 	default boolean smithingSunday() { return false; }
@@ -2700,7 +2700,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = smithingSkill
 	)
 	default Hour smithingStartTime() { return Hour.NONE; }
@@ -2709,7 +2709,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = smithingSkill
 	)
 	default Hour smithingEndTime() { return Hour.NONE; }
@@ -2718,7 +2718,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = smithingSkill
 	)
 	default DayCadence smithingDayCadence() { return DayCadence.NONE; }
@@ -2727,7 +2727,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "smithingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = smithingSkill
 	)
 	default DayCadence smithingDayCadenceDay() { return DayCadence.NONE; }
@@ -2736,7 +2736,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "SmithingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = smithingSkill
 	)
 	default String smithingPattens() { return ""; }
@@ -2763,7 +2763,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = fishingSkill
 	)
 	default int fishingXpGoal() { return 1; }
@@ -2781,7 +2781,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = fishingSkill
 	)
 	default boolean fishingMonday() { return false; }
@@ -2790,7 +2790,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = fishingSkill
 	)
 	default boolean fishingTuesday() { return false; }
@@ -2799,7 +2799,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = fishingSkill
 	)
 	default boolean fishingWednesday() { return false; }
@@ -2808,7 +2808,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = fishingSkill
 	)
 	default boolean fishingThursday() { return false; }
@@ -2817,7 +2817,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = fishingSkill
 	)
 	default boolean fishingFriday() { return false; }
@@ -2826,7 +2826,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = fishingSkill
 	)
 	default boolean fishingSaturday() { return false; }
@@ -2835,7 +2835,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = fishingSkill
 	)
 	default boolean fishingSunday() { return false; }
@@ -2844,7 +2844,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = fishingSkill
 	)
 	default Hour fishingStartTime() { return Hour.NONE; }
@@ -2853,7 +2853,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = fishingSkill
 	)
 	default Hour fishingEndTime() { return Hour.NONE; }
@@ -2862,7 +2862,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = fishingSkill
 	)
 	default DayCadence fishingDayCadence() { return DayCadence.NONE; }
@@ -2871,7 +2871,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "fishingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = fishingSkill
 	)
 	default DayCadence fishingDayCadenceDay() { return DayCadence.NONE; }
@@ -2880,7 +2880,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "FishingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = fishingSkill
 	)
 	default String fishingPattens() { return ""; }
@@ -2907,7 +2907,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = cookingSkill
 	)
 	default int cookingXpGoal() { return 1; }
@@ -2925,7 +2925,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = cookingSkill
 	)
 	default boolean cookingMonday() { return false; }
@@ -2934,7 +2934,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = cookingSkill
 	)
 	default boolean cookingTuesday() { return false; }
@@ -2943,7 +2943,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = cookingSkill
 	)
 	default boolean cookingWednesday() { return false; }
@@ -2952,7 +2952,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = cookingSkill
 	)
 	default boolean cookingThursday() { return false; }
@@ -2961,7 +2961,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = cookingSkill
 	)
 	default boolean cookingFriday() { return false; }
@@ -2970,7 +2970,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = cookingSkill
 	)
 	default boolean cookingSaturday() { return false; }
@@ -2979,7 +2979,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = cookingSkill
 	)
 	default boolean cookingSunday() { return false; }
@@ -2988,7 +2988,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = cookingSkill
 	)
 	default Hour cookingStartTime() { return Hour.NONE; }
@@ -2997,7 +2997,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = cookingSkill
 	)
 	default Hour cookingEndTime() { return Hour.NONE; }
@@ -3006,7 +3006,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = cookingSkill
 	)
 	default DayCadence cookingDayCadence() { return DayCadence.NONE; }
@@ -3015,7 +3015,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "cookingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = cookingSkill
 	)
 	default DayCadence cookingDayCadenceDay() { return DayCadence.NONE; }
@@ -3024,7 +3024,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "CookingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = cookingSkill
 	)
 	default String cookingPattens() { return ""; }
@@ -3051,7 +3051,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = firemakingSkill
 	)
 	default int firemakingXpGoal() { return 1; }
@@ -3069,7 +3069,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingMonday() { return false; }
@@ -3078,7 +3078,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingTuesday() { return false; }
@@ -3087,7 +3087,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingWednesday() { return false; }
@@ -3096,7 +3096,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingThursday() { return false; }
@@ -3105,7 +3105,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingFriday() { return false; }
@@ -3114,7 +3114,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingSaturday() { return false; }
@@ -3123,7 +3123,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = firemakingSkill
 	)
 	default boolean firemakingSunday() { return false; }
@@ -3132,7 +3132,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = firemakingSkill
 	)
 	default Hour firemakingStartTime() { return Hour.NONE; }
@@ -3141,7 +3141,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = firemakingSkill
 	)
 	default Hour firemakingEndTime() { return Hour.NONE; }
@@ -3150,7 +3150,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = firemakingSkill
 	)
 	default DayCadence firemakingDayCadence() { return DayCadence.NONE; }
@@ -3159,7 +3159,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "firemakingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = firemakingSkill
 	)
 	default DayCadence firemakingDayCadenceDay() { return DayCadence.NONE; }
@@ -3168,7 +3168,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "FiremakingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = firemakingSkill
 	)
 	default String firemakingPattens() { return ""; }
@@ -3195,7 +3195,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = woodcuttingSkill
 	)
 	default int woodcuttingXpGoal() { return 1; }
@@ -3213,7 +3213,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingMonday() { return false; }
@@ -3222,7 +3222,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingTuesday() { return false; }
@@ -3231,7 +3231,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingWednesday() { return false; }
@@ -3240,7 +3240,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingThursday() { return false; }
@@ -3249,7 +3249,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingFriday() { return false; }
@@ -3258,7 +3258,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingSaturday() { return false; }
@@ -3267,7 +3267,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = woodcuttingSkill
 	)
 	default boolean woodcuttingSunday() { return false; }
@@ -3276,7 +3276,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = woodcuttingSkill
 	)
 	default Hour woodcuttingStartTime() { return Hour.NONE; }
@@ -3285,7 +3285,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = woodcuttingSkill
 	)
 	default Hour woodcuttingEndTime() { return Hour.NONE; }
@@ -3294,7 +3294,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = woodcuttingSkill
 	)
 	default DayCadence woodcuttingDayCadence() { return DayCadence.NONE; }
@@ -3303,7 +3303,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "woodcuttingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = woodcuttingSkill
 	)
 	default DayCadence woodcuttingDayCadenceDay() { return DayCadence.NONE; }
@@ -3312,7 +3312,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "WoodcuttingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = woodcuttingSkill
 	)
 	default String woodcuttingPattens() { return ""; }
@@ -3339,7 +3339,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingXpGoal",
 			position = 2,
 			name = "Target Xp",
-			description = "Configures the xp goal.",
+			description = "Configures xp goal.",
 			section = farmingSkill
 	)
 	default int farmingXpGoal() { return 1; }
@@ -3357,7 +3357,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingMonday",
 			position = 4,
 			name = "Monday",
-			description = "Configures whether or not progress is recorded on Mondays.",
+			description = "Configures whether or not progress is tracked on Mondays.",
 			section = farmingSkill
 	)
 	default boolean farmingMonday() { return false; }
@@ -3366,7 +3366,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingTuesday",
 			position = 5,
 			name = "Tuesday",
-			description = "Configures whether or not progress is recorded on Tuesdays.",
+			description = "Configures whether or not progress is tracked on Tuesdays.",
 			section = farmingSkill
 	)
 	default boolean farmingTuesday() { return false; }
@@ -3375,7 +3375,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingWednesday",
 			position = 6,
 			name = "Wednesday",
-			description = "Configures whether or not progress is recorded on Wednesdays.",
+			description = "Configures whether or not progress is tracked on Wednesdays.",
 			section = farmingSkill
 	)
 	default boolean farmingWednesday() { return false; }
@@ -3384,7 +3384,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingThursday",
 			position = 7,
 			name = "Thursday",
-			description = "Configures whether or not progress is recorded on Thursdays.",
+			description = "Configures whether or not progress is tracked on Thursdays.",
 			section = farmingSkill
 	)
 	default boolean farmingThursday() { return false; }
@@ -3393,7 +3393,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingFriday",
 			position = 8,
 			name = "Friday",
-			description = "Configures whether or not progress is recorded on Fridays.",
+			description = "Configures whether or not progress is tracked on Fridays.",
 			section = farmingSkill
 	)
 	default boolean farmingFriday() { return false; }
@@ -3402,7 +3402,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingSaturday",
 			position = 9,
 			name = "Saturday",
-			description = "Configures whether or not progress is recorded on Saturdays.",
+			description = "Configures whether or not progress is tracked on Saturdays.",
 			section = farmingSkill
 	)
 	default boolean farmingSaturday() { return false; }
@@ -3411,7 +3411,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingSunday",
 			position = 10,
 			name = "Sunday",
-			description = "Configures whether or not progress is recorded on Sundays.",
+			description = "Configures whether or not progress is tracked on Sundays.",
 			section = farmingSkill
 	)
 	default boolean farmingSunday() { return false; }
@@ -3420,7 +3420,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingStartTime",
 			position = 11,
 			name = "Start Time",
-			description = "Configures the start time for when progress is recorded each day.",
+			description = "Configures start time for when progress is tracked each day.",
 			section = farmingSkill
 	)
 	default Hour farmingStartTime() { return Hour.NONE; }
@@ -3429,7 +3429,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingEndTime",
 			position = 12,
 			name = "End Time",
-			description = "Configures the end time for when progress is recorded each day.",
+			description = "Configures end time for when progress is tracked each day.",
 			section = farmingSkill
 	)
 	default Hour farmingEndTime() { return Hour.NONE; }
@@ -3438,7 +3438,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingDayCadence",
 			position = 13,
 			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			description = "Configures day cadence for when progress is tracked. For example 1, 2, 3, 4, 5.",
 			section = farmingSkill
 	)
 	default DayCadence farmingDayCadence() { return DayCadence.NONE; }
@@ -3447,7 +3447,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "farmingCadenceDay",
 			position = 14,
 			name = "Cadence Day",
-			description = "Configures on which day in the cadence progress is recorded.",
+			description = "Configures on which day in cadence progress is tracked.",
 			section = farmingSkill
 	)
 	default DayCadence farmingDayCadenceDay() { return DayCadence.NONE; }
@@ -3456,7 +3456,7 @@ public interface XpGoalsConfig extends Config
 			keyName = "FarmingCustomPatterns",
 			position = 15,
 			name = "Custom Patterns",
-			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			description = "Configures custom track patterns. See plugin page about making custom patterns.",
 			section = farmingSkill
 	)
 	default String farmingPattens() { return ""; }
