@@ -38,32 +38,33 @@ Omit XP for configured Target Xp
 
 For cadences the format is [(M,W,D,H)|~offet|interval]
 
-#### Example 1 - Every other day in 2023
-[2023]->[D|2]
-
-#### Example 2 - Every third day of each month starting on the 3rd
-[M]->[D|~2|3]
-
-#### Example 3 - April and May 5th 2pm - 6pm
-[Apr-May]->[D^5]->[2pm-6pm]
-
-#### Example 4 - 21st week of the year
-[Y]->[W^21]
-
-#### Example 5 - 149th day of the year
-[Y]->[D^149]
-
-#### Example 6 - 2nd and 4th Saturday of April
-[Apr]->[W^(2,4)]->[Sat]
-
-#### Example 7 - Monday, Wednesday, and Friday in July
-[Jul]->[W]->[D^(1, 3, 5)]
-
-#### Example 8 - Monday from 3pm-5pm 20,000 XP & Wednesday from 7pm-10pm 30,000 XP
+#### Example 1 - Different times for different days of the week
 [Mon]->[3pm-5pm]=20000
 
 [Wed]->[7pm-10pm]=30000
 
+#### Example 2 - Every other day in 2023
+[2023]->[D|2]
+
+#### Example 3 - Every third day of each month starting on the 3rd
+[M]->[D|~2|3]
+
+#### Example 4 - April and May 5th 2pm - 6pm
+[Apr-May]->[D^5]->[2pm-6pm]
+
+#### Example 5 - 21st week of the year
+[Y]->[W^21]
+
+#### Example 6 - 50th & 149th day of the year
+[Y]->[D^(50,149)]
+
+#### Example 7 - 2nd and 4th Saturday of April
+[Apr]->[W^(2,4)]->[Sat]
+
+#### Example 8 - Monday, Wednesday, and Friday in July
+[Jul]->[W]->[D^(1, 3, 5)]
+
 #### Example 9 - October - December, 3rd week and the 5th day of December only
 [Oct-Dec]->[W^3]
+
 [Dec]->[D^5]
