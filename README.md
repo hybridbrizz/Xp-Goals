@@ -6,7 +6,7 @@ Set XP goals. For example:
 - 25,000 Strength xp / day on Mondays, Wednesdays, and Fridays
 - Rotate between Runecrafting, Smithing, and Herblore each day starting at 8pm
 
-Optinally configure the follwing for each skill:
+Optionally configure the follwing for each skill:
 - Target Xp
 - Reset Interval
   - Hourly
@@ -19,7 +19,7 @@ Optinally configure the follwing for each skill:
 - End Time
 - Day Cadence
 
-More advanced configurations are possible with custom patterns.
+More advanced configurations with custom patterns.
 
 ## Custom Patterns
 
@@ -36,28 +36,34 @@ Any of [Y], [M], [W], [D], or [H] can be omitted.
 
 Omit XP for configured Target Xp
 
-For cadances the format is [(M,W,D,H)|~offet|interval]
+For cadences the format is [(M,W,D,H)|~offet|interval]
 
 #### Example 1 - Every other day in 2023
 [2023]->[D|2]
 
-#### Example 2 - April and May 5th 2pm - 6pm
+#### Example 2 - Every third day of each month starting on the 3rd
+[M]->[D|~2|3]
+
+#### Example 3 - April and May 5th 2pm - 6pm
 [Apr-May]->[D^5]->[2pm-6pm]
 
-#### Example 3 - 21st week of the year
+#### Example 4 - 21st week of the year
 [Y]->[W^21]
 
-#### Example 4 - 149th day of the year
+#### Example 5 - 149th day of the year
 [Y]->[D^149]
 
-#### Example 5 - 2nd and 4th Saturday of April
+#### Example 6 - 2nd and 4th Saturday of April
 [Apr]->[W^(2,4)]->[Sat]
 
-#### Example 6 - Monday from 3pm-5pm 10,000 XP & Wednesday from 3pm-7pm 20,000 XP
+#### Example 7 - Monday, Wednesday, and Friday in July
+[Jul]->[W]->[D^(1, 3, 5)]
+
+#### Example 8 - Monday from 3pm-5pm 10,000 XP & Wednesday from 3pm-7pm 20,000 XP
 [Mon]->[3pm-5pm]=10000
 
 [Wed]->[3pm-7pm]=20000
 
-#### Example 7 - October - December, 3rd week and the 5th day of December only
+#### Example 9 - October - December, 3rd week and the 5th day of December only
 [Oct-Dec]->[W^3]
 [Dec]->[D^5]
