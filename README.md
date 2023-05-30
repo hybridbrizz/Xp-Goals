@@ -2,11 +2,11 @@
 
 ![goals_6](https://github.com/erversteeg/Xp-Goals/assets/2341316/0c0643a8-c29a-4e4e-8090-e7d3e10a5b7b)
 
-Schedule goals for the various skills you are leveling on a per day or hour basis.
+Schedule goals for various skills you are leveling on a per day or hour basis. 
 
-Bars show you how much progress you're making towards your goals until they're complete.
+Bars show you how much progress you're making towards your goals until they're complete. 
 
-Goals reset every hour, day, week, month, or year.
+Goals reset every hour, day, week, month, or year. 
 
 Mouse-over tooltip shows the results of your most recent cycles for each skill.
 
