@@ -56,6 +56,8 @@ public class XpGoalsPlugin extends Plugin
 
 	LocalDateTime lastDateTime = null;
 
+	boolean progressUpdated = false;
+
 	// so the first hit after a reset is tracked
 	private Map<Integer, Integer> skillsXp = new HashMap<>();
 
@@ -69,7 +71,6 @@ public class XpGoalsPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		overlayManager.remove(overlay);
-		writeSavedData();
 	}
 
 	@Subscribe
@@ -111,6 +112,13 @@ public class XpGoalsPlugin extends Plugin
 	public void onGameTick(GameTick tick)
 	{
 		checkResets();
+
+		if (progressUpdated)
+		{
+			writeSavedData();
+		}
+
+		progressUpdated = false;
 	}
 
 	@Subscribe
@@ -131,6 +139,8 @@ public class XpGoalsPlugin extends Plugin
 
 			if (goal.progressXp < 0) goal.progressXp = 0;
 			goal.progressXp += xp - lastXp;
+
+			progressUpdated = true;
 		}
 
 		skillsXp.put(skill.ordinal(), xp);
@@ -142,8 +152,6 @@ public class XpGoalsPlugin extends Plugin
 
 		LocalDateTime dateTIme = LocalDateTime.now();
 
-		boolean reset = false;
-
 		if (dateTIme.get(ChronoField.HOUR_OF_DAY) != lastDateTime.get(ChronoField.HOUR_OF_DAY)
 				|| (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH))
 				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
@@ -151,41 +159,26 @@ public class XpGoalsPlugin extends Plugin
 		{
 			resetGoals(Goal.resetHourly);
 			configSyncGoals();
-			reset = true;
 		}
 		if (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH)
 				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetDaily);
-			reset = true;
 		}
 		if (dateTIme.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) != lastDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetWeekly);
-			reset = true;
 		}
 		if (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR)
 				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetMonthly);
-			reset = true;
 		}
 		if (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR))
 		{
 			resetGoals(Goal.resetYearly);
-			reset = true;
-		}
-
-		// check save data
-		if (dateTIme.get(ChronoField.MINUTE_OF_HOUR) != lastDateTime.get(ChronoField.MINUTE_OF_HOUR) ||
-				dateTIme.get(ChronoField.HOUR_OF_DAY) != lastDateTime.get(ChronoField.HOUR_OF_DAY)
-				|| (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH))
-				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
-				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)) || reset)
-		{
-			writeSavedData();
 		}
 
 		goalData.lastCheck = dateTIme.toEpochSecond(zoneOffset);

@@ -51,6 +51,8 @@ class XpGoalsOverlay extends Overlay {
 	int panelBottomPadding = 4;
 	int panelHPadding = 4;
 
+	int iconRightPadding = 3;
+
 	private int panelX;
 	private int panelY;
 	private int panelWidth;
@@ -196,7 +198,7 @@ class XpGoalsOverlay extends Overlay {
 				extraBottomPadding = (ICON_SIZE - barHeight) / 2;
 			}
 
-			int iconSizeWPadding = ICON_SIZE + 5;
+			int iconSizeWPadding = ICON_SIZE + iconRightPadding;
 			if (ICON_SIZE == 0)
 			{
 				iconSizeWPadding = 0;
@@ -387,10 +389,10 @@ class XpGoalsOverlay extends Overlay {
 
 		int h = Math.max(config.barHeight(), 2);
 
-		int x = anchorX + ICON_SIZE + 5;
+		int x = anchorX + ICON_SIZE + iconRightPadding;
 		if (config.hideSkillIcons())
 		{
-			x -= 5;
+			x -= iconRightPadding;
 		}
 
 		int y = anchorY + offsetY;
@@ -544,7 +546,7 @@ class XpGoalsOverlay extends Overlay {
 		int x = 0;
 		int y;
 
-		int iconPadding = 5;
+		int iconPadding = iconRightPadding;
 		if (config.hideSkillIcons())
 		{
 			iconPadding = 0;
