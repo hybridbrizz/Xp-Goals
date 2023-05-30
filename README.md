@@ -1,8 +1,18 @@
 # Xp Goalz
 
-![goalz_8](https://github.com/erversteeg/Xp-Goals/assets/2341316/9200b49e-93b2-4fa3-89f8-66f8faa32f0f)
+![goals_6](https://github.com/erversteeg/Xp-Goals/assets/2341316/0c0643a8-c29a-4e4e-8090-e7d3e10a5b7b)
 
-Track xp goals
+Schedule goals for various skills you are leveling on a per day or hour basis. 
+
+Bars show you how much progress you're making towards your goals until they're complete. 
+
+Goals reset every hour, day, week, month, or year. 
+
+Mouse-over tooltip shows the results of your most recent cycles for each skill.
+
+Goals automatically show up when you schedule them and automatically hide when they aren't scheduled.
+
+Additional scheduling can be done with custom patterns.
 
 ## Custom Patterns
 
@@ -29,7 +39,7 @@ For cadences the format is [(M,W,D,H)|~offet|interval]
 #### Example 2 - Every other day in 2023
 [2023]->[D|2]
 
-#### Example 3 - Every third day of each month starting on the 3rd
+#### Example 3 - Every third day of each month offset by 2 days
 [M]->[D|~2|3]
 
 #### Example 4 - April and May 5th 2pm - 6pm
@@ -41,7 +51,7 @@ For cadences the format is [(M,W,D,H)|~offet|interval]
 #### Example 6 - 50th & 149th day of the year
 [Y]->[D^(50,149)]
 
-#### Example 7 - 2nd and 4th Saturday of April
+#### Example 7 - 2nd and 4th Saturday in April
 [Apr]->[W^(2,4)]->[Sat]
 
 #### Example 8 - Monday, Wednesday, and Friday in July
