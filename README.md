@@ -12,7 +12,7 @@ Mouse-over tooltip shows the results of your most recent cycles for each skill.
 
 Goals automatically show up how you schedule them and automatically hide when they aren't scheduled.
 
-Additional configuration can be done with custom patterns.
+Additional scheduling can be done with custom patterns.
 
 ## Custom Patterns
 
