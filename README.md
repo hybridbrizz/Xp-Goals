@@ -10,7 +10,7 @@ Goals reset every hour, day, week, month, or year.
 
 Mouse-over tooltip shows the results of your most recent cycles for each skill.
 
-Goals automatically show up how you schedule them and automatically hide when they aren't scheduled.
+Goals automatically show up when you schedule them and automatically hide when they aren't scheduled.
 
 Additional scheduling can be done with custom patterns.
 
