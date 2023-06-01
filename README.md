@@ -2,17 +2,13 @@
 
 ![goals_6](https://github.com/erversteeg/Xp-Goals/assets/2341316/0c0643a8-c29a-4e4e-8090-e7d3e10a5b7b)
 
-Schedule goals for various skills you are leveling on a per day or hour basis. 
+Track your xp goals and schedule them for different hours and days of the week.
 
-Bars show you how much progress you're making towards your goals until they're complete. 
+Each skill is reset either every hour, day, week, month, or year.
 
-Goals reset every hour, day, week, month, or year. 
+View your most recent results by mousing over.
 
-Mouse-over tooltip shows the results of your most recent cycles for each skill.
-
-Goals automatically show up when you schedule them and automatically hide when they aren't scheduled.
-
-Additional scheduling can be done with custom patterns.
+More specific scheduling can be accomplished with custom patterns.
 
 ## Custom Patterns
 
@@ -31,7 +27,7 @@ Omit XP for configured Target Xp
 
 For cadences the format is [(M,W,D,H)|~offet|interval]
 
-#### Example 1 - Different times for different days of the week
+#### Example 1 - Different Xp for different days of the week
 [Mon]->[3pm-5pm]=20000
 
 [Wed]->[7pm-10pm]=30000
