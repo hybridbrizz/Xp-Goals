@@ -328,6 +328,7 @@ public class XpGoalsPlugin extends Plugin
 						oneValidPattern = true;
 
 						String pattern = "";
+						int xp = goalXp;
 
 						if (patternStr.contains("="))
 						{
@@ -336,7 +337,7 @@ public class XpGoalsPlugin extends Plugin
 
 							if (patternParts.length > 1)
 							{
-								goalXp = Integer.parseInt(patternParts[1].replace(",", "").replace(" ", "").trim());
+								xp = Integer.parseInt(patternParts[1].replace(",", "").replace(" ", "").trim());
 							}
 						}
 						else
@@ -346,6 +347,7 @@ public class XpGoalsPlugin extends Plugin
 
 						if (Pattern.parse(pattern, new Date()).matches())
 						{
+							goalXp = xp;
 							track = true;
 							break;
 						}
