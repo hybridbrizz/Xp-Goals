@@ -5,7 +5,10 @@ import com.ericversteeg.config.AnchorType;
 import com.ericversteeg.config.DayCadence;
 import com.ericversteeg.config.Hour;
 import com.ericversteeg.goal.ResetType;
-import net.runelite.client.config.*;
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.ConfigSection;
 
 import java.awt.*;
 
@@ -169,8 +172,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableAttack",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not attack is enabled.",
+			name = "Enable / Reset",
+			description = "Enables attack and if auto reset type is none resets.",
 			section = attackSkill
 	)
 	default boolean enableAttackSkill() { return false; }
@@ -187,11 +190,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "attackResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = attackSkill
 	)
-	default ResetType attackResetType() { return ResetType.DAILY; }
+	default ResetType attackResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "attackMonday",
@@ -301,6 +304,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String attackPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideAttack",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not attack is hidden.",
+			section = attackSkill
+	)
+	default boolean hideAttack() { return false; }
+
 
 	@ConfigSection(
 			name = "Strength",
@@ -313,8 +325,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableStrength",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not strength is enabled.",
+			name = "Enable / Reset",
+			description = "Enables strength and if auto reset type is none resets.",
 			section = strengthSkill
 	)
 	default boolean enableStrengthSkill() { return false; }
@@ -331,11 +343,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "strengthResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = strengthSkill
 	)
-	default ResetType strengthResetType() { return ResetType.DAILY; }
+	default ResetType strengthResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "strengthMonday",
@@ -445,6 +457,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String strengthPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideStrength",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not strength is hidden.",
+			section = strengthSkill
+	)
+	default boolean hideStrength() { return false; }
+
 
 	@ConfigSection(
 			name = "Defense",
@@ -457,8 +478,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableDefense",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not defense is enabled.",
+			name = "Enable / Reset",
+			description = "Enables defense and if auto reset type is none resets.",
 			section = defenseSkill
 	)
 	default boolean enableDefenseSkill() { return false; }
@@ -475,11 +496,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "defenseResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = defenseSkill
 	)
-	default ResetType defenseResetType() { return ResetType.DAILY; }
+	default ResetType defenseResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "defenseMonday",
@@ -589,6 +610,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String defensePattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideDefense",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not defense is hidden.",
+			section = defenseSkill
+	)
+	default boolean hideDefense() { return false; }
+
 
 	@ConfigSection(
 			name = "Ranged",
@@ -601,8 +631,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableRanged",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not ranged is enabled.",
+			name = "Enable / Reset",
+			description = "Enables ranged and if auto reset type is none resets.",
 			section = rangedSkill
 	)
 	default boolean enableRangedSkill() { return false; }
@@ -619,11 +649,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "rangedResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = rangedSkill
 	)
-	default ResetType rangedResetType() { return ResetType.DAILY; }
+	default ResetType rangedResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "rangedMonday",
@@ -733,6 +763,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String rangedPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideRanged",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not ranged is hidden.",
+			section = rangedSkill
+	)
+	default boolean hideRanged() { return false; }
+
 
 	@ConfigSection(
 			name = "Prayer",
@@ -745,8 +784,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enablePrayer",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not prayer is enabled.",
+			name = "Enable / Reset",
+			description = "Enables prayer and if auto reset type is none resets.",
 			section = prayerSkill
 	)
 	default boolean enablePrayerSkill() { return false; }
@@ -763,11 +802,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "prayerResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = prayerSkill
 	)
-	default ResetType prayerResetType() { return ResetType.DAILY; }
+	default ResetType prayerResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "prayerMonday",
@@ -877,6 +916,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String prayerPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hidePrayer",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not prayer is hidden.",
+			section = prayerSkill
+	)
+	default boolean hidePrayer() { return false; }
+
 
 	@ConfigSection(
 			name = "Magic",
@@ -889,8 +937,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableMagic",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not magic is enabled.",
+			name = "Enable / Reset",
+			description = "Enables magic and if auto reset type is none resets.",
 			section = magicSkill
 	)
 	default boolean enableMagicSkill() { return false; }
@@ -907,11 +955,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "magicResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = magicSkill
 	)
-	default ResetType magicResetType() { return ResetType.DAILY; }
+	default ResetType magicResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "magicMonday",
@@ -1021,6 +1069,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String magicPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideMagic",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not magic is hidden.",
+			section = magicSkill
+	)
+	default boolean hideMagic() { return false; }
+
 
 	@ConfigSection(
 			name = "Runecrafting",
@@ -1033,8 +1090,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableRunecrafting",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not runecrafting is enabled.",
+			name = "Enable / Reset",
+			description = "Enables runecrafting and if auto reset type is none resets.",
 			section = runecraftingSkill
 	)
 	default boolean enableRunecraftingSkill() { return false; }
@@ -1051,11 +1108,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "runecraftingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = runecraftingSkill
 	)
-	default ResetType runecraftingResetType() { return ResetType.DAILY; }
+	default ResetType runecraftingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "runecraftingMonday",
@@ -1165,6 +1222,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String runecraftingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideRunecrafting",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not runecrafting is hidden.",
+			section = runecraftingSkill
+	)
+	default boolean hideRunecrafting() { return false; }
+
 
 	@ConfigSection(
 			name = "Construction",
@@ -1177,8 +1243,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableConstruction",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not construction is enabled.",
+			name = "Enable / Reset",
+			description = "Enables construction and if auto reset type is none resets.",
 			section = constructionSkill
 	)
 	default boolean enableConstructionSkill() { return false; }
@@ -1195,11 +1261,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "constructionResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = constructionSkill
 	)
-	default ResetType constructionResetType() { return ResetType.DAILY; }
+	default ResetType constructionResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "constructionMonday",
@@ -1309,6 +1375,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String constructionPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideConstruction",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not construction is hidden.",
+			section = constructionSkill
+	)
+	default boolean hideConstruction() { return false; }
+
 
 	@ConfigSection(
 			name = "Hitpoints",
@@ -1321,8 +1396,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableHitpoints",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not hitpoints is enabled.",
+			name = "Enable / Reset",
+			description = "Enables hitpoints and if auto reset type is none resets.",
 			section = hitpointsSkill
 	)
 	default boolean enableHitpointsSkill() { return false; }
@@ -1339,11 +1414,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "hitpointsResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = hitpointsSkill
 	)
-	default ResetType hitpointsResetType() { return ResetType.DAILY; }
+	default ResetType hitpointsResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "hitpointsMonday",
@@ -1453,6 +1528,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String hitpointsPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideHitpoints",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not hitpoints is hidden.",
+			section = hitpointsSkill
+	)
+	default boolean hideHitpoints() { return false; }
+
 
 	@ConfigSection(
 			name = "Agility",
@@ -1465,8 +1549,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableAgility",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not agility is enabled.",
+			name = "Enable / Reset",
+			description = "Enables agility and if auto reset type is none resets.",
 			section = agilitySkill
 	)
 	default boolean enableAgilitySkill() { return false; }
@@ -1483,11 +1567,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "agilityResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = agilitySkill
 	)
-	default ResetType agilityResetType() { return ResetType.DAILY; }
+	default ResetType agilityResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "agilityMonday",
@@ -1597,6 +1681,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String agilityPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideAgility",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not agility is hidden.",
+			section = agilitySkill
+	)
+	default boolean hideAgility() { return false; }
+
 
 	@ConfigSection(
 			name = "Herblore",
@@ -1609,8 +1702,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableHerblore",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not herblore is enabled.",
+			name = "Enable / Reset",
+			description = "Enables herblore and if auto reset type is none resets.",
 			section = herbloreSkill
 	)
 	default boolean enableHerbloreSkill() { return false; }
@@ -1627,11 +1720,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "herbloreResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = herbloreSkill
 	)
-	default ResetType herbloreResetType() { return ResetType.DAILY; }
+	default ResetType herbloreResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "herbloreMonday",
@@ -1741,6 +1834,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String herblorePattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideHerblore",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not herblore is hidden.",
+			section = herbloreSkill
+	)
+	default boolean hideHerblore() { return false; }
+
 
 	@ConfigSection(
 			name = "Thieving",
@@ -1753,8 +1855,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableThieving",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not thieving is enabled.",
+			name = "Enable / Reset",
+			description = "Enables thieving and if auto reset type is none resets.",
 			section = thievingSkill
 	)
 	default boolean enableThievingSkill() { return false; }
@@ -1771,11 +1873,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "thievingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = thievingSkill
 	)
-	default ResetType thievingResetType() { return ResetType.DAILY; }
+	default ResetType thievingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "thievingMonday",
@@ -1885,6 +1987,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String thievingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideThieving",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not thieving is hidden.",
+			section = thievingSkill
+	)
+	default boolean hideThieving() { return false; }
+
 
 	@ConfigSection(
 			name = "Crafting",
@@ -1897,8 +2008,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableCrafting",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not crafting is enabled.",
+			name = "Enable / Reset",
+			description = "Enables crafting and if auto reset type is none resets.",
 			section = craftingSkill
 	)
 	default boolean enableCraftingSkill() { return false; }
@@ -1915,11 +2026,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "craftingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = craftingSkill
 	)
-	default ResetType craftingResetType() { return ResetType.DAILY; }
+	default ResetType craftingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "craftingMonday",
@@ -2029,6 +2140,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String craftingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideCrafting",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not crafting is hidden.",
+			section = craftingSkill
+	)
+	default boolean hideCrafting() { return false; }
+
 
 	@ConfigSection(
 			name = "Fletching",
@@ -2041,8 +2161,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableFletching",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not fletching is enabled.",
+			name = "Enable / Reset",
+			description = "Enables fletching and if auto reset type is none resets.",
 			section = fletchingSkill
 	)
 	default boolean enableFletchingSkill() { return false; }
@@ -2059,11 +2179,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "fletchingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = fletchingSkill
 	)
-	default ResetType fletchingResetType() { return ResetType.DAILY; }
+	default ResetType fletchingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "fletchingMonday",
@@ -2173,6 +2293,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String fletchingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideFletching",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not fletching is hidden.",
+			section = fletchingSkill
+	)
+	default boolean hideFletching() { return false; }
+
 
 	@ConfigSection(
 			name = "Slayer",
@@ -2185,8 +2314,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableSlayer",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not slayer is enabled.",
+			name = "Enable / Reset",
+			description = "Enables slayer and if auto reset type is none resets.",
 			section = slayerSkill
 	)
 	default boolean enableSlayerSkill() { return false; }
@@ -2203,11 +2332,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "slayerResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = slayerSkill
 	)
-	default ResetType slayerResetType() { return ResetType.DAILY; }
+	default ResetType slayerResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "slayerMonday",
@@ -2317,6 +2446,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String slayerPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideSlayer",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not slayer is hidden.",
+			section = slayerSkill
+	)
+	default boolean hideSlayer() { return false; }
+
 
 	@ConfigSection(
 			name = "Hunter",
@@ -2329,8 +2467,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableHunter",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not hunter is enabled.",
+			name = "Enable / Reset",
+			description = "Enables hunter and if auto reset type is none resets.",
 			section = hunterSkill
 	)
 	default boolean enableHunterSkill() { return false; }
@@ -2347,11 +2485,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "hunterResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = hunterSkill
 	)
-	default ResetType hunterResetType() { return ResetType.DAILY; }
+	default ResetType hunterResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "hunterMonday",
@@ -2461,6 +2599,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String hunterPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideHunter",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not hunter is hidden.",
+			section = hunterSkill
+	)
+	default boolean hideHunter() { return false; }
+
 
 	@ConfigSection(
 			name = "Mining",
@@ -2473,8 +2620,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableMining",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not mining is enabled.",
+			name = "Enable / Reset",
+			description = "Enables mining and if auto reset type is none resets.",
 			section = miningSkill
 	)
 	default boolean enableMiningSkill() { return false; }
@@ -2491,11 +2638,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "miningResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = miningSkill
 	)
-	default ResetType miningResetType() { return ResetType.DAILY; }
+	default ResetType miningResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "miningMonday",
@@ -2605,6 +2752,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String miningPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideMining",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not mining is hidden.",
+			section = miningSkill
+	)
+	default boolean hideMining() { return false; }
+
 
 	@ConfigSection(
 			name = "Smithing",
@@ -2617,8 +2773,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableSmithing",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not smithing is enabled.",
+			name = "Enable / Reset",
+			description = "Enables smithing and if auto reset type is none resets.",
 			section = smithingSkill
 	)
 	default boolean enableSmithingSkill() { return false; }
@@ -2635,11 +2791,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "smithingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = smithingSkill
 	)
-	default ResetType smithingResetType() { return ResetType.DAILY; }
+	default ResetType smithingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "smithingMonday",
@@ -2749,6 +2905,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String smithingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideSmithing",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not smithing is hidden.",
+			section = smithingSkill
+	)
+	default boolean hideSmithing() { return false; }
+
 
 	@ConfigSection(
 			name = "Fishing",
@@ -2761,8 +2926,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableFishing",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not fishing is enabled.",
+			name = "Enable / Reset",
+			description = "Enables fishing and if auto reset type is none resets.",
 			section = fishingSkill
 	)
 	default boolean enableFishingSkill() { return false; }
@@ -2779,11 +2944,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "fishingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = fishingSkill
 	)
-	default ResetType fishingResetType() { return ResetType.DAILY; }
+	default ResetType fishingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "fishingMonday",
@@ -2893,6 +3058,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String fishingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideFishing",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not fishing is hidden.",
+			section = fishingSkill
+	)
+	default boolean hideFishing() { return false; }
+
 
 	@ConfigSection(
 			name = "Cooking",
@@ -2905,8 +3079,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableCooking",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not cooking is enabled.",
+			name = "Enable / Reset",
+			description = "Enables cooking and if auto reset type is none resets.",
 			section = cookingSkill
 	)
 	default boolean enableCookingSkill() { return false; }
@@ -2923,11 +3097,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "cookingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = cookingSkill
 	)
-	default ResetType cookingResetType() { return ResetType.DAILY; }
+	default ResetType cookingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "cookingMonday",
@@ -3037,6 +3211,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String cookingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideCooking",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not cooking is hidden.",
+			section = cookingSkill
+	)
+	default boolean hideCooking() { return false; }
+
 
 	@ConfigSection(
 			name = "Firemaking",
@@ -3049,8 +3232,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableFiremaking",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not firemaking is enabled.",
+			name = "Enable / Reset",
+			description = "Enables firemaking and if auto reset type is none resets.",
 			section = firemakingSkill
 	)
 	default boolean enableFiremakingSkill() { return false; }
@@ -3067,11 +3250,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "firemakingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = firemakingSkill
 	)
-	default ResetType firemakingResetType() { return ResetType.DAILY; }
+	default ResetType firemakingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "firemakingMonday",
@@ -3181,6 +3364,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String firemakingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideFiremaking",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not firemaking is hidden.",
+			section = firemakingSkill
+	)
+	default boolean hideFiremaking() { return false; }
+
 
 	@ConfigSection(
 			name = "Woodcutting",
@@ -3193,8 +3385,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableWoodcutting",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not woodcutting is enabled.",
+			name = "Enable / Reset",
+			description = "Enables woodcutting and if auto reset type is none resets.",
 			section = woodcuttingSkill
 	)
 	default boolean enableWoodcuttingSkill() { return false; }
@@ -3211,11 +3403,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "woodcuttingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = woodcuttingSkill
 	)
-	default ResetType woodcuttingResetType() { return ResetType.DAILY; }
+	default ResetType woodcuttingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "woodcuttingMonday",
@@ -3325,6 +3517,15 @@ public interface XpGoalsConfig extends Config
 	)
 	default String woodcuttingPattens() { return ""; }
 
+	@ConfigItem(
+			keyName = "hideWoodcutting",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not woodcutting is hidden.",
+			section = woodcuttingSkill
+	)
+	default boolean hideWoodcutting() { return false; }
+
 
 	@ConfigSection(
 			name = "Farming",
@@ -3337,8 +3538,8 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "enableFarming",
 			position = 0,
-			name = "Enabled",
-			description = "Configures whether or not farming is enabled.",
+			name = "Enable / Reset",
+			description = "Enables farming and if auto reset type is none resets.",
 			section = farmingSkill
 	)
 	default boolean enableFarmingSkill() { return false; }
@@ -3355,11 +3556,11 @@ public interface XpGoalsConfig extends Config
 	@ConfigItem(
 			keyName = "farmingResetType",
 			position = 3,
-			name = "Reset Interval",
+			name = "Auto Reset",
 			description = "Configures how often progress resets.",
 			section = farmingSkill
 	)
-	default ResetType farmingResetType() { return ResetType.DAILY; }
+	default ResetType farmingResetType() { return ResetType.NONE; }
 
 	@ConfigItem(
 			keyName = "farmingMonday",
@@ -3468,4 +3669,13 @@ public interface XpGoalsConfig extends Config
 			section = farmingSkill
 	)
 	default String farmingPattens() { return ""; }
+
+	@ConfigItem(
+			keyName = "hideFarming",
+			position = 1,
+			name = "Hidden",
+			description = "Configures whether or not farming is hidden.",
+			section = farmingSkill
+	)
+	default boolean hideFarming() { return false; }
 }
