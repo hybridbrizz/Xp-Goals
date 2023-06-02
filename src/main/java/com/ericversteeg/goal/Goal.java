@@ -44,10 +44,18 @@ public class Goal {
             pastProgress = new LinkedList<>();
         }
 
-        pastProgress.add(
-                (progressXp) /
-                ((float) goalXp)
+        pastProgress.add(0,
+            (progressXp) /
+            ((float) goalXp)
         );
+
+        List<Float> recentPastProgress = new LinkedList<>();
+        for (int i = 0; i < Math.min(pastProgress.size(), 25); i++)
+        {
+            recentPastProgress.add(pastProgress.get(i));
+        }
+
+        pastProgress = recentPastProgress;
 
         System.out.println("Reset goal skill id = " + skillId);
 

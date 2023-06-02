@@ -627,6 +627,8 @@ class XpGoalsOverlay extends Overlay {
 			));
 
 			textComponent.render(graphics);
+
+			return;
 		}
 
 		for (int r = 0; r < span; r++)
@@ -635,7 +637,7 @@ class XpGoalsOverlay extends Overlay {
 			{
 				if (r * span + c < pastProgress.size())
 				{
-					float progress = pastProgress.get(pastProgress.size() - 1 - (r * span + c));
+					float progress = pastProgress.get(r * span + c);
 
 					renderPastProgressItem(
 							graphics,
