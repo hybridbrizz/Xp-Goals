@@ -141,6 +141,11 @@ public class XpGoalsPlugin extends Plugin
 
 	private void checkResets()
 	{
+		if (goalData == null)
+		{
+			goalData = new GoalData();
+		}
+
 		if (lastDateTime == null)
 		{
 			lastDateTime = LocalDateTime.ofEpochSecond(
