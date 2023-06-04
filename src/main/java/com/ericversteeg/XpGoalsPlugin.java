@@ -80,13 +80,6 @@ public class XpGoalsPlugin extends Plugin
 		if (profile != null)
 		{
 			goalData = getSavedData();
-
-			lastDateTime = LocalDateTime.ofEpochSecond(
-				goalData.lastCheck,
-				0,
-				zoneOffset
-			);
-
 			checkResets();
 		}
 		else
@@ -148,7 +141,14 @@ public class XpGoalsPlugin extends Plugin
 
 	private void checkResets()
 	{
-		if (lastDateTime == null) return;
+		if (lastDateTime == null)
+		{
+			lastDateTime = LocalDateTime.ofEpochSecond(
+					goalData.lastCheck,
+					0,
+					zoneOffset
+			);
+		}
 
 		LocalDateTime dateTIme = LocalDateTime.now();
 
@@ -230,7 +230,10 @@ public class XpGoalsPlugin extends Plugin
 
 	void configSyncGoals()
 	{
-		if (goalData == null) return;
+		if (goalData == null)
+		{
+			goalData = new GoalData();
+		}
 
 		if (goalData.goals.isEmpty())
 		{
