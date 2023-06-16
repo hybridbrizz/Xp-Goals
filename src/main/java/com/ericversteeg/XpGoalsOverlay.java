@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static net.runelite.api.MenuAction.RUNELITE_OVERLAY_CONFIG;
+import static net.runelite.client.ui.overlay.OverlayManager.OPTION_CONFIGURE;
+
 class XpGoalsOverlay extends Overlay {
 
 	private int ICON_SIZE = 16;
@@ -76,9 +79,6 @@ class XpGoalsOverlay extends Overlay {
 			XpGoalsConfig config,
 			SkillIconManager iconManager
 	) {
-		setPosition(OverlayPosition.DYNAMIC);
-		setLayer(OverlayLayer.ABOVE_WIDGETS);
-
 		this.client = client;
 		this.plugin = plugin;
 		this.config = config;
@@ -96,6 +96,9 @@ class XpGoalsOverlay extends Overlay {
 		{
 			font = FontManager.getRunescapeSmallFont();
 		}
+
+		setPosition(OverlayPosition.DYNAMIC);
+		setLayer(OverlayLayer.UNDER_WIDGETS);
 	}
 
 	@Override
