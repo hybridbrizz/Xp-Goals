@@ -276,8 +276,14 @@ public class XpGoalsPlugin extends Plugin
 			boolean enabled = isGoalEnabled(skillId);
 			boolean hidden = isSkillHidden(skillId);
 			boolean track = enabled;
+			boolean hideOnMet = config.hideOnMet();
 			int goalXp = goalXp(skillId);
 			ResetType resetType = goalResetType(skillId);
+
+			float xpProgress = overlay.getXpProgress(
+					goal.progressXp,
+					goal.goalXp
+			);
 
 			boolean oneValidPattern = false;
 			boolean patternError = false;
@@ -381,7 +387,7 @@ public class XpGoalsPlugin extends Plugin
 
 			goal.resetType = resetType.ordinal();
 			goal.enabled = enabled;
-			goal.track = track && !hidden;
+			goal.track = track && !hidden && !(hideOnMet && xpProgress >= 1f);
 			goal.goalXp = goalXp;
 		}
 	}

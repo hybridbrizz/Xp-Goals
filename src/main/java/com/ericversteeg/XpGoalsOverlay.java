@@ -703,7 +703,7 @@ class XpGoalsOverlay extends Overlay {
 		return client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
 	}
 
-	private float getXpProgress(int progressXp, int goalXp)
+	float getXpProgress(int progressXp, int goalXp)
 	{
 		if (goalXp == 0)
 		{
