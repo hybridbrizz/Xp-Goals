@@ -6,8 +6,8 @@ import com.ericversteeg.config.StackOrientation;
 import com.ericversteeg.goal.Goal;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
+import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.SkillColor;
@@ -28,9 +28,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-
-import static net.runelite.api.MenuAction.RUNELITE_OVERLAY_CONFIG;
-import static net.runelite.client.ui.overlay.OverlayManager.OPTION_CONFIGURE;
 
 class XpGoalsOverlay extends Overlay {
 
@@ -780,16 +777,16 @@ class XpGoalsOverlay extends Overlay {
 	{
 		Widget widget;
 
-		widget = client.getWidget(WidgetInfo.RESIZABLE_VIEWPORT_INTERFACE_CONTAINER);
+		widget = client.getWidget(ComponentID.RESIZABLE_VIEWPORT_INTERFACE_CONTAINER);
 		if (widget != null) return widget;
 
-		widget = client.getWidget(WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INTERFACE_CONTAINER);
+		widget = client.getWidget(ComponentID.RESIZABLE_VIEWPORT_BOTTOM_LINE_INTERFACE_CONTAINER);
 		if (widget != null) return widget;
 
-		widget = client.getWidget(WidgetInfo.FIXED_VIEWPORT_INTERFACE_CONTAINER);
+		widget = client.getWidget(ComponentID.FIXED_VIEWPORT_INTERFACE_CONTAINER);
 		if (widget != null) return widget;
 
-		return client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
+		return client.getWidget(ComponentID.BANK_INVENTORY_ITEM_CONTAINER);
 	}
 
 	float getXpProgress(int progressXp, int goalXp)
