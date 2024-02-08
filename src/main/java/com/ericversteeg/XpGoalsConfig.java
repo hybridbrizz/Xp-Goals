@@ -403,7 +403,7 @@ public interface XpGoalsConfig extends Config {
 			section = attackSkill
 	)
 	default ResetType attackResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -587,7 +587,7 @@ public interface XpGoalsConfig extends Config {
 			section = strengthSkill
 	)
 	default ResetType strengthResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -771,7 +771,7 @@ public interface XpGoalsConfig extends Config {
 			section = defenseSkill
 	)
 	default ResetType defenseResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -955,7 +955,7 @@ public interface XpGoalsConfig extends Config {
 			section = rangedSkill
 	)
 	default ResetType rangedResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -1139,7 +1139,7 @@ public interface XpGoalsConfig extends Config {
 			section = prayerSkill
 	)
 	default ResetType prayerResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -1323,7 +1323,7 @@ public interface XpGoalsConfig extends Config {
 			section = magicSkill
 	)
 	default ResetType magicResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -1507,7 +1507,7 @@ public interface XpGoalsConfig extends Config {
 			section = runecraftingSkill
 	)
 	default ResetType runecraftingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -1691,7 +1691,7 @@ public interface XpGoalsConfig extends Config {
 			section = constructionSkill
 	)
 	default ResetType constructionResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -1875,7 +1875,7 @@ public interface XpGoalsConfig extends Config {
 			section = hitpointsSkill
 	)
 	default ResetType hitpointsResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2059,7 +2059,7 @@ public interface XpGoalsConfig extends Config {
 			section = agilitySkill
 	)
 	default ResetType agilityResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2243,7 +2243,7 @@ public interface XpGoalsConfig extends Config {
 			section = herbloreSkill
 	)
 	default ResetType herbloreResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2427,7 +2427,7 @@ public interface XpGoalsConfig extends Config {
 			section = thievingSkill
 	)
 	default ResetType thievingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2611,7 +2611,7 @@ public interface XpGoalsConfig extends Config {
 			section = craftingSkill
 	)
 	default ResetType craftingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2795,7 +2795,7 @@ public interface XpGoalsConfig extends Config {
 			section = fletchingSkill
 	)
 	default ResetType fletchingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -2979,7 +2979,7 @@ public interface XpGoalsConfig extends Config {
 			section = slayerSkill
 	)
 	default ResetType slayerResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -3163,7 +3163,7 @@ public interface XpGoalsConfig extends Config {
 			section = hunterSkill
 	)
 	default ResetType hunterResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -3347,7 +3347,7 @@ public interface XpGoalsConfig extends Config {
 			section = miningSkill
 	)
 	default ResetType miningResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -3531,7 +3531,7 @@ public interface XpGoalsConfig extends Config {
 			section = smithingSkill
 	)
 	default ResetType smithingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -3715,7 +3715,7 @@ public interface XpGoalsConfig extends Config {
 			section = fishingSkill
 	)
 	default ResetType fishingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -3899,7 +3899,7 @@ public interface XpGoalsConfig extends Config {
 			section = cookingSkill
 	)
 	default ResetType cookingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -4083,7 +4083,7 @@ public interface XpGoalsConfig extends Config {
 			section = firemakingSkill
 	)
 	default ResetType firemakingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -4267,7 +4267,7 @@ public interface XpGoalsConfig extends Config {
 			section = woodcuttingSkill
 	)
 	default ResetType woodcuttingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -4451,7 +4451,7 @@ public interface XpGoalsConfig extends Config {
 			section = farmingSkill
 	)
 	default ResetType farmingResetType() {
-		return ResetType.DAILY;
+		return ResetType.NONE;
 	}
 
 	@ConfigItem(
@@ -4586,4 +4586,3 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 }
-

@@ -204,20 +204,20 @@ class XpGoalsOverlay extends Overlay {
 				extraBottomPadding = (ICON_SIZE - barHeight) / 2;
 			}
 
-			if (config.stackOrientation() != StackOrientation.HORIZONTAL)
+			if (config.stackOrientation() == StackOrientation.VERTICAL)
 			{
 				panelWidth = (barWidth + ICON_SIZE + iconRightPadding + barSpacing) *
 						((goals.size() - 1) / span + 1) + panelHPadding * 2 - barSpacing + 5;
 			}
 			else
 			{
-				panelWidth = (barWidth + ICON_SIZE + iconRightPadding) * span + barSpacing *
+				panelWidth = (barWidth + ICON_SIZE + iconRightPadding) * Math.min(goals.size(), span) + barSpacing *
 						Math.min(Math.max(span - 1, 1), goals.size()) + panelHPadding * 2;
 			}
 
-			if (config.stackOrientation() != StackOrientation.HORIZONTAL)
+			if (config.stackOrientation() == StackOrientation.VERTICAL)
 			{
-				panelHeight =  panelTopPadding + topSectionHeight + barHeight * span + barSpacing *
+				panelHeight =  panelTopPadding + topSectionHeight + barHeight * Math.min(goals.size(), span) + barSpacing *
 						Math.min(Math.max(span - 1, 1), goals.size()) + panelBottomPadding + extraBottomPadding;
 			}
 			else

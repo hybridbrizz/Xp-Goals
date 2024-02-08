@@ -228,6 +228,17 @@ public class XpGoalsPlugin extends Plugin
 
 		if (profile != null)
 		{
+			for (Goal goal: goalData.goals)
+			{
+				for (Float progress: goal.pastProgress)
+				{
+                    if (Double.isNaN(progress)) {
+                        goal.pastProgress = new LinkedList<>();
+                        break;
+                    }
+				}
+
+			}
 			String json = gson.toJson(goalData);
 			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY, json);
 		}
