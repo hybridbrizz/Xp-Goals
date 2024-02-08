@@ -68,11 +68,20 @@ public interface XpGoalsConfig extends Config {
 		return true;
 	}
 
+	@ConfigSection(
+			name = "Panel Adjustments",
+			description = "Various adjustments to the panel.",
+			closedByDefault = true,
+			position = 40
+	)
+	String panelAdjustments = "Panel Adjustments";
+
 	@ConfigItem(
 			position = 4,
 			keyName = "panelExtensionWidth",
 			name = "Panel Width Extension",
-			description = "Configures the panel width extension value."
+			description = "Configures the panel width extension value.",
+			section = panelAdjustments
 	)
 	default int panelWidthExtension() {
 		return 0;
@@ -82,7 +91,8 @@ public interface XpGoalsConfig extends Config {
 			position = 4,
 			keyName = "panelExtensionWidthNegative",
 			name = "Panel Width Extension Negative",
-			description = "Configures whether or not the panel width extension value is negative."
+			description = "Configures whether or not the panel width extension value is negative.",
+			section = panelAdjustments
 	)
 	default boolean isPanelWidthExtensionNegative() {
 		return false;
@@ -92,7 +102,8 @@ public interface XpGoalsConfig extends Config {
 			position = 4,
 			keyName = "panelExtensionHeight",
 			name = "Panel Height Extension",
-			description = "Configures the panel height extension value."
+			description = "Configures the panel height extension value.",
+			section = panelAdjustments
 	)
 	default int panelHeightExtension() {
 		return 0;
@@ -102,7 +113,8 @@ public interface XpGoalsConfig extends Config {
 			position = 4,
 			keyName = "panelExtensionHeightNegative",
 			name = "Panel Height Extension Negative",
-			description = "Configures whether or not the panel height extension value is negative."
+			description = "Configures whether or not the panel height extension value is negative.",
+			section = panelAdjustments
 	)
 	default boolean isPanelHeightExtensionNegative() {
 		return false;
@@ -110,12 +122,46 @@ public interface XpGoalsConfig extends Config {
 
 	@ConfigItem(
 			position = 4,
-			keyName = "panelBackgroundColor",
-			name = "Panel Height Extension Negative",
-			description = "Configures whether or not the panel height extension value is negative."
+			keyName = "panelOffsetX",
+			name = "Panel Correction X",
+			description = "Configures the panel correction x value.",
+			section = panelAdjustments
 	)
-	default Color panelBackgroundColor() {
-		return new Color(70, 61, 50, 156);
+	default int panelCorrectionX() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelOffsetXNegative",
+			name = "Panel Correction X Negative",
+			description = "Configures whether or not the panel correction x value is negative.",
+			section = panelAdjustments
+	)
+	default boolean isPanelCorrectionXNegative() {
+		return false;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelOffsetY",
+			name = "Panel Correction Y",
+			description = "Configures the panel correction y value.",
+			section = panelAdjustments
+	)
+	default int panelCorrectionY() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelOffsetYNegative",
+			name = "Panel Correction Y Negative",
+			description = "Configures whether or not the panel correction y value is negative.",
+			section = panelAdjustments
+	)
+	default boolean isPanelCorrectionYNegative() {
+		return false;
 	}
 
 	@ConfigItem(
@@ -291,7 +337,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigSection(
 			name = "Attack",
 			description = "Attack Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String attackSkill = "attackSkill";
@@ -472,33 +518,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "AttackHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = attackSkill
-	)
-	default boolean isAttackHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "AttackHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = attackSkill
-	)
-	default boolean hideAttack() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Strength",
 			description = "Strength Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String strengthSkill = "strengthSkill";
@@ -679,33 +702,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "StrengthHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = strengthSkill
-	)
-	default boolean isStrengthHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "StrengthHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = strengthSkill
-	)
-	default boolean hideStrength() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Defense",
 			description = "Defense Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String defenseSkill = "defenseSkill";
@@ -886,33 +886,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "DefenseHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = defenseSkill
-	)
-	default boolean isDefenseHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "DefenseHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = defenseSkill
-	)
-	default boolean hideDefense() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Ranged",
 			description = "Ranged Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String rangedSkill = "rangedSkill";
@@ -1093,33 +1070,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "RangedHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = rangedSkill
-	)
-	default boolean isRangedHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "RangedHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = rangedSkill
-	)
-	default boolean hideRanged() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Prayer",
 			description = "Prayer Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String prayerSkill = "prayerSkill";
@@ -1300,33 +1254,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "PrayerHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = prayerSkill
-	)
-	default boolean isPrayerHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "PrayerHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = prayerSkill
-	)
-	default boolean hidePrayer() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Magic",
 			description = "Magic Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String magicSkill = "magicSkill";
@@ -1507,33 +1438,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "MagicHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = magicSkill
-	)
-	default boolean isMagicHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "MagicHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = magicSkill
-	)
-	default boolean hideMagic() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Runecrafting",
 			description = "Runecrafting Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String runecraftingSkill = "runecraftingSkill";
@@ -1714,33 +1622,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "RunecraftingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = runecraftingSkill
-	)
-	default boolean isRunecraftingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "RunecraftingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = runecraftingSkill
-	)
-	default boolean hideRunecrafting() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Construction",
 			description = "Construction Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String constructionSkill = "constructionSkill";
@@ -1921,33 +1806,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "ConstructionHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = constructionSkill
-	)
-	default boolean isConstructionHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "ConstructionHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = constructionSkill
-	)
-	default boolean hideConstruction() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Hitpoints",
 			description = "Hitpoints Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String hitpointsSkill = "hitpointsSkill";
@@ -2128,33 +1990,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "HitpointsHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = hitpointsSkill
-	)
-	default boolean isHitpointsHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "HitpointsHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = hitpointsSkill
-	)
-	default boolean hideHitpoints() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Agility",
 			description = "Agility Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String agilitySkill = "agilitySkill";
@@ -2335,33 +2174,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "AgilityHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = agilitySkill
-	)
-	default boolean isAgilityHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "AgilityHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = agilitySkill
-	)
-	default boolean hideAgility() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Herblore",
 			description = "Herblore Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String herbloreSkill = "herbloreSkill";
@@ -2542,33 +2358,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "HerbloreHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = herbloreSkill
-	)
-	default boolean isHerbloreHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "HerbloreHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = herbloreSkill
-	)
-	default boolean hideHerblore() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Thieving",
 			description = "Thieving Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String thievingSkill = "thievingSkill";
@@ -2749,33 +2542,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "ThievingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = thievingSkill
-	)
-	default boolean isThievingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "ThievingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = thievingSkill
-	)
-	default boolean hideThieving() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Crafting",
 			description = "Crafting Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String craftingSkill = "craftingSkill";
@@ -2956,33 +2726,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "CraftingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = craftingSkill
-	)
-	default boolean isCraftingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "CraftingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = craftingSkill
-	)
-	default boolean hideCrafting() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Fletching",
 			description = "Fletching Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String fletchingSkill = "fletchingSkill";
@@ -3163,33 +2910,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "FletchingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = fletchingSkill
-	)
-	default boolean isFletchingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "FletchingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = fletchingSkill
-	)
-	default boolean hideFletching() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Slayer",
 			description = "Slayer Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String slayerSkill = "slayerSkill";
@@ -3370,33 +3094,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "SlayerHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = slayerSkill
-	)
-	default boolean isSlayerHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "SlayerHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = slayerSkill
-	)
-	default boolean hideSlayer() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Hunter",
 			description = "Hunter Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String hunterSkill = "hunterSkill";
@@ -3577,33 +3278,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "HunterHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = hunterSkill
-	)
-	default boolean isHunterHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "HunterHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = hunterSkill
-	)
-	default boolean hideHunter() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Mining",
 			description = "Mining Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String miningSkill = "miningSkill";
@@ -3784,33 +3462,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "MiningHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = miningSkill
-	)
-	default boolean isMiningHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "MiningHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = miningSkill
-	)
-	default boolean hideMining() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Smithing",
 			description = "Smithing Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String smithingSkill = "smithingSkill";
@@ -3991,33 +3646,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "SmithingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = smithingSkill
-	)
-	default boolean isSmithingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "SmithingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = smithingSkill
-	)
-	default boolean hideSmithing() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Fishing",
 			description = "Fishing Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String fishingSkill = "fishingSkill";
@@ -4198,33 +3830,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "FishingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = fishingSkill
-	)
-	default boolean isFishingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "FishingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = fishingSkill
-	)
-	default boolean hideFishing() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Cooking",
 			description = "Cooking Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String cookingSkill = "cookingSkill";
@@ -4405,33 +4014,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "CookingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = cookingSkill
-	)
-	default boolean isCookingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "CookingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = cookingSkill
-	)
-	default boolean hideCooking() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Firemaking",
 			description = "Firemaking Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String firemakingSkill = "firemakingSkill";
@@ -4612,33 +4198,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "FiremakingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = firemakingSkill
-	)
-	default boolean isFiremakingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "FiremakingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = firemakingSkill
-	)
-	default boolean hideFiremaking() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Woodcutting",
 			description = "Woodcutting Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String woodcuttingSkill = "woodcuttingSkill";
@@ -4819,33 +4382,10 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 
-	@ConfigItem(
-			keyName = "WoodcuttingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = woodcuttingSkill
-	)
-	default boolean isWoodcuttingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "WoodcuttingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = woodcuttingSkill
-	)
-	default boolean hideWoodcutting() {
-		return false;
-	}
-
-
 	@ConfigSection(
 			name = "Farming",
 			description = "Farming Skill",
-			position = 40,
+			position = 0,
 			closedByDefault = true
 	)
 	String farmingSkill = "farmingSkill";
@@ -5025,26 +4565,5 @@ public interface XpGoalsConfig extends Config {
 	default String farmingPattens() {
 		return "";
 	}
-
-	@ConfigItem(
-			keyName = "FarmingHideWhenGoalMet",
-			position = 16,
-			name = "Hide Bars When Goal Is Met",
-			description = "Configures whether or not the bars hide after the goal is met and appear after reset.",
-			section = farmingSkill
-	)
-	default boolean isFarmingHideWhenGoalMet() {
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "FarmingHidden",
-			position = 17,
-			name = "Hide",
-			description = "Configures whether or not the skill is hidden.",
-			section = farmingSkill
-	)
-	default boolean hideFarming() {
-		return false;
-	}
 }
+

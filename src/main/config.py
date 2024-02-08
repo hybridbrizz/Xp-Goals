@@ -1,7 +1,7 @@
 line1  = '    @ConfigSection('
 line2  = '            name = "{ucName}",'
 line3  = '            description = "{ucName} Skill",'
-line4  = '            position = 40,'
+line4  = '            position = 0,'
 line5  = '            closedByDefault = true'
 line6  = '    )'
 line7  = '    String {lcName}Skill = "{lcName}Skill";'
@@ -158,25 +158,7 @@ line148 = '            description = "Configures custom record patterns. See plu
 line149 = '            section = {lcName}Skill'
 line150 = '      )'
 line151 = '      default String {lcName}Pattens() {{ return ""; }}'
-line152 = ''
-line153 = '      @ConfigItem('
-line154 = '      keyName = "{ucName}HideWhenGoalMet",'
-line155 = '            position = 16,'
-line156 = '            name = "Hide Bars When Goal Is Met",'
-line157 = '            description = "Configures whether or not the bars hide after the goal is met and appear after reset.",'
-line158 = '            section = {lcName}Skill'
-line159 = '      )'
-line160 = '      default boolean is{ucName}HideWhenGoalMet() {{ return false; }}'
 line161 = ''
-line162 = '      @ConfigItem('
-line163 = '      keyName = "{ucName}Hidden",'
-line164 = '            position = 17,'
-line165 = '            name = "Hide",'
-line166 = '            description = "Configures whether or not the skill is hidden.",'
-line167 = '            section = {lcName}Skill'
-line168 = '      )'
-line169 = '      default boolean hide{ucName}() {{ return false; }}'
-line170 = ''
 
 config = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n" + line6 + "\n" + line7 + "\n" + line8 + \
          "\n" + line9 + "\n" + line10 + "\n" + line11 + "\n" + line12 + "\n" + line13 + "\n" + line14 + "\n" + line15 + "\n" + \
@@ -198,9 +180,7 @@ config = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n
          "\n" + line131 + "\n" + line132 + "\n" + line133 + "\n" + line134 + "\n" + line135 + "\n" + line136 + "\n" + line137 + \
          "\n" + line138 + "\n" + line139 + "\n" + line140 + "\n" + line141 + "\n" + line142 + "\n" + line143 + "\n" + line144 + \
          "\n" + line145 + "\n" + line146 + "\n" + line147 + "\n" + line148 + "\n" + line149 + "\n" + line150 + "\n" + line151 + \
-         "\n" + line152 + "\n" + line153 + "\n" + line154 + "\n" + line155 + "\n" + line156 + "\n" + line157 + "\n" + line158 + \
-         "\n" + line159 + "\n" + line160 + "\n" + line161 + "\n" + line162 + "\n" + line163 + "\n" + line164 + "\n" + line165 + \
-         "\n" + line166 + "\n" + line167 + "\n" + line168 + "\n" + line169 + "\n" + line170 + "\n"
+         "\n"
 
 skills = [
     'attack',

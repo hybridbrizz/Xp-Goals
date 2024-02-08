@@ -274,7 +274,6 @@ public class XpGoalsPlugin extends Plugin
 			int skillId = goal.skillId;
 
 			boolean enabled = isGoalEnabled(skillId);
-			boolean hidden = isSkillHidden(skillId);
 			boolean track = enabled;
 			boolean hideOnMet = config.hideOnMet();
 			int goalXp = goalXp(skillId);
@@ -387,7 +386,7 @@ public class XpGoalsPlugin extends Plugin
 
 			goal.resetType = resetType.ordinal();
 			goal.enabled = enabled;
-			goal.track = track && !hidden && !(hideOnMet && xpProgress >= 1f);
+			goal.track = track && !(hideOnMet && xpProgress >= 1f);
 			goal.goalXp = goalXp;
 		}
 	}
@@ -430,34 +429,6 @@ public class XpGoalsPlugin extends Plugin
 			}
 		}
 		return null;
-	}
-
-	boolean isSkillHidden(int skillId)
-	{
-		if (skillId == Skill.ATTACK.ordinal()) return config.hideAttack();
-		else if (skillId == Skill.STRENGTH.ordinal()) return config.hideStrength();
-		else if (skillId == Skill.DEFENCE.ordinal()) return config.hideDefense();
-		else if (skillId == Skill.RANGED.ordinal()) return config.hideRanged();
-		else if (skillId == Skill.PRAYER.ordinal()) return config.hidePrayer();
-		else if (skillId == Skill.MAGIC.ordinal()) return config.hideMagic();
-		else if (skillId == Skill.RUNECRAFT.ordinal()) return config.hideRunecrafting();
-		else if (skillId == Skill.CONSTRUCTION.ordinal()) return config.hideConstruction();
-		else if (skillId == Skill.HITPOINTS.ordinal()) return config.hideHitpoints();
-		else if (skillId == Skill.AGILITY.ordinal()) return config.hideAgility();
-		else if (skillId == Skill.HERBLORE.ordinal()) return config.hideHerblore();
-		else if (skillId == Skill.THIEVING.ordinal()) return config.hideThieving();
-		else if (skillId == Skill.CRAFTING.ordinal()) return config.hideCrafting();
-		else if (skillId == Skill.FLETCHING.ordinal()) return config.hideFletching();
-		else if (skillId == Skill.SLAYER.ordinal()) return config.hideSlayer();
-		else if (skillId == Skill.HUNTER.ordinal()) return config.hideHunter();
-		else if (skillId == Skill.MINING.ordinal()) return config.hideMining();
-		else if (skillId == Skill.SMITHING.ordinal()) return config.hideSmithing();
-		else if (skillId == Skill.FISHING.ordinal()) return config.hideFishing();
-		else if (skillId == Skill.COOKING.ordinal()) return config.hideCooking();
-		else if (skillId == Skill.FIREMAKING.ordinal()) return config.hideFiremaking();
-		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.hideWoodcutting();
-		else if (skillId == Skill.FARMING.ordinal()) return config.hideFarming();
-		else return true;
 	}
 
 	boolean isGoalEnabled(int skillId)

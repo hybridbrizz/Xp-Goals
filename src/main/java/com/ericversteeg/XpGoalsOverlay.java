@@ -249,6 +249,24 @@ class XpGoalsOverlay extends Overlay {
 
 			if (config.showPanel())
 			{
+				if (config.isPanelCorrectionXNegative())
+				{
+					panelX += config.panelCorrectionX() * -1;
+				}
+				else
+				{
+					panelX += config.panelCorrectionX();
+				}
+
+				if (config.isPanelCorrectionYNegative())
+				{
+					panelY += config.panelCorrectionY() * -1;
+				}
+				else
+				{
+					panelY += config.panelCorrectionY();
+				}
+
 				if (config.isPanelWidthExtensionNegative())
 				{
 					panelWidth += config.panelWidthExtension() * -1;
@@ -377,7 +395,7 @@ class XpGoalsOverlay extends Overlay {
 
 	private void renderPanel(Graphics2D graphics, int x, int y, int width, int height)
 	{
-		graphics.setColor(config.panelBackgroundColor());
+		graphics.setColor(ComponentConstants.STANDARD_BACKGROUND_COLOR);
 		graphics.fillRect(x, y, width, height);
 
 		graphics.setColor(outerBorderColor);
