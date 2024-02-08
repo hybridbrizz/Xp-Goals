@@ -914,7 +914,7 @@ public class XpGoalsPlugin extends Plugin
 		{
 			int cadence = dayCadence.ordinal();
 			int offset = cadenceDay.ordinal() - 1;
-			dayPart = "[2023]->[D|~"+ offset +"|" + cadence + "]";
+			dayPart = "[D|~"+ offset +"|" + cadence + "]";
 		}
 		return dayPart;
 	}

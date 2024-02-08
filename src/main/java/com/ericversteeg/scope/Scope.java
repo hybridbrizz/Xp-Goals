@@ -113,7 +113,11 @@ public abstract class Scope
     {
         if (parent == null)
         {
-            if (this instanceof  HourScope)
+            if (type == Type.REPEAT)
+            {
+                refLocalDate = estLocalDate.withYear(2023).withDayOfYear(1).atStartOfDay();
+            }
+            else if (this instanceof  HourScope)
             {
                 refLocalDate = estLocalDate.atTime(estLocalDate.get(ChronoField.HOUR_OF_DAY), 0);
             }
