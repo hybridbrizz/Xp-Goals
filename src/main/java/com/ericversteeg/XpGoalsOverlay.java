@@ -204,12 +204,6 @@ class XpGoalsOverlay extends Overlay {
 				extraBottomPadding = (ICON_SIZE - barHeight) / 2;
 			}
 
-			int iconSizeWPadding = ICON_SIZE + iconRightPadding;
-			if (ICON_SIZE == 0)
-			{
-				iconSizeWPadding = 0;
-			}
-
 			if (config.stackOrientation() != StackOrientation.HORIZONTAL)
 			{
 				panelWidth = (barWidth + ICON_SIZE + iconRightPadding + barSpacing) *
@@ -303,6 +297,31 @@ class XpGoalsOverlay extends Overlay {
 			Goal goal = goals.get(i);
 			if (goal.enabled)
 			{
+				Rectangle2D rectangle;
+				if (barHeight < ICON_SIZE)
+				{
+					rectangle = new Rectangle2D.Float(
+							panelX + offsetX,
+							anchorY + offsetY - (ICON_SIZE - barHeight) / 2f,
+							barWidth + ICON_SIZE + iconRightPadding + barSpacing,
+							ICON_SIZE
+					);
+				}
+				else
+				{
+					rectangle = new Rectangle2D.Float(
+							panelX + offsetX,
+							anchorY + offsetY,
+							barWidth + ICON_SIZE + iconRightPadding + barSpacing,
+							barHeight
+					);
+				}
+
+				if (rectangle.contains(mouseX, mouseY))
+				{
+					tooltipGoal = goal;
+				}
+
 				float progress = getXpProgress(
 						goal.progressXp, goal.goalXp);
 
@@ -317,32 +336,7 @@ class XpGoalsOverlay extends Overlay {
 						goal
 				);
 
-				renderBarText(graphics, barWidth, offsetX, offsetY, goal, progress);
-
-				Rectangle2D rectangle;
-				if (barHeight < ICON_SIZE)
-				{
-					rectangle = new Rectangle2D.Float(
-							panelX + offsetX,
-							anchorY + offsetY - (ICON_SIZE - barHeight) / 2f,
-							panelWidth,
-							ICON_SIZE
-					);
-				}
-				else
-				{
-					rectangle = new Rectangle2D.Float(
-							panelX + offsetX,
-							anchorY + offsetY,
-							panelWidth,
-							barHeight
-					);
-				}
-
-				if (rectangle.contains(mouseX, mouseY))
-				{
-					tooltipGoal = goal;
-				}
+				renderBarText(graphics, offsetX, offsetY, goal, progress, tooltipGoal == goal);
 
 				// vertical stack
 				if (config.stackOrientation() == StackOrientation.VERTICAL)
@@ -372,7 +366,7 @@ class XpGoalsOverlay extends Overlay {
 			}
 		}
 
-		if (tooltipGoal != null)
+		if (tooltipGoal != null && config.showTooltip())
 		{
 			int x = mouseX + 15;
 			int y = mouseY + 15;
@@ -442,7 +436,8 @@ class XpGoalsOverlay extends Overlay {
 		graphics2D.drawImage(icon, x, y, null);
 	}
 
-	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetX, int offsetY, float progress, Goal goal)
+	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetX,
+							 int offsetY, float progress, Goal goal)
 	{
 		Color progressColor;
 
@@ -498,7 +493,8 @@ class XpGoalsOverlay extends Overlay {
 		graphics.drawRect(x, y, barWidth, h);
 	}
 
-	private void renderBarText(Graphics2D graphics, int barWidth, int offsetX, int offsetY, Goal goal, float progress)
+	private void renderBarText(Graphics2D graphics, int offsetX, int offsetY, Goal goal,
+							   float progress, boolean isMouseover)
 	{
 		FontMetrics fontMetrics;
 		TextComponent textComponent = new TextComponent();
@@ -549,6 +545,11 @@ class XpGoalsOverlay extends Overlay {
 		String text = "";
 
 		BarTextType textType = config.barTextType();
+		if (isMouseover)
+		{
+			textType = config.mouseoverBarTextType();
+		}
+
 		switch (textType)
 		{
 			case FRACTION:

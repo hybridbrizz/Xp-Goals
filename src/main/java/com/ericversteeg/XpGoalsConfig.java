@@ -225,6 +225,16 @@ public interface XpGoalsConfig extends Config {
 	}
 
 	@ConfigItem(
+			position = 8,
+			keyName = "mouseoverBarTextType",
+			name = "Mouseover Value Text Type",
+			description = "Configures what type of value is displayed when you mouseover."
+	)
+	default BarTextType mouseoverBarTextType() {
+		return BarTextType.PERCENTAGE;
+	}
+
+	@ConfigItem(
 			position = 9,
 			keyName = "barTextPosition",
 			name = "Value Text Position",
@@ -262,6 +272,16 @@ public interface XpGoalsConfig extends Config {
 	)
 	default int pastProgressSpan() {
 		return 3;
+	}
+
+	@ConfigItem(
+			position = 10,
+			keyName = "showTooltip",
+			name = "Show Tooltip",
+			description = "Configures whether or not to show the tooltip."
+	)
+	default boolean showTooltip() {
+		return true;
 	}
 
 	@ConfigItem(
