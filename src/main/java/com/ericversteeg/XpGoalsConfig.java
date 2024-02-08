@@ -374,17 +374,6 @@ public interface XpGoalsConfig extends Config {
 	}
 
 	@ConfigItem(
-			keyName = "attackProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = attackSkill
-	)
-	default Color attackProgressColor() {
-		return Color.decode("#30FCAB");
-	}
-
-	@ConfigItem(
 			keyName = "attackXpGoal",
 			position = 2,
 			name = "Target Xp",
@@ -508,8 +497,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "attackDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = attackSkill
 	)
 	default DayCadence attackDayCadence() {
@@ -519,7 +508,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "attackCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = attackSkill
 	)
@@ -555,17 +544,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableStrengthSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "strengthProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = strengthSkill
-	)
-	default Color strengthProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -692,8 +670,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "strengthDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = strengthSkill
 	)
 	default DayCadence strengthDayCadence() {
@@ -703,7 +681,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "strengthCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = strengthSkill
 	)
@@ -739,17 +717,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableDefenseSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "defenseProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = defenseSkill
-	)
-	default Color defenseProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -876,8 +843,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "defenseDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = defenseSkill
 	)
 	default DayCadence defenseDayCadence() {
@@ -887,7 +854,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "defenseCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = defenseSkill
 	)
@@ -923,17 +890,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableRangedSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "rangedProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = rangedSkill
-	)
-	default Color rangedProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1060,8 +1016,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "rangedDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = rangedSkill
 	)
 	default DayCadence rangedDayCadence() {
@@ -1071,7 +1027,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "rangedCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = rangedSkill
 	)
@@ -1107,17 +1063,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enablePrayerSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "prayerProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = prayerSkill
-	)
-	default Color prayerProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1244,8 +1189,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "prayerDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = prayerSkill
 	)
 	default DayCadence prayerDayCadence() {
@@ -1255,7 +1200,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "prayerCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = prayerSkill
 	)
@@ -1291,17 +1236,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableMagicSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "magicProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = magicSkill
-	)
-	default Color magicProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1428,8 +1362,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "magicDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = magicSkill
 	)
 	default DayCadence magicDayCadence() {
@@ -1439,7 +1373,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "magicCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = magicSkill
 	)
@@ -1475,17 +1409,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableRunecraftingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "runecraftingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = runecraftingSkill
-	)
-	default Color runecraftingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1612,8 +1535,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "runecraftingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = runecraftingSkill
 	)
 	default DayCadence runecraftingDayCadence() {
@@ -1623,7 +1546,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "runecraftingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = runecraftingSkill
 	)
@@ -1659,17 +1582,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableConstructionSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "constructionProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = constructionSkill
-	)
-	default Color constructionProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1796,8 +1708,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "constructionDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = constructionSkill
 	)
 	default DayCadence constructionDayCadence() {
@@ -1807,7 +1719,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "constructionCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = constructionSkill
 	)
@@ -1843,17 +1755,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableHitpointsSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "hitpointsProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = hitpointsSkill
-	)
-	default Color hitpointsProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -1980,8 +1881,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "hitpointsDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = hitpointsSkill
 	)
 	default DayCadence hitpointsDayCadence() {
@@ -1991,7 +1892,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "hitpointsCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = hitpointsSkill
 	)
@@ -2027,17 +1928,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableAgilitySkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "agilityProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = agilitySkill
-	)
-	default Color agilityProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -2164,8 +2054,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "agilityDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = agilitySkill
 	)
 	default DayCadence agilityDayCadence() {
@@ -2175,7 +2065,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "agilityCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = agilitySkill
 	)
@@ -2211,17 +2101,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableHerbloreSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "herbloreProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = herbloreSkill
-	)
-	default Color herbloreProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -2348,8 +2227,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "herbloreDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = herbloreSkill
 	)
 	default DayCadence herbloreDayCadence() {
@@ -2359,7 +2238,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "herbloreCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = herbloreSkill
 	)
@@ -2395,17 +2274,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableThievingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "thievingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = thievingSkill
-	)
-	default Color thievingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -2532,8 +2400,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "thievingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = thievingSkill
 	)
 	default DayCadence thievingDayCadence() {
@@ -2543,7 +2411,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "thievingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = thievingSkill
 	)
@@ -2579,17 +2447,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableCraftingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "craftingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = craftingSkill
-	)
-	default Color craftingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -2716,8 +2573,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "craftingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = craftingSkill
 	)
 	default DayCadence craftingDayCadence() {
@@ -2727,7 +2584,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "craftingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = craftingSkill
 	)
@@ -2763,17 +2620,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableFletchingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "fletchingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = fletchingSkill
-	)
-	default Color fletchingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -2900,8 +2746,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "fletchingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = fletchingSkill
 	)
 	default DayCadence fletchingDayCadence() {
@@ -2911,7 +2757,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "fletchingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = fletchingSkill
 	)
@@ -2947,17 +2793,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableSlayerSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "slayerProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = slayerSkill
-	)
-	default Color slayerProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -3084,8 +2919,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "slayerDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = slayerSkill
 	)
 	default DayCadence slayerDayCadence() {
@@ -3095,7 +2930,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "slayerCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = slayerSkill
 	)
@@ -3131,17 +2966,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableHunterSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "hunterProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = hunterSkill
-	)
-	default Color hunterProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -3268,8 +3092,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "hunterDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = hunterSkill
 	)
 	default DayCadence hunterDayCadence() {
@@ -3279,7 +3103,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "hunterCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = hunterSkill
 	)
@@ -3315,17 +3139,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableMiningSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "miningProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = miningSkill
-	)
-	default Color miningProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -3452,8 +3265,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "miningDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = miningSkill
 	)
 	default DayCadence miningDayCadence() {
@@ -3463,7 +3276,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "miningCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = miningSkill
 	)
@@ -3499,17 +3312,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableSmithingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "smithingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = smithingSkill
-	)
-	default Color smithingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -3636,8 +3438,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "smithingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = smithingSkill
 	)
 	default DayCadence smithingDayCadence() {
@@ -3647,7 +3449,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "smithingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = smithingSkill
 	)
@@ -3683,17 +3485,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableFishingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "fishingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = fishingSkill
-	)
-	default Color fishingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -3820,8 +3611,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "fishingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = fishingSkill
 	)
 	default DayCadence fishingDayCadence() {
@@ -3831,7 +3622,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "fishingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = fishingSkill
 	)
@@ -3867,17 +3658,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableCookingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "cookingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = cookingSkill
-	)
-	default Color cookingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -4004,8 +3784,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "cookingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = cookingSkill
 	)
 	default DayCadence cookingDayCadence() {
@@ -4015,7 +3795,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "cookingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = cookingSkill
 	)
@@ -4051,17 +3831,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableFiremakingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "firemakingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = firemakingSkill
-	)
-	default Color firemakingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -4188,8 +3957,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "firemakingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = firemakingSkill
 	)
 	default DayCadence firemakingDayCadence() {
@@ -4199,7 +3968,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "firemakingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = firemakingSkill
 	)
@@ -4235,17 +4004,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableWoodcuttingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "woodcuttingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = woodcuttingSkill
-	)
-	default Color woodcuttingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -4372,8 +4130,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "woodcuttingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = woodcuttingSkill
 	)
 	default DayCadence woodcuttingDayCadence() {
@@ -4383,7 +4141,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "woodcuttingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = woodcuttingSkill
 	)
@@ -4419,17 +4177,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default boolean enableFarmingSkill() {
 		return false;
-	}
-
-	@ConfigItem(
-			keyName = "farmingProgressColor",
-			position = 1,
-			name = "Progress Color",
-			description = "Configures the progress color.",
-			section = farmingSkill
-	)
-	default Color farmingProgressColor() {
-		return Color.decode("#30FCAB");
 	}
 
 	@ConfigItem(
@@ -4556,8 +4303,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "farmingDayCadence",
 			position = 13,
-			name = "Day Cadence",
-			description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
 			section = farmingSkill
 	)
 	default DayCadence farmingDayCadence() {
@@ -4567,7 +4314,7 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			keyName = "farmingCadenceDay",
 			position = 14,
-			name = "Day Cadence",
+			name = "Cadence Day",
 			description = "Configures on which day in the cadence progress is recorded.",
 			section = farmingSkill
 	)
@@ -4586,3 +4333,4 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 }
+

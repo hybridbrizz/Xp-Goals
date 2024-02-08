@@ -15,15 +15,6 @@ line14 = '            section = {lcName}Skill'
 line15 = '    )'
 line16 = '    default boolean enable{ucName}Skill() {{ return false; }}'
 line17 = ''
-line18 = '    @ConfigItem('
-line19 = '            keyName = "{lcName}ProgressColor",'
-line20 = '            position = 1,'
-line21 = '            name = "Progress Color",'
-line22 = '            description = "Configures the progress color.",'
-line23 = '            section = {lcName}Skill'
-line24 = '    )'
-line25 = '    default Color {lcName}ProgressColor() {{ return Color.decode("#30FCAB"); }}'
-line26 = ''
 line27 = '    @ConfigItem('
 line28 = '            keyName = "{lcName}XpGoal",'
 line29 = '            position = 2,'
@@ -126,8 +117,8 @@ line125 = ''
 line126 = '      @ConfigItem('
 line127 = '            keyName = "{lcName}DayCadence",'
 line128 = '            position = 13,'
-line129 = '            name = "Day Cadence",'
-line130 = '            description = "Configures the day cadence for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",'
+line129 = '            name = "Day Cadence Length",'
+line130 = '            description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",'
 line131 = '            section = {lcName}Skill'
 line132 = '      )'
 line133 = '      default DayCadence {lcName}DayCadence() {{ return DayCadence.NONE; }}'
@@ -135,7 +126,7 @@ line134 = ''
 line135 = '      @ConfigItem('
 line136 = '            keyName = "{lcName}CadenceDay",'
 line137 = '            position = 14,'
-line138 = '            name = "Day Cadence",'
+line138 = '            name = "Cadence Day",'
 line139 = '            description = "Configures on which day in the cadence progress is recorded.",'
 line140 = '            section = {lcName}Skill'
 line141 = '      )'
@@ -162,8 +153,7 @@ line161 = ''
 
 config = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n" + line6 + "\n" + line7 + "\n" + line8 + \
          "\n" + line9 + "\n" + line10 + "\n" + line11 + "\n" + line12 + "\n" + line13 + "\n" + line14 + "\n" + line15 + "\n" + \
-         line16 + "\n" + line17 + "\n" + line18 + "\n" + line19 + "\n" + line20 + "\n" + line21 + "\n" + line22 + "\n" + line23 + \
-         "\n" + line24 + "\n" + line25 + "\n" + line26 + "\n" + line27 + "\n" + line28 + "\n" + line29 + "\n" + line30 + "\n" + line31 + \
+         line16 + "\n" + line17 + "\n" + line27 + "\n" + line28 + "\n" + line29 + "\n" + line30 + "\n" + line31 + \
          "\n" + line32 + "\n" + line33 + "\n" + line34 + "\n" + line35 + "\n" + line36 + "\n" + line37 + "\n" + line38 + "\n" + line39 + \
          "\n" + line40 + "\n" + line41 + "\n" + line42 + "\n" + line43 + "\n" + line44 + "\n" + line45 + "\n" + line46 + "\n" + line47 + \
          "\n" + line48 + "\n" + line49 + "\n" + line50 + "\n" + line51 + "\n" + line52 + "\n" + line53 + "\n" + line54 + "\n" + line55 + \
