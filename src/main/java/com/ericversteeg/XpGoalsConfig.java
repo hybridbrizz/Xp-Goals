@@ -4,11 +4,13 @@ import com.ericversteeg.bar.*;
 import com.ericversteeg.config.AnchorType;
 import com.ericversteeg.config.DayCadence;
 import com.ericversteeg.config.Hour;
+import com.ericversteeg.config.StackOrientation;
 import com.ericversteeg.goal.ResetType;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
+import net.runelite.client.ui.overlay.components.ComponentConstants;
 
 import java.awt.*;
 
@@ -47,13 +49,73 @@ public interface XpGoalsConfig extends Config {
 	}
 
 	@ConfigItem(
-			position = 4,
+			position = 3,
 			keyName = "anchorY",
 			name = "Y Position",
 			description = "Configures y position relative to the anchor."
 	)
 	default int anchorY() {
 		return 120;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "showPanel",
+			name = "Show Panel",
+			description = "Configures whether or not to show panel."
+	)
+	default boolean showPanel() {
+		return true;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelExtensionWidth",
+			name = "Panel Width Extension",
+			description = "Configures the panel width extension value."
+	)
+	default int panelWidthExtension() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelExtensionWidthNegative",
+			name = "Panel Width Extension Negative",
+			description = "Configures whether or not the panel width extension value is negative."
+	)
+	default boolean isPanelWidthExtensionNegative() {
+		return false;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelExtensionHeight",
+			name = "Panel Height Extension",
+			description = "Configures the panel height extension value."
+	)
+	default int panelHeightExtension() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelExtensionHeightNegative",
+			name = "Panel Height Extension Negative",
+			description = "Configures whether or not the panel height extension value is negative."
+	)
+	default boolean isPanelHeightExtensionNegative() {
+		return false;
+	}
+
+	@ConfigItem(
+			position = 4,
+			keyName = "panelBackgroundColor",
+			name = "Panel Height Extension Negative",
+			description = "Configures whether or not the panel height extension value is negative."
+	)
+	default Color panelBackgroundColor() {
+		return new Color(70, 61, 50, 156);
 	}
 
 	@ConfigItem(
@@ -84,6 +146,26 @@ public interface XpGoalsConfig extends Config {
 	)
 	default int barSpacing() {
 		return 5;
+	}
+
+	@ConfigItem(
+			position = 7,
+			keyName = "stackSize",
+			name = "Stack Size",
+			description = "Configures how many bars to stack."
+	)
+	default int stackSize() {
+		return 1;
+	}
+
+	@ConfigItem(
+			position = 7,
+			keyName = "stackOrientation",
+			name = "Stack Orientation",
+			description = "Configures whether bars stack horizontal or vertical."
+	)
+	default StackOrientation stackOrientation() {
+		return StackOrientation.HORIZONTAL;
 	}
 
 	@ConfigItem(

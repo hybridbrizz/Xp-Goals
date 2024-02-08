@@ -2,6 +2,7 @@ package com.ericversteeg;
 
 import com.ericversteeg.bar.*;
 import com.ericversteeg.config.AnchorType;
+import com.ericversteeg.config.StackOrientation;
 import com.ericversteeg.goal.Goal;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
@@ -131,6 +132,8 @@ class XpGoalsOverlay extends Overlay {
 		int barWidth = Math.max(Math.min(config.barWidth(), 1000), 45);
 		int barHeight = Math.max(config.barHeight(), 2);
 
+		int span = config.stackSize();
+
 		int minBarSpacing = 0;
 		if ((textPosition == BarTextPosition.OUTSIDE || textOutsideOverride) && textType != BarTextType.NONE)
 		{
@@ -207,9 +210,27 @@ class XpGoalsOverlay extends Overlay {
 				iconSizeWPadding = 0;
 			}
 
-			panelWidth = iconSizeWPadding + barWidth + panelHPadding * 2;
-			panelHeight =  panelTopPadding + topSectionHeight + barHeight * goals.size() + barSpacing *
-					Math.max(goals.size() - 1, 0) + panelBottomPadding + extraBottomPadding;
+			if (config.stackOrientation() != StackOrientation.HORIZONTAL)
+			{
+				panelWidth = (barWidth + ICON_SIZE + iconRightPadding + barSpacing) *
+						((goals.size() - 1) / span + 1) + panelHPadding * 2 - barSpacing + 5;
+			}
+			else
+			{
+				panelWidth = (barWidth + ICON_SIZE + iconRightPadding) * span + barSpacing *
+						Math.min(Math.max(span - 1, 1), goals.size()) + panelHPadding * 2;
+			}
+
+			if (config.stackOrientation() != StackOrientation.HORIZONTAL)
+			{
+				panelHeight =  panelTopPadding + topSectionHeight + barHeight * span + barSpacing *
+						Math.min(Math.max(span - 1, 1), goals.size()) + panelBottomPadding + extraBottomPadding;
+			}
+			else
+			{
+				panelHeight = panelTopPadding + topSectionHeight + (barHeight + barSpacing) *
+						((goals.size() - 1) / span + 1) + panelBottomPadding - barSpacing;
+			}
 
 			anchorX = config.anchorX();
 			if (anchorType == AnchorType.TOP_RIGHT || anchorType == AnchorType.BOTTOM_RIGHT)
@@ -226,7 +247,28 @@ class XpGoalsOverlay extends Overlay {
 			panelX = anchorX - panelHPadding;
 			panelY = anchorY - panelTopPadding;
 
-			renderPanel(graphics, panelX, panelY, panelWidth, panelHeight);
+			if (config.showPanel())
+			{
+				if (config.isPanelWidthExtensionNegative())
+				{
+					panelWidth += config.panelWidthExtension() * -1;
+				}
+				else
+				{
+					panelWidth += config.panelWidthExtension();
+				}
+
+				if (config.isPanelHeightExtensionNegative())
+				{
+					panelHeight += config.panelHeightExtension() * -1;
+				}
+				else
+				{
+					panelHeight += config.panelHeightExtension();
+				}
+
+				renderPanel(graphics, panelX, panelY, panelWidth, panelHeight);
+			}
 
 			if (!hideLabel)
 			{
@@ -236,6 +278,7 @@ class XpGoalsOverlay extends Overlay {
 
 		Goal tooltipGoal = null;
 
+		int offsetX = panelHPadding;
 		int offsetY = topSectionHeight;
 		for (int i = 0; i < goals.size(); i++)
 		{
@@ -245,23 +288,24 @@ class XpGoalsOverlay extends Overlay {
 				float progress = getXpProgress(
 						goal.progressXp, goal.goalXp);
 
-				renderSkillIcon(graphics, offsetY, goal);
+				renderSkillIcon(graphics, offsetX, offsetY, goal);
 
 				renderXpBar(
 						graphics,
 						barWidth,
+						offsetX,
 						offsetY,
 						progress,
 						goal
 				);
 
-				renderBarText(graphics, barWidth, offsetY, goal, progress);
+				renderBarText(graphics, barWidth, offsetX, offsetY, goal, progress);
 
 				Rectangle2D rectangle;
 				if (barHeight < ICON_SIZE)
 				{
 					rectangle = new Rectangle2D.Float(
-							panelX,
+							panelX + offsetX,
 							anchorY + offsetY - (ICON_SIZE - barHeight) / 2f,
 							panelWidth,
 							ICON_SIZE
@@ -270,7 +314,7 @@ class XpGoalsOverlay extends Overlay {
 				else
 				{
 					rectangle = new Rectangle2D.Float(
-							panelX,
+							panelX + offsetX,
 							anchorY + offsetY,
 							panelWidth,
 							barHeight
@@ -282,7 +326,31 @@ class XpGoalsOverlay extends Overlay {
 					tooltipGoal = goal;
 				}
 
-				offsetY += barHeight + barSpacing;
+				// vertical stack
+				if (config.stackOrientation() == StackOrientation.VERTICAL)
+				{
+					if ((i + 1) % span == 0)
+					{
+						offsetX += barWidth + ICON_SIZE + iconRightPadding + barSpacing;
+						offsetY = topSectionHeight;
+					}
+					else
+					{
+						offsetY += barHeight + barSpacing;
+					}
+				}
+				else
+				{
+					if ((i + 1) % span == 0)
+					{
+						offsetX = panelHPadding;
+						offsetY += barHeight + barSpacing;
+					}
+					else
+					{
+						offsetX += barWidth + ICON_SIZE + iconRightPadding + barSpacing;
+					}
+				}
 			}
 		}
 
@@ -309,7 +377,7 @@ class XpGoalsOverlay extends Overlay {
 
 	private void renderPanel(Graphics2D graphics, int x, int y, int width, int height)
 	{
-		graphics.setColor(ComponentConstants.STANDARD_BACKGROUND_COLOR);
+		graphics.setColor(config.panelBackgroundColor());
 		graphics.fillRect(x, y, width, height);
 
 		graphics.setColor(outerBorderColor);
@@ -338,7 +406,7 @@ class XpGoalsOverlay extends Overlay {
 		textComponent.render(graphics);
 	}
 
-	private void renderSkillIcon(Graphics2D graphics2D, int offsetY, Goal goal)
+	private void renderSkillIcon(Graphics2D graphics2D, int offsetX, int offsetY, Goal goal)
 	{
 		if (ICON_SIZE == 0) return;
 
@@ -348,13 +416,15 @@ class XpGoalsOverlay extends Overlay {
 		BufferedImage icon = iconManager.getSkillImage(skill);
 		icon = ImageUtil.resizeImage(icon, ICON_SIZE, ICON_SIZE, true);
 
+		int x = anchorX + offsetX;
+
 		int barHeight = Math.max(config.barHeight(), 2);
 		int y = anchorY + offsetY - (ICON_SIZE - barHeight) / 2;
 
-		graphics2D.drawImage(icon, anchorX, y, null);
+		graphics2D.drawImage(icon, x, y, null);
 	}
 
-	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetY, float progress, Goal goal)
+	private void renderXpBar(Graphics2D graphics, int barWidth, int offsetX, int offsetY, float progress, Goal goal)
 	{
 		Color progressColor;
 
@@ -392,7 +462,7 @@ class XpGoalsOverlay extends Overlay {
 
 		int h = Math.max(config.barHeight(), 2);
 
-		int x = anchorX + ICON_SIZE + iconRightPadding;
+		int x = anchorX + offsetX + ICON_SIZE + iconRightPadding;
 		if (config.hideSkillIcons())
 		{
 			x -= iconRightPadding;
@@ -410,7 +480,7 @@ class XpGoalsOverlay extends Overlay {
 		graphics.drawRect(x, y, barWidth, h);
 	}
 
-	private void renderBarText(Graphics2D graphics, int barWidth, int offsetY, Goal goal, float progress)
+	private void renderBarText(Graphics2D graphics, int barWidth, int offsetX, int offsetY, Goal goal, float progress)
 	{
 		FontMetrics fontMetrics;
 		TextComponent textComponent = new TextComponent();
@@ -558,13 +628,13 @@ class XpGoalsOverlay extends Overlay {
 		switch (textAlignment)
 		{
 			case LEADING:
-				x = anchorX + ICON_SIZE + iconPadding + 1;
+				x = anchorX + offsetX + ICON_SIZE + iconPadding + 1;
 				break;
 			case CENTER:
-				x = anchorX + ICON_SIZE + iconPadding + (barW - w) / 2;
+				x = anchorX + offsetX + ICON_SIZE + iconPadding + (barW - w) / 2;
 				break;
 			case TRAILING:
-				x = anchorX + ICON_SIZE + iconPadding + barW - w;
+				x = anchorX + offsetX + ICON_SIZE + iconPadding + barW - w;
 		}
 
 		if (position == BarTextPosition.OUTSIDE || textOutsideOverride)
