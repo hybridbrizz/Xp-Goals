@@ -2,6 +2,7 @@ package com.ericversteeg;
 
 import com.ericversteeg.config.DayCadence;
 import com.ericversteeg.config.Hour;
+import com.ericversteeg.config.ResetOffsetTimeUnit;
 import com.ericversteeg.goal.Goal;
 import com.ericversteeg.goal.GoalData;
 import com.ericversteeg.goal.ResetType;
@@ -155,39 +156,42 @@ public class XpGoalsPlugin extends Plugin
 			);
 		}
 
-		LocalDateTime dateTIme = LocalDateTime.now();
+		LocalDateTime dateTime = LocalDateTime.now();
 
-		if (dateTIme.get(ChronoField.HOUR_OF_DAY) != lastDateTime.get(ChronoField.HOUR_OF_DAY)
-				|| (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH))
-				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
-				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
+		LocalDateTime adjustedDateTime = adjustToConfiguredResetOffset(dateTime);
+		LocalDateTime adjustedLastDateTime = adjustToConfiguredResetOffset(lastDateTime);
+
+		if (adjustedDateTime.get(ChronoField.HOUR_OF_DAY) != adjustedLastDateTime.get(ChronoField.HOUR_OF_DAY)
+				|| (adjustedDateTime.get(ChronoField.DAY_OF_MONTH) != adjustedLastDateTime.get(ChronoField.DAY_OF_MONTH))
+				|| (adjustedDateTime.get(ChronoField.MONTH_OF_YEAR) != adjustedLastDateTime.get(ChronoField.MONTH_OF_YEAR))
+				|| (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetHourly);
 			configSyncGoals();
 		}
-		if (dateTIme.get(ChronoField.DAY_OF_MONTH) != lastDateTime.get(ChronoField.DAY_OF_MONTH)
-				|| (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR))
-				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
+		if (adjustedDateTime.get(ChronoField.DAY_OF_MONTH) != adjustedLastDateTime.get(ChronoField.DAY_OF_MONTH)
+				|| (adjustedDateTime.get(ChronoField.MONTH_OF_YEAR) != adjustedLastDateTime.get(ChronoField.MONTH_OF_YEAR))
+				|| (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetDaily);
 		}
-		if (dateTIme.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) != lastDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
-				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
+		if (adjustedDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) != adjustedLastDateTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
+				|| (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetWeekly);
 		}
-		if (dateTIme.get(ChronoField.MONTH_OF_YEAR) != lastDateTime.get(ChronoField.MONTH_OF_YEAR)
-				|| (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR)))
+		if (adjustedDateTime.get(ChronoField.MONTH_OF_YEAR) != adjustedLastDateTime.get(ChronoField.MONTH_OF_YEAR)
+				|| (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetMonthly);
 		}
-		if (dateTIme.get(ChronoField.YEAR) != lastDateTime.get(ChronoField.YEAR))
+		if (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR))
 		{
 			resetGoals(Goal.resetYearly);
 		}
 
-		goalData.lastCheck = dateTIme.toEpochSecond(zoneOffset);
-		lastDateTime = dateTIme;
+		goalData.lastCheck = dateTime.toEpochSecond(zoneOffset);
+		lastDateTime = dateTime;
 	}
 
 	private void resetGoals(int resetType)
@@ -200,6 +204,38 @@ public class XpGoalsPlugin extends Plugin
 			}
 		}
 		writeSavedData();
+	}
+
+	private LocalDateTime adjustToConfiguredResetOffset(LocalDateTime dateTime)
+	{
+		return dateTime.minusSeconds(getResetOffsetInSeconds());
+	}
+
+	private long getResetOffsetInSeconds()
+	{
+		int value = config.resetOffset();
+		ResetOffsetTimeUnit unit = config.resetOffsetUnit();
+		boolean isNegative = config.isResetOffsetNegative();
+
+		int seconds = 0;
+		switch (unit)
+		{
+			case MINUTE:
+				seconds = value * 60;
+				break;
+			case HOUR:
+				seconds = value * 60 * 60;
+				break;
+			case DAY:
+				seconds = value * 24 * 60 * 60;
+				break;
+		}
+
+		if (isNegative)
+		{
+			seconds = -seconds;
+		}
+		return seconds;
 	}
 
 	GoalData getSavedData()

@@ -1,10 +1,7 @@
 package com.ericversteeg;
 
 import com.ericversteeg.bar.*;
-import com.ericversteeg.config.AnchorType;
-import com.ericversteeg.config.DayCadence;
-import com.ericversteeg.config.Hour;
-import com.ericversteeg.config.StackOrientation;
+import com.ericversteeg.config.*;
 import com.ericversteeg.goal.ResetType;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
@@ -352,6 +349,37 @@ public interface XpGoalsConfig extends Config {
 	)
 	default Color overfillColor() {
 		return Color.decode("#A020F0");
+	}
+
+	@ConfigItem(
+			position = 16,
+			keyName = "resetOffset",
+			name = "Reset Offset",
+			description = "Offsets all skill reset times by the specified interval e.g. 4 hours will cause all daily " +
+					"resets to happen at 4am and -4 hours will cause daily resets to happen at 8pm."
+	)
+	default int resetOffset() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 17,
+			keyName = "resetOffsetUnit",
+			name = "Reset Offset Unit",
+			description = "Configures the unit of the reset offset value."
+	)
+	default ResetOffsetTimeUnit resetOffsetUnit() {
+		return ResetOffsetTimeUnit.HOUR;
+	}
+
+	@ConfigItem(
+			position = 18,
+			keyName = "resetOffsetNegative",
+			name = "Reset Offset Negative",
+			description = "Configures whether or not the reset offset value is negative."
+	)
+	default boolean isResetOffsetNegative() {
+		return false;
 	}
 
 	@ConfigSection(
