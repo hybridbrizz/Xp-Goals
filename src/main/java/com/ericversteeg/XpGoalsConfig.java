@@ -354,9 +354,9 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			position = 16,
 			keyName = "resetOffset",
-			name = "Reset Offset",
-			description = "Offsets all skill reset times by the specified interval e.g. 4 hours will cause all daily " +
-					"resets to happen at 4am and -4 hours will cause daily resets to happen at 8pm."
+			name = "Time Offset",
+			description = "Optionally offsets all skill reset times and / or skill pattern tracking times by the specified interval e.g. 4 hours will cause all daily " +
+					"resets and / or skill track patterns to happen at 4am and -4 hours will cause them to happen at 8pm."
 	)
 	default int resetOffset() {
 		return 0;
@@ -365,8 +365,8 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			position = 17,
 			keyName = "resetOffsetUnit",
-			name = "Reset Offset Unit",
-			description = "Configures the unit of the reset offset value."
+			name = "Time Offset Unit",
+			description = "Configures the unit of the time offset value."
 	)
 	default ResetOffsetTimeUnit resetOffsetUnit() {
 		return ResetOffsetTimeUnit.HOUR;
@@ -375,11 +375,33 @@ public interface XpGoalsConfig extends Config {
 	@ConfigItem(
 			position = 18,
 			keyName = "resetOffsetNegative",
-			name = "Reset Offset Negative",
-			description = "Configures whether or not the reset offset value is negative."
+			name = "Time Offset Negative",
+			description = "Configures whether or not the time offset value is negative."
 	)
 	default boolean isResetOffsetNegative() {
 		return false;
+	}
+
+	@ConfigItem(
+			position = 19,
+			keyName = "offsetResets",
+			name = "Offset Skill Reset",
+			description = "Configures whether or not to offset resets."
+	)
+	default boolean isOffsetResets() {
+		return true;
+	}
+
+	@ConfigItem(
+			position = 20,
+			keyName = "offsetPatterns",
+			name = "Offset Track Pattern",
+			description = "Configures whether or not to offset skill track patterns. " +
+					"For example with a configured 4 hour reset offset and this option enabled, " +
+					"12am-4am is considered on the previous calendar day."
+	)
+	default boolean isOffsetPatterns() {
+		return true;
 	}
 
 	@ConfigSection(

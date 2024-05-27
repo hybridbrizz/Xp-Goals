@@ -8,28 +8,23 @@ import java.util.Date;
 
 public class YearScope extends Scope {
 
-    public YearScope()
+    public YearScope(int value, long offsetBy)
     {
-        super();
-    }
-
-    public YearScope(int value)
-    {
-        super(null, value);
+        super(null, value, offsetBy);
 
         temporalField = ChronoField.YEAR;
     }
 
-    public YearScope(Scope parent, int value)
+    public YearScope(Scope parent, int value, long offsetBy)
     {
-        super(parent, value);
+        super(parent, value, offsetBy);
 
         temporalField = ChronoField.YEAR;
     }
 
-    public YearScope(Date estDate, int offset, int interval)
+    public YearScope(Date estDate, int offset, int interval, long offsetBy)
     {
-        super(estDate, offset, interval);
+        super(estDate, offset, interval, offsetBy);
     }
 
     @Override

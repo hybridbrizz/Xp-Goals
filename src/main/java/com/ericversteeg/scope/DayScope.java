@@ -8,14 +8,9 @@ import java.util.Date;
 
 public class DayScope extends Scope
 {
-    public DayScope(Scope parent)
+    public DayScope(Scope parent, int value, long offsetBy)
     {
-        super(parent);
-    }
-
-    public DayScope(Scope parent, int value)
-    {
-        super(parent, value);
+        super(parent, value, offsetBy);
 
         if (parent instanceof YearScope)
         {
@@ -31,14 +26,14 @@ public class DayScope extends Scope
         }
     }
 
-    public DayScope(Scope parent, int offset, int interval)
+    public DayScope(Scope parent, int offset, int interval, long offsetBy)
     {
-        super(parent, offset, interval);
+        super(parent, offset, interval, offsetBy);
     }
 
-    public DayScope(Date estDate, int offset, int interval)
+    public DayScope(Date estDate, int offset, int interval, long offsetBy)
     {
-        super(estDate, offset, interval);
+        super(estDate, offset, interval, offsetBy);
     }
 
     @Override

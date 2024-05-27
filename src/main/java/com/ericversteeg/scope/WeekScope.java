@@ -11,19 +11,9 @@ import java.util.Date;
 
 public class WeekScope extends Scope
 {
-    public WeekScope()
+    public WeekScope(Scope parent, int value, long offsetBy)
     {
-        super();
-    }
-
-    public WeekScope(Scope parent)
-    {
-        super(parent);
-    }
-
-    public WeekScope(Scope parent, int value)
-    {
-        super(parent, value);
+        super(parent, value, offsetBy);
 
         if (parent instanceof YearScope)
         {
@@ -31,14 +21,14 @@ public class WeekScope extends Scope
         }
     }
 
-    public WeekScope(Scope parent, int offset, int interval)
+    public WeekScope(Scope parent, int offset, int interval, long offsetBy)
     {
-        super(parent, offset, interval);
+        super(parent, offset, interval, offsetBy);
     }
 
-    public WeekScope(Date estDate, int offset, int interval)
+    public WeekScope(Date estDate, int offset, int interval, long offsetBy)
     {
-        super(estDate, offset, interval);
+        super(estDate, offset, interval, offsetBy);
     }
 
     @Override

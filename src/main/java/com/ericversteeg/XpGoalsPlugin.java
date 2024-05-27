@@ -167,7 +167,6 @@ public class XpGoalsPlugin extends Plugin
 				|| (adjustedDateTime.get(ChronoField.YEAR) != adjustedLastDateTime.get(ChronoField.YEAR)))
 		{
 			resetGoals(Goal.resetHourly);
-			configSyncGoals();
 		}
 		if (adjustedDateTime.get(ChronoField.DAY_OF_MONTH) != adjustedLastDateTime.get(ChronoField.DAY_OF_MONTH)
 				|| (adjustedDateTime.get(ChronoField.MONTH_OF_YEAR) != adjustedLastDateTime.get(ChronoField.MONTH_OF_YEAR))
@@ -190,6 +189,18 @@ public class XpGoalsPlugin extends Plugin
 			resetGoals(Goal.resetYearly);
 		}
 
+		// update tracking patterns
+		LocalDateTime adjustedPatternDateTime = adjustToConfiguredPatternOffset(dateTime);
+		LocalDateTime adjustedPatternLastDateTime = adjustToConfiguredPatternOffset(lastDateTime);
+
+		if (adjustedPatternDateTime.get(ChronoField.HOUR_OF_DAY) != adjustedPatternLastDateTime.get(ChronoField.HOUR_OF_DAY)
+				|| (adjustedPatternDateTime.get(ChronoField.DAY_OF_MONTH) != adjustedPatternLastDateTime.get(ChronoField.DAY_OF_MONTH))
+				|| (adjustedPatternDateTime.get(ChronoField.MONTH_OF_YEAR) != adjustedPatternLastDateTime.get(ChronoField.MONTH_OF_YEAR))
+				|| (adjustedPatternDateTime.get(ChronoField.YEAR) != adjustedPatternLastDateTime.get(ChronoField.YEAR)))
+		{
+			configSyncGoals();
+		}
+
 		goalData.lastCheck = dateTime.toEpochSecond(zoneOffset);
 		lastDateTime = dateTime;
 	}
@@ -208,10 +219,29 @@ public class XpGoalsPlugin extends Plugin
 
 	private LocalDateTime adjustToConfiguredResetOffset(LocalDateTime dateTime)
 	{
-		return dateTime.minusSeconds(getResetOffsetInSeconds());
+		if (config.isOffsetResets())
+		{
+			return dateTime.minusSeconds(getTimeOffsetInSeconds());
+		}
+		else
+		{
+			return dateTime;
+		}
 	}
 
-	private long getResetOffsetInSeconds()
+	private LocalDateTime adjustToConfiguredPatternOffset(LocalDateTime dateTime)
+	{
+		if (config.isOffsetPatterns())
+		{
+			return dateTime.minusSeconds(getTimeOffsetInSeconds());
+		}
+		else
+		{
+			return dateTime;
+		}
+	}
+
+	private long getTimeOffsetInSeconds()
 	{
 		int value = config.resetOffset();
 		ResetOffsetTimeUnit unit = config.resetOffsetUnit();
@@ -326,6 +356,12 @@ public class XpGoalsPlugin extends Plugin
 			int goalXp = goalXp(skillId);
 			ResetType resetType = goalResetType(skillId);
 
+			long patternOffset = 0;
+			if (config.isOffsetPatterns())
+			{
+				patternOffset = getTimeOffsetInSeconds();
+			}
+
 			float xpProgress = overlay.getXpProgress(
 					goal.progressXp,
 					goal.goalXp
@@ -407,7 +443,7 @@ public class XpGoalsPlugin extends Plugin
 							pattern = patternStr;
 						}
 
-						if (Pattern.parse(pattern, new Date()).matches())
+						if (Pattern.parse(pattern, new Date(), patternOffset).matches())
 						{
 							goalXp = xp;
 							track = true;

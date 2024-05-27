@@ -8,19 +8,9 @@ import java.util.Date;
 
 public class MonthScope extends Scope
 {
-    public MonthScope()
+    public MonthScope(Scope parent, int value, long offsetBy)
     {
-        super();
-    }
-
-    public MonthScope(Scope parent)
-    {
-        super(parent);
-    }
-
-    public MonthScope(Scope parent, int value)
-    {
-        super(parent, value);
+        super(parent, value, offsetBy);
 
         if (parent instanceof YearScope)
         {
@@ -28,14 +18,14 @@ public class MonthScope extends Scope
         }
     }
 
-    public MonthScope(Scope parent, int offset, int interval)
+    public MonthScope(Scope parent, int offset, int interval, long offsetBy)
     {
-        super(parent, offset, interval);
+        super(parent, offset, interval, offsetBy);
     }
 
-    public MonthScope(Date estDate, int offset, int interval)
+    public MonthScope(Date estDate, int offset, int interval, long offsetBy)
     {
-        super(estDate, offset, interval);
+        super(estDate, offset, interval, offsetBy);
     }
 
     @Override

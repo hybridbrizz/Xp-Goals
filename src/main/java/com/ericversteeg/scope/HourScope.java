@@ -8,26 +8,21 @@ import java.util.Date;
 
 public class HourScope extends Scope
 {
-    public HourScope(Scope parent)
+    public HourScope(Scope parent, int value, long offsetBy)
     {
-        super(parent);
-    }
-
-    public HourScope(Scope parent, int value)
-    {
-        super(parent, value);
+        super(parent, value, offsetBy);
 
         temporalField = ChronoField.HOUR_OF_DAY;
     }
 
-    public HourScope(Scope parent, int offset, int interval)
+    public HourScope(Scope parent, int offset, int interval, long offsetBy)
     {
-        super(parent, offset, interval);
+        super(parent, offset, interval, offsetBy);
     }
 
-    public HourScope(Date estDate, int offset, int interval)
+    public HourScope(Date estDate, int offset, int interval, long offsetBy)
     {
-        super(estDate, offset, interval);
+        super(estDate, offset, interval, offsetBy);
     }
 
     @Override

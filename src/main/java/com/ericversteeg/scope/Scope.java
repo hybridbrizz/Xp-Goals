@@ -12,7 +12,7 @@ public abstract class Scope
 {
     protected LocalDate estLocalDate;
     protected LocalDateTime refLocalDate;
-    protected LocalDate nowLocalDate = LocalDate.now();
+    protected LocalDateTime nowLocalDate = LocalDateTime.now();
 
     public enum Type
     {
@@ -36,21 +36,7 @@ public abstract class Scope
     private int offset;
     private int interval;
 
-    public Scope()
-    {
-
-    }
-
-    public Scope(Scope parent)
-    {
-        this.parent = parent;
-        if (parent != null)
-        {
-            parent.addChild(this);
-        }
-    }
-
-    public Scope(Scope parent, int value)
+    public Scope(Scope parent, int value, long offsetBy)
     {
         this.parent = parent;
         if (parent != null)
@@ -61,9 +47,11 @@ public abstract class Scope
         this.type = Type.FIXED;
 
         this.value = value;
+
+        nowLocalDate = LocalDateTime.now().minusSeconds(offsetBy(offsetBy));
     }
 
-    public Scope(Scope parent, TemporalField temporalField, int value)
+    public Scope(Scope parent, TemporalField temporalField, int value, long offsetBy)
     {
         this.parent = parent;
         if (parent != null)
@@ -77,9 +65,11 @@ public abstract class Scope
         this.value = value;
 
         setReferenceDate();
+
+        nowLocalDate = LocalDateTime.now().minusSeconds(offsetBy(offsetBy));
     }
 
-    public Scope(Scope parent, int offset, int interval)
+    public Scope(Scope parent, int offset, int interval, long offsetBy)
     {
         this.parent = parent;
         if (parent != null)
@@ -93,9 +83,11 @@ public abstract class Scope
         this.interval = interval;
 
         setReferenceDate();
+
+        nowLocalDate = LocalDateTime.now().minusSeconds(offsetBy(offsetBy));
     }
 
-    public Scope(Date estDate, int offset, int interval)
+    public Scope(Date estDate, int offset, int interval, long offsetBy)
     {
         this.type = Type.REPEAT;
 
@@ -107,6 +99,8 @@ public abstract class Scope
         this.interval = interval;
 
         setReferenceDate();
+
+        nowLocalDate = LocalDateTime.now().minusSeconds(offsetBy(offsetBy));
     }
 
     void setReferenceDate()
@@ -140,19 +134,19 @@ public abstract class Scope
         }
         else if (parent instanceof YearScope)
         {
-            refLocalDate = nowLocalDate.withDayOfYear(1).atStartOfDay();
+            refLocalDate = nowLocalDate.toLocalDate().withDayOfYear(1).atStartOfDay();
         }
         else if (parent instanceof MonthScope)
         {
-            refLocalDate = nowLocalDate.withDayOfMonth(1).atStartOfDay();
+            refLocalDate = nowLocalDate.toLocalDate().withDayOfMonth(1).atStartOfDay();
         }
         else if (parent instanceof WeekScope)
         {
-            refLocalDate = nowLocalDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).atStartOfDay();
+            refLocalDate = nowLocalDate.toLocalDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).atStartOfDay();
         }
         else if (parent instanceof DayScope)
         {
-            refLocalDate = nowLocalDate.atStartOfDay();
+            refLocalDate = nowLocalDate.toLocalDate().atStartOfDay();
         }
     }
 
@@ -184,24 +178,17 @@ public abstract class Scope
 
         if (parent != null && alsoParents)
         {
-            return parent.matches(true) && matchesInterval(refLocalDate, nowLocalDate, offset, interval);
+            return parent.matches(true) && matchesInterval(refLocalDate, nowLocalDate.toLocalDate(), offset, interval);
         }
         else
         {
-            return matchesInterval(refLocalDate, nowLocalDate, offset, interval);
+            return matchesInterval(refLocalDate, nowLocalDate.toLocalDate(), offset, interval);
         }
     }
 
     protected boolean matchesFixed()
     {
-        if (this instanceof HourScope)
-        {
-            return nowLocalDate.atTime(LocalTime.now()).get(temporalField) == value;
-        }
-        else
-        {
-            return nowLocalDate.get(temporalField) == value;
-        }
+        return nowLocalDate.get(temporalField) == value;
     }
 
     abstract boolean matchesInterval(LocalDateTime estLocalDate, LocalDate nowLocalDate, int offset, int interval);
@@ -214,6 +201,29 @@ public abstract class Scope
     public List<Scope> getChildren()
     {
         return children;
+    }
+
+    public long offsetBy(long offset)
+    {
+        if (offset % 86400 == 0)
+        {
+            if (!(this instanceof DayScope) && !(this instanceof HourScope))
+            {
+                return offset;
+            }
+        }
+        else if (offset % 3600 == 0)
+        {
+            if (!(this instanceof HourScope))
+            {
+                return offset;
+            }
+        }
+        else
+        {
+            return offset;
+        }
+        return 0;
     }
 
     @Override

@@ -8,11 +8,13 @@ public class Pattern {
 
     private Scope[] roots;
     private Scope [] scopes;
+    private long offsetBy = 0L;
 
-    public Pattern(Scope [] roots, Scope [] scopes)
+    public Pattern(Scope [] roots, Scope [] scopes, long offsetBy)
     {
         this.roots = roots;
         this.scopes = scopes;
+        this.offsetBy = offsetBy;
     }
 
     public boolean matches()
@@ -44,12 +46,12 @@ public class Pattern {
         return false;
     }
 
-    public static Pattern parse(String pattern, Date estDate)
+    public static Pattern parse(String pattern, Date estDate, long offsetBy)
     {
         String removedRepeatsPattern = removeRepeatScopes(pattern);
         if (!removedRepeatsPattern.equals(pattern.trim()))
         {
-            return parse(removedRepeatsPattern, estDate);
+            return parse(removedRepeatsPattern, estDate, offsetBy);
         }
 
         List<Scope> roots = new LinkedList<>();
@@ -73,7 +75,7 @@ public class Pattern {
                     String fixedFormat = specificFixedFormat(scopeString);
                     if (!fixedFormat.isEmpty())
                     {
-                        return parse(fixedFormat + rebuiltSuffix(scopeStrings, i + 1), estDate);
+                        return parse(fixedFormat + rebuiltSuffix(scopeStrings, i + 1), estDate, offsetBy);
                     }
                 }
 
@@ -112,14 +114,14 @@ public class Pattern {
                         int fixedValue = Integer.parseInt(fixedValuePart.trim());
                         if (parentScopes.isEmpty())
                         {
-                            scopes.add(fixedScope(null, type, fixedValue));
+                            scopes.add(fixedScope(null, type, fixedValue, offsetBy));
                             roots.add(scopes.get(scopes.size() - 1));
                         }
                         else
                         {
                             for (Scope parent: parentScopes)
                             {
-                                scopes.add(fixedScope(parent, type, fixedValue));
+                                scopes.add(fixedScope(parent, type, fixedValue, offsetBy));
                             }
                         }
                     }
@@ -156,7 +158,7 @@ public class Pattern {
                         typeValues = type.split(",");
                     }
                     return parse(specificYearsFormat(typeValues)
-                            + rebuiltSuffix(scopeStrings, i + 1), estDate);
+                            + rebuiltSuffix(scopeStrings, i + 1), estDate, offsetBy);
                 }
                 if (monthNumber(type) > 0)
                 {
@@ -174,7 +176,7 @@ public class Pattern {
                     }
                     return parse(rebuiltPrefix + specificMonthsFormat(
                             typeValues, i, offset, interval)
-                                    + rebuiltSuffix(scopeStrings, i + 1), estDate);
+                                    + rebuiltSuffix(scopeStrings, i + 1), estDate, offsetBy);
                 }
                 else if (dayOfWeekNumber(type) > 0)
                 {
@@ -189,7 +191,7 @@ public class Pattern {
                     }
                     return parse(rebuiltPrefix + specificDaysOfWeekFormat(
                             typeValues, offset, interval)
-                                    + rebuiltSuffix(scopeStrings, i + 1), estDate);
+                                    + rebuiltSuffix(scopeStrings, i + 1), estDate, offsetBy);
                 }
                 else if (hourOfDayNumber(type) > 0)
                 {
@@ -204,19 +206,19 @@ public class Pattern {
                     }
                     return parse(rebuiltPrefix + specificHoursFormat(
                             typeValues, offset, interval)
-                            + rebuiltSuffix(scopeStrings, i + 1), estDate);
+                            + rebuiltSuffix(scopeStrings, i + 1), estDate, offsetBy);
                 }
 
                 if (parentScopes.isEmpty())
                 {
-                    scopes.add(repeatScope(null, estDate, type, offset, interval));
+                    scopes.add(repeatScope(null, estDate, type, offset, interval, offsetBy));
                     roots.add(scopes.get(scopes.size() - 1));
                 }
                 else
                 {
                     for (Scope parent: parentScopes)
                     {
-                        scopes.add(repeatScope(parent, estDate, type, offset, interval));
+                        scopes.add(repeatScope(parent, estDate, type, offset, interval, offsetBy));
                     }
                 }
             }
@@ -229,7 +231,7 @@ public class Pattern {
             rebuiltPrefix.append(scopeString).append("->");
         }
 
-        return new Pattern(roots.toArray(new Scope[0]), allScopes.toArray(new Scope[0]));
+        return new Pattern(roots.toArray(new Scope[0]), allScopes.toArray(new Scope[0]), offsetBy);
     }
 
     private static String removeRepeatScopes(String pattern)
@@ -280,65 +282,65 @@ public class Pattern {
         return sb.toString();
     }
 
-    private static Scope fixedScope(Scope parent, String type, int value)
+    private static Scope fixedScope(Scope parent, String type, int value, long offsetBy)
     {
         switch (type.toLowerCase())
         {
             case "y":
-                return new YearScope(parent, value);
+                return new YearScope(parent, value, offsetBy);
             case "m":
-                return new MonthScope(parent, value);
+                return new MonthScope(parent, value, offsetBy);
             case "w":
-                return new WeekScope(parent, value);
+                return new WeekScope(parent, value, offsetBy);
             case "d":
-                return new DayScope(parent, value);
+                return new DayScope(parent, value, offsetBy);
             case "h":
-                return new HourScope(parent, value);
+                return new HourScope(parent, value, offsetBy);
         }
         return null;
     }
 
-    private static Scope repeatScope(Scope parent, Date estDate, String type, int offset, int interval)
+    private static Scope repeatScope(Scope parent, Date estDate, String type, int offset, int interval, long offsetBy)
     {
         switch (type.toLowerCase())
         {
             case "y":
-                return new YearScope(estDate, offset, interval);
+                return new YearScope(estDate, offset, interval, offsetBy);
             case "m":
                 if (parent != null)
                 {
-                    return new MonthScope(parent, offset, interval);
+                    return new MonthScope(parent, offset, interval, offsetBy);
                 }
                 else
                 {
-                    return new MonthScope(estDate, offset, interval);
+                    return new MonthScope(estDate, offset, interval, offsetBy);
                 }
             case "w":
                 if (parent != null)
                 {
-                    return new WeekScope(parent, offset, interval);
+                    return new WeekScope(parent, offset, interval, offsetBy);
                 }
                 else
                 {
-                    return new WeekScope(estDate, offset, interval);
+                    return new WeekScope(estDate, offset, interval, offsetBy);
                 }
             case "d":
                 if (parent != null)
                 {
-                    return new DayScope(parent, offset, interval);
+                    return new DayScope(parent, offset, interval, offsetBy);
                 }
                 else
                 {
-                    return new DayScope(estDate, offset, interval);
+                    return new DayScope(estDate, offset, interval, offsetBy);
                 }
             case "h":
                 if (parent != null)
                 {
-                    return new HourScope(parent, offset, interval);
+                    return new HourScope(parent, offset, interval, offsetBy);
                 }
                 else
                 {
-                    return new HourScope(estDate, offset, interval);
+                    return new HourScope(estDate, offset, interval, offsetBy);
                 }
         }
         return null;
