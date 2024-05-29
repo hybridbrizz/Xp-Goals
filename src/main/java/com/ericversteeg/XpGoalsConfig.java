@@ -451,7 +451,7 @@ public interface XpGoalsConfig extends Config {
 			section = attackSkill
 	)
 	default int attackXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -624,7 +624,7 @@ public interface XpGoalsConfig extends Config {
 			section = strengthSkill
 	)
 	default int strengthXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -797,7 +797,7 @@ public interface XpGoalsConfig extends Config {
 			section = defenseSkill
 	)
 	default int defenseXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -970,7 +970,7 @@ public interface XpGoalsConfig extends Config {
 			section = rangedSkill
 	)
 	default int rangedXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -1143,7 +1143,7 @@ public interface XpGoalsConfig extends Config {
 			section = prayerSkill
 	)
 	default int prayerXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -1316,7 +1316,7 @@ public interface XpGoalsConfig extends Config {
 			section = magicSkill
 	)
 	default int magicXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -1489,7 +1489,7 @@ public interface XpGoalsConfig extends Config {
 			section = runecraftingSkill
 	)
 	default int runecraftingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -1662,7 +1662,7 @@ public interface XpGoalsConfig extends Config {
 			section = constructionSkill
 	)
 	default int constructionXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -1835,7 +1835,7 @@ public interface XpGoalsConfig extends Config {
 			section = hitpointsSkill
 	)
 	default int hitpointsXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2008,7 +2008,7 @@ public interface XpGoalsConfig extends Config {
 			section = agilitySkill
 	)
 	default int agilityXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2181,7 +2181,7 @@ public interface XpGoalsConfig extends Config {
 			section = herbloreSkill
 	)
 	default int herbloreXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2354,7 +2354,7 @@ public interface XpGoalsConfig extends Config {
 			section = thievingSkill
 	)
 	default int thievingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2527,7 +2527,7 @@ public interface XpGoalsConfig extends Config {
 			section = craftingSkill
 	)
 	default int craftingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2700,7 +2700,7 @@ public interface XpGoalsConfig extends Config {
 			section = fletchingSkill
 	)
 	default int fletchingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -2873,7 +2873,7 @@ public interface XpGoalsConfig extends Config {
 			section = slayerSkill
 	)
 	default int slayerXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3046,7 +3046,7 @@ public interface XpGoalsConfig extends Config {
 			section = hunterSkill
 	)
 	default int hunterXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3219,7 +3219,7 @@ public interface XpGoalsConfig extends Config {
 			section = miningSkill
 	)
 	default int miningXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3392,7 +3392,7 @@ public interface XpGoalsConfig extends Config {
 			section = smithingSkill
 	)
 	default int smithingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3565,7 +3565,7 @@ public interface XpGoalsConfig extends Config {
 			section = fishingSkill
 	)
 	default int fishingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3738,7 +3738,7 @@ public interface XpGoalsConfig extends Config {
 			section = cookingSkill
 	)
 	default int cookingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -3911,7 +3911,7 @@ public interface XpGoalsConfig extends Config {
 			section = firemakingSkill
 	)
 	default int firemakingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -4084,7 +4084,7 @@ public interface XpGoalsConfig extends Config {
 			section = woodcuttingSkill
 	)
 	default int woodcuttingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -4257,7 +4257,7 @@ public interface XpGoalsConfig extends Config {
 			section = farmingSkill
 	)
 	default int farmingXpGoal() {
-		return 0;
+		return 1;
 	}
 
 	@ConfigItem(
@@ -4403,4 +4403,3 @@ public interface XpGoalsConfig extends Config {
 		return "";
 	}
 }
-
