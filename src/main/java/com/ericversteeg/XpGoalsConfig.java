@@ -303,6 +303,26 @@ public interface XpGoalsConfig extends Config {
 
 	@ConfigItem(
 			position = 11,
+			keyName = "sortType",
+			name = "Order Type",
+			description = "Configures the order by which goal bars are displayed."
+	)
+	default SortType sortType() {
+		return SortType.PERCENTAGE;
+	}
+
+	@ConfigItem(
+			position = 11,
+			keyName = "maxBars",
+			name = "Maximum Goals",
+			description = "Configures the maximum number of goals that are displayed at the same time (0 = no limit)."
+	)
+	default int maxGoals() {
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 12,
 			keyName = "hideLabel",
 			name = "Hide Label",
 			description = "Configures whether or not the label is hidden."

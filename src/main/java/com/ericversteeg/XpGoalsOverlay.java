@@ -24,6 +24,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -817,7 +818,49 @@ class XpGoalsOverlay extends Overlay {
 				tracked.add(goal);
 			}
 		}
-		return tracked.stream().sorted((obj, other) -> {
+		switch (config.sortType())
+		{
+			case PERCENTAGE:
+				tracked = sortByPercent(tracked);
+				break;
+			case PERCENTAGE_FLIP:
+				List<Goal> sortedPercent = sortByPercent(tracked);
+				Collections.reverse(sortedPercent);
+				tracked = sortedPercent;
+				break;
+			case XP_GAINED:
+				tracked = sortByXpGained(tracked);
+				break;
+			case XP_GAINED_FLIP:
+				List<Goal> sortedXpGained = sortByXpGained(tracked);
+				Collections.reverse(sortedXpGained);
+				tracked = sortedXpGained;
+				break;
+			case XP_REMAINING:
+				tracked = sortByXpLeft(tracked);
+				break;
+			case XP_REMAINING_FLIP:
+				List<Goal> sortedXpLeft = sortByXpLeft(tracked);
+				Collections.reverse(sortedXpLeft);
+				tracked = sortedXpLeft;
+				break;
+		}
+
+		int maxGoals = config.maxGoals();
+		if (maxGoals == 0)
+		{
+			return tracked;
+		}
+		else
+		{
+			int eIndex = Math.min(maxGoals, tracked.size());
+			return tracked.subList(0, eIndex);
+		}
+	}
+
+	private List<Goal> sortByPercent(List<Goal> goals)
+	{
+		return goals.stream().sorted((obj, other) -> {
 			int progress = (int) (getXpProgress(
 					obj.progressXp,
 					obj.goalXp
@@ -835,6 +878,26 @@ class XpGoalsOverlay extends Overlay {
 			else if (otherProgress >= 200) otherProgress = -1;
 
 			return otherProgress - progress;
+		}).collect(Collectors.toList());
+	}
+
+	private List<Goal> sortByXpGained(List<Goal> goals)
+	{
+		return goals.stream().sorted((obj, other) -> {
+			int xpGained = obj.progressXp;
+			int otherXpGained = other.progressXp;
+
+			return otherXpGained - xpGained;
+		}).collect(Collectors.toList());
+	}
+
+	private List<Goal> sortByXpLeft(List<Goal> goals)
+	{
+		return goals.stream().sorted((obj, other) -> {
+			int xpLeft = obj.goalXp - obj.progressXp;
+			int otherXpLeft = other.goalXp - other.progressXp;
+
+			return otherXpLeft - xpLeft;
 		}).collect(Collectors.toList());
 	}
 
