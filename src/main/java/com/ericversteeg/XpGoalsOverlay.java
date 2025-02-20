@@ -18,10 +18,12 @@ import net.runelite.client.ui.overlay.components.ComponentConstants;
 import net.runelite.client.ui.overlay.components.TextComponent;
 import net.runelite.client.util.ImageUtil;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -29,6 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import static com.ericversteeg.XpGoalsPlugin.TOTAL_XP_SKILL_ID;
 
 class XpGoalsOverlay extends Overlay {
 
@@ -71,6 +75,8 @@ class XpGoalsOverlay extends Overlay {
 	private int tooltipWidth = 120;
 	int tooltipHeight = 120;
 
+	private BufferedImage totalXpIcon;
+
 	@Inject
 	private XpGoalsOverlay(
 			Client client,
@@ -82,6 +88,8 @@ class XpGoalsOverlay extends Overlay {
 		this.plugin = plugin;
 		this.config = config;
 		this.iconManager = iconManager;
+
+		totalXpIcon = ImageUtil.loadImageResource(getClass(), "totalxp.png");
 
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -421,9 +429,16 @@ class XpGoalsOverlay extends Overlay {
 		if (ICON_SIZE == 0) return;
 
 		Skill skill = getSkillForId(goal.skillId);
-		if (skill == null) return;
 
-		BufferedImage icon = iconManager.getSkillImage(skill);
+		BufferedImage icon;
+		if (goal.skillId != TOTAL_XP_SKILL_ID)
+		{
+			icon = iconManager.getSkillImage(skill);
+		}
+		else
+		{
+			icon = totalXpIcon;
+		}
 		icon = ImageUtil.resizeImage(icon, ICON_SIZE, ICON_SIZE, true);
 
 		int x = anchorX + offsetX;
@@ -446,7 +461,7 @@ class XpGoalsOverlay extends Overlay {
 		}
 		else
 		{
-			progressColor = Color.YELLOW;
+			progressColor = Color.GRAY;
 		}
 
 		Color backColor = barBackgroundColor;
@@ -745,7 +760,17 @@ class XpGoalsOverlay extends Overlay {
 
 	private void renderPastProgressItem(Graphics2D graphics, int x, int y, int w, int h, Goal goal, float progress)
 	{
-		Color color = SkillColor.find(plugin.skillForSkillId(goal.skillId)).getColor();
+		Skill skill = plugin.skillForSkillId(goal.skillId);
+
+		Color color;
+		if (skill != null)
+		{
+			color = SkillColor.find(skill).getColor();
+		}
+		else
+		{
+			color = Color.GRAY;
+		}
 		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 125));
 
 		//System.out.println("x = " + x + ", y = " + y + ", w = " + w + ", h = " + h + "yy = " + y + (h - (int) (h * progress)) + ", hh = " + (int) (h * progress));

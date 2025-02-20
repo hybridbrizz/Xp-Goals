@@ -46,6 +46,8 @@ public class XpGoalsPlugin extends Plugin
 
 	private static String DATA_KEY = "xp_goals_data_3";
 
+	public static int TOTAL_XP_SKILL_ID = -5;
+
 	GoalData goalData;
 
 	ZoneOffset zoneOffset = ZoneId.systemDefault()
@@ -88,6 +90,8 @@ public class XpGoalsPlugin extends Plugin
 			goalData = new GoalData();
 			configSyncGoals();
 		}
+
+		skillsXp.put(TOTAL_XP_SKILL_ID, (int) client.getOverallExperience());
 	}
 
 	@Provides
@@ -123,7 +127,7 @@ public class XpGoalsPlugin extends Plugin
 
 		Goal goal = goalForSkillId(skill.ordinal());
 
-		if (goal != null && goal.track)
+		if (goal != null)
 		{
 			int lastXp = xp;
 			if (skillsXp.containsKey(skill.ordinal()))
@@ -132,9 +136,22 @@ public class XpGoalsPlugin extends Plugin
 			}
 
 			if (goal.progressXp < 0) goal.progressXp = 0;
-			goal.progressXp += xp - lastXp;
 
-			progressUpdated = true;
+			int earnedXp = xp - lastXp;
+
+			if (goal.track) {
+				goal.progressXp += earnedXp;
+				progressUpdated = true;
+			}
+
+			Goal totalXpGoal = goalForSkillId(TOTAL_XP_SKILL_ID);
+
+			if (totalXpGoal != null && totalXpGoal.track) {
+				totalXpGoal.progressXp += earnedXp;
+				progressUpdated = true;
+			}
+
+			skillsXp.put(TOTAL_XP_SKILL_ID, skillsXp.get(TOTAL_XP_SKILL_ID) + earnedXp);
 		}
 
 		skillsXp.put(skill.ordinal(), xp);
@@ -342,8 +359,21 @@ public class XpGoalsPlugin extends Plugin
 					new Goal(Skill.COOKING.ordinal()),
 					new Goal(Skill.FIREMAKING.ordinal()),
 					new Goal(Skill.WOODCUTTING.ordinal()),
-					new Goal(Skill.FARMING.ordinal())
+					new Goal(Skill.FARMING.ordinal()),
+					new Goal(TOTAL_XP_SKILL_ID)
 			);
+		}
+		else {
+			boolean foundTotalXp = false;
+			for (Goal goal: goalData.goals) {
+				if (goal.skillId == TOTAL_XP_SKILL_ID) {
+					foundTotalXp = true;
+					break;
+				}
+			}
+			if (!foundTotalXp) {
+				goalData.goals.add(new Goal(TOTAL_XP_SKILL_ID));
+			}
 		}
 
 		for (Goal goal: goalData.goals)
@@ -539,6 +569,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.SMITHING.ordinal()) return config.enableSmithingSkill();
 		else if (skillId == Skill.COOKING.ordinal()) return config.enableCookingSkill();
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.enableFiremakingSkill();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.enableTotalxpSkill();
 		else return false;
 	}
 
@@ -567,6 +598,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingResetType();
 		else if (skillId == Skill.COOKING.ordinal()) return config.cookingResetType();
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingResetType();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpResetType();
 		else return ResetType.NONE;
 	}
 
@@ -595,6 +627,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingXpGoal();
 		else if (skillId == Skill.COOKING.ordinal()) return config.cookingXpGoal();
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingXpGoal();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpXpGoal();
 		else return 0;
 	}
 
@@ -623,6 +656,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.SMITHING.ordinal()) return config.smithingPattens();
 		else if (skillId == Skill.COOKING.ordinal()) return config.cookingPattens();
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingPattens();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpPattens();
 		else return "";
 	}
 
@@ -651,6 +685,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingMonday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingMonday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingMonday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpMonday();
 		else return false;
 	}
 
@@ -679,6 +714,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingTuesday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingTuesday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingTuesday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpTuesday();
 		else return false;
 	}
 
@@ -707,6 +743,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingWednesday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingWednesday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingWednesday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpWednesday();
 		else return false;
 	}
 
@@ -735,6 +772,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingThursday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingThursday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingThursday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpThursday();
 		else return false;
 	}
 
@@ -763,6 +801,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingFriday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingFriday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingFriday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpFriday();
 		else return false;
 	}
 
@@ -791,6 +830,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingSaturday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingSaturday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingSaturday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpSaturday();
 		else return false;
 	}
 
@@ -819,6 +859,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingSunday();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingSunday();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingSunday();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpSunday();
 		else return false;
 	}
 
@@ -847,6 +888,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingStartTime();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingStartTime();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingStartTime();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpStartTime();
 		else return Hour.NONE;
 	}
 
@@ -875,6 +917,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingEndTime();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingEndTime();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingEndTime();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpEndTime();
 		else return Hour.NONE;
 	}
 
@@ -903,6 +946,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingDayCadence();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingDayCadence();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingDayCadence();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpDayCadence();
 		else return DayCadence.NONE;
 	}
 
@@ -931,6 +975,7 @@ public class XpGoalsPlugin extends Plugin
 		else if (skillId == Skill.FIREMAKING.ordinal()) return config.firemakingDayCadenceDay();
 		else if (skillId == Skill.WOODCUTTING.ordinal()) return config.woodcuttingDayCadenceDay();
 		else if (skillId == Skill.FARMING.ordinal()) return config.farmingDayCadenceDay();
+		else if (skillId == TOTAL_XP_SKILL_ID) return config.totalxpDayCadenceDay();
 		else return DayCadence.NONE;
 	}
 
