@@ -57,8 +57,6 @@ public class Goal {
 
         pastProgress = recentPastProgress;
 
-        System.out.println("Reset goal skill id = " + skillId);
-
         progressXp = -1;
     }
 }

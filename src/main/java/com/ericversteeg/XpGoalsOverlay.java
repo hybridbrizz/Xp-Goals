@@ -773,8 +773,6 @@ class XpGoalsOverlay extends Overlay {
 		}
 		graphics.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 125));
 
-		//System.out.println("x = " + x + ", y = " + y + ", w = " + w + ", h = " + h + "yy = " + y + (h - (int) (h * progress)) + ", hh = " + (int) (h * progress));
-
 		float percentToFill = Math.min(progress, 1);
 
 		graphics.fillRect(x, y + (h - (int) (h * percentToFill)), w, (int) (h * percentToFill));
