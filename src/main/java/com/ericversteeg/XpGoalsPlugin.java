@@ -139,14 +139,16 @@ public class XpGoalsPlugin extends Plugin
 
 			int earnedXp = xp - lastXp;
 
-			if (goal.track) {
+			if (goal.track)
+			{
 				goal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
 
 			Goal totalXpGoal = goalForSkillId(TOTAL_XP_SKILL_ID);
 
-			if (totalXpGoal != null && totalXpGoal.track) {
+			if (totalXpGoal != null && totalXpGoal.track)
+			{
 				totalXpGoal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
@@ -363,15 +365,19 @@ public class XpGoalsPlugin extends Plugin
 					new Goal(TOTAL_XP_SKILL_ID)
 			);
 		}
-		else {
+		else
+		{
 			boolean foundTotalXp = false;
-			for (Goal goal: goalData.goals) {
-				if (goal.skillId == TOTAL_XP_SKILL_ID) {
+			for (Goal goal: goalData.goals)
+			{
+				if (goal.skillId == TOTAL_XP_SKILL_ID)
+				{
 					foundTotalXp = true;
 					break;
 				}
 			}
-			if (!foundTotalXp) {
+			if (!foundTotalXp)
+			{
 				goalData.goals.add(new Goal(TOTAL_XP_SKILL_ID));
 			}
 		}
