@@ -16,6 +16,7 @@ import net.runelite.api.events.StatChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.events.ProfileChanged;
 import net.runelite.client.events.RuneScapeProfileChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -44,7 +45,8 @@ public class XpGoalsPlugin extends Plugin
 	@Inject private ConfigManager configManager;
 	@Inject private Gson gson;
 
-	private static String DATA_KEY = "xp_goals_data_3";
+	private static String DATA_KEY_LEGACY_1 = "xp_goals_data_3";
+	private static String PROFILE_DATA_KEY_PREFIX = "xp_goals_data_";
 
 	public static int TOTAL_XP_SKILL_ID = -5;
 
@@ -68,6 +70,7 @@ public class XpGoalsPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		overlayManager.add(overlay);
+		handleProfileChange();
 	}
 
 	@Override
@@ -79,9 +82,38 @@ public class XpGoalsPlugin extends Plugin
 	@Subscribe
 	public void onRuneScapeProfileChanged(RuneScapeProfileChanged e)
 	{
+		System.out.println("onRuneScapeProfileChanged()");
+
+		handleProfileChange();
+	}
+
+	@Subscribe
+	public void onProfileChanged(ProfileChanged e) {
+		System.out.println("onProfileChanged()");
+
+		handleProfileChange();
+	}
+
+	private void handleProfileChange() {
 		String profile = configManager.getRSProfileKey();
 		if (profile != null)
 		{
+			// Check for legacy data 1
+			String legacyJson1 = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY_LEGACY_1);
+			if (legacyJson1 != null)
+			{
+				goalData = getSavedDataLegacy1();
+				// Migrate to new profile based save
+				writeSavedData();
+				// Remove legacy configuration
+				configManager.unsetConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY_LEGACY_1);
+			}
+
+			// Before this point data needs to have been
+			// migrated to the getConfiguration() location
+			// specified in getSavedData()
+
+			// Get data as normal
 			goalData = getSavedData();
 			checkResets();
 		}
@@ -113,10 +145,9 @@ public class XpGoalsPlugin extends Plugin
 
 		if (progressUpdated)
 		{
+			progressUpdated = false;
 			writeSavedData();
 		}
-
-		progressUpdated = false;
 	}
 
 	@Subscribe
@@ -141,6 +172,7 @@ public class XpGoalsPlugin extends Plugin
 
 			if (goal.track)
 			{
+				System.out.println("here goal");
 				goal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
@@ -149,6 +181,7 @@ public class XpGoalsPlugin extends Plugin
 
 			if (totalXpGoal != null && totalXpGoal.track)
 			{
+				System.out.println("here total");
 				totalXpGoal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
@@ -290,8 +323,25 @@ public class XpGoalsPlugin extends Plugin
 	GoalData getSavedData()
 	{
 		String profile = configManager.getRSProfileKey();
-		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY);
+		long profileId = configManager.getProfile().getId();
 
+		System.out.println("Getting profile id " + profileId);
+		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, PROFILE_DATA_KEY_PREFIX + profileId);
+
+		return decodeGoalData(json);
+	}
+
+	GoalData getSavedDataLegacy1()
+	{
+		String profile = configManager.getRSProfileKey();
+
+		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY_LEGACY_1);
+
+		return decodeGoalData(json);
+	}
+
+	private GoalData decodeGoalData(String json)
+	{
 		if (json == null)
 		{
 			return new GoalData();
@@ -310,8 +360,9 @@ public class XpGoalsPlugin extends Plugin
 	void writeSavedData()
 	{
 		String profile = configManager.getRSProfileKey();
+		long profileId = configManager.getProfile().getId();
 
-		if (profile != null)
+		if (profile != null && profileId != 0L)
 		{
 			for (Goal goal: goalData.goals)
 			{
@@ -322,10 +373,10 @@ public class XpGoalsPlugin extends Plugin
                         break;
                     }
 				}
-
 			}
 			String json = gson.toJson(goalData);
-			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, DATA_KEY, json);
+			System.out.println("Saving profile data for " + configManager.getProfile().getId());
+			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, PROFILE_DATA_KEY_PREFIX + profileId, json);
 		}
 	}
 
@@ -495,7 +546,6 @@ public class XpGoalsPlugin extends Plugin
 				if (goal.resetType == Goal.resetNone)
 				{
 					goal.reset();
-					writeSavedData();
 				}
 			}
 
