@@ -53,8 +53,8 @@ class XpGoalsOverlay extends Overlay {
 	private Color barBackgroundColor = Color.decode("#1b1b1b");
 	private Color barBorderColor = Color.decode("#0b0b0b");
 
-	int panelTopPadding = 4;
-	int panelBottomPadding = 4;
+	int panelTopPadding = 8;
+	int panelBottomPadding = 8;
 	int panelHPadding = 4;
 
 	int iconRightPadding = 3;
@@ -165,7 +165,7 @@ class XpGoalsOverlay extends Overlay {
 
 		int barSpacing = config.barSpacing() + minBarSpacing;
 
-		boolean hideLabel = config.hideLabel();
+		boolean hideLabel = true;
 
 		if (!goals.isEmpty())
 		{
@@ -210,26 +210,36 @@ class XpGoalsOverlay extends Overlay {
 				extraBottomPadding = (ICON_SIZE - barHeight) / 2;
 			}
 
+			int spanCount = (goals.size() - 1) / config.stackSize() + 1;
+
 			if (config.stackOrientation() == StackOrientation.VERTICAL)
 			{
-				panelWidth = (barWidth + ICON_SIZE + iconRightPadding + barSpacing) *
-						((goals.size() - 1) / span + 1) + panelHPadding * 2 - barSpacing + 5;
+				panelWidth = panelHPadding * 4;
+				panelWidth += ICON_SIZE * spanCount;
+				panelWidth += iconRightPadding * spanCount;
+				panelWidth += barSpacing * (spanCount - 1);
+				panelWidth += barWidth * spanCount;
 			}
 			else
 			{
-				panelWidth = (barWidth + ICON_SIZE + iconRightPadding) * Math.min(goals.size(), span) + barSpacing *
-						Math.min(Math.max(span - 1, 1), goals.size()) + panelHPadding * 2;
+				panelWidth = panelHPadding * 4;
+				panelWidth += barWidth * config.stackSize();
+				panelWidth += barSpacing * (config.stackSize() - 1);
+				panelWidth += ICON_SIZE * config.stackSize();
+				panelWidth += iconRightPadding * config.stackSize();;
 			}
 
 			if (config.stackOrientation() == StackOrientation.VERTICAL)
 			{
-				panelHeight =  panelTopPadding + topSectionHeight + barHeight * Math.min(goals.size(), span) + barSpacing *
-						Math.min(Math.max(span - 1, 1), goals.size()) + panelBottomPadding + extraBottomPadding;
+				panelHeight = panelTopPadding + panelBottomPadding + topSectionHeight;
+				panelHeight += barHeight * config.stackSize();
+				panelHeight += barSpacing * (config.stackSize() - 1);
 			}
 			else
 			{
-				panelHeight = panelTopPadding + topSectionHeight + (barHeight + barSpacing) *
-						((goals.size() - 1) / span + 1) + panelBottomPadding - barSpacing;
+				panelHeight = panelTopPadding + panelBottomPadding + topSectionHeight;
+				panelHeight += barHeight * spanCount;
+				panelHeight += barSpacing * (spanCount - 1);
 			}
 
 			anchorX = config.anchorX();

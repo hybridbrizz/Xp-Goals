@@ -188,7 +188,7 @@ public interface XpGoalsConfig extends Config {
 			description = "Configures space between bars."
 	)
 	default int barSpacing() {
-		return 5;
+		return 10;
 	}
 
 	@ConfigItem(
@@ -319,16 +319,6 @@ public interface XpGoalsConfig extends Config {
 	)
 	default int maxGoals() {
 		return 0;
-	}
-
-	@ConfigItem(
-			position = 12,
-			keyName = "hideLabel",
-			name = "Hide Label",
-			description = "Configures whether or not the label is hidden."
-	)
-	default boolean hideLabel() {
-		return false;
 	}
 
 	@ConfigItem(
