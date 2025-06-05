@@ -82,15 +82,11 @@ public class XpGoalsPlugin extends Plugin
 	@Subscribe
 	public void onRuneScapeProfileChanged(RuneScapeProfileChanged e)
 	{
-		System.out.println("onRuneScapeProfileChanged()");
-
 		handleProfileChange();
 	}
 
 	@Subscribe
 	public void onProfileChanged(ProfileChanged e) {
-		System.out.println("onProfileChanged()");
-
 		handleProfileChange();
 	}
 
@@ -172,7 +168,6 @@ public class XpGoalsPlugin extends Plugin
 
 			if (goal.track)
 			{
-				System.out.println("here goal");
 				goal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
@@ -181,7 +176,6 @@ public class XpGoalsPlugin extends Plugin
 
 			if (totalXpGoal != null && totalXpGoal.track)
 			{
-				System.out.println("here total");
 				totalXpGoal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
@@ -325,7 +319,6 @@ public class XpGoalsPlugin extends Plugin
 		String profile = configManager.getRSProfileKey();
 		long profileId = configManager.getProfile().getId();
 
-		System.out.println("Getting profile id " + profileId);
 		String json = configManager.getConfiguration(XpGoalsConfig.GROUP, profile, PROFILE_DATA_KEY_PREFIX + profileId);
 
 		return decodeGoalData(json);
@@ -375,7 +368,6 @@ public class XpGoalsPlugin extends Plugin
 				}
 			}
 			String json = gson.toJson(goalData);
-			System.out.println("Saving profile data for " + configManager.getProfile().getId());
 			configManager.setConfiguration(XpGoalsConfig.GROUP, profile, PROFILE_DATA_KEY_PREFIX + profileId, json);
 		}
 	}
