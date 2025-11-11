@@ -3704,6 +3704,149 @@ public interface XpGoalsConfig extends Config {
 	default String farmingPattens() { return ""; }
 
 	@ConfigSection(
+			name = "Sailing",
+			description = "Sailing Skill",
+			position = 0,
+			closedByDefault = true
+	)
+	String sailingSkill = "sailingSkill";
+
+	@ConfigItem(
+			keyName = "enableSailing",
+			position = 0,
+			name = "Enabled",
+			description = "Configures whether or not sailing skill is enabled.",
+			section = sailingSkill
+	)
+	default boolean enableSailingSkill() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingXpGoal",
+			position = 2,
+			name = "Target Xp",
+			description = "Configures the xp goal.",
+			section = sailingSkill
+	)
+	default int sailingXpGoal() { return 1; }
+
+	@ConfigItem(
+			keyName = "sailingResetType",
+			position = 3,
+			name = "Reset Interval",
+			description = "Configured how often skill progress resets.",
+			section = sailingSkill
+	)
+	default ResetType sailingResetType() { return ResetType.NONE; }
+
+	@ConfigItem(
+			keyName = "sailingMonday",
+			position = 4,
+			name = "Monday",
+			description = "Configures whether or not progress is recorded on Mondays.",
+			section = sailingSkill
+	)
+	default boolean sailingMonday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingTuesday",
+			position = 5,
+			name = "Tuesday",
+			description = "Configures whether or not progress is recorded on Tuesdays.",
+			section = sailingSkill
+	)
+	default boolean sailingTuesday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingWednesday",
+			position = 6,
+			name = "Wednesday",
+			description = "Configures whether or not progress is recorded on Wednesdays.",
+			section = sailingSkill
+	)
+	default boolean sailingWednesday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingThursday",
+			position = 7,
+			name = "Thursday",
+			description = "Configures whether or not progress is recorded on Thursdays.",
+			section = sailingSkill
+	)
+	default boolean sailingThursday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingFriday",
+			position = 8,
+			name = "Friday",
+			description = "Configures whether or not progress is recorded on Fridays.",
+			section = sailingSkill
+	)
+	default boolean sailingFriday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingSaturday",
+			position = 9,
+			name = "Saturday",
+			description = "Configures whether or not progress is recorded on Saturdays.",
+			section = sailingSkill
+	)
+	default boolean sailingSaturday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingSunday",
+			position = 10,
+			name = "Sunday",
+			description = "Configures whether or not progress is recorded on Sundays.",
+			section = sailingSkill
+	)
+	default boolean sailingSunday() { return false; }
+
+	@ConfigItem(
+			keyName = "sailingStartTime",
+			position = 11,
+			name = "Start Time",
+			description = "Configures the start time for when progress is recorded each day.",
+			section = sailingSkill
+	)
+	default Hour sailingStartTime() { return Hour.NONE; }
+
+	@ConfigItem(
+			keyName = "sailingEndTime",
+			position = 12,
+			name = "End Time",
+			description = "Configures the end time for when progress is recorded each day.",
+			section = sailingSkill
+	)
+	default Hour sailingEndTime() { return Hour.NONE; }
+
+	@ConfigItem(
+			keyName = "sailingDayCadence",
+			position = 13,
+			name = "Day Cadence Length",
+			description = "Configures the day cadence length for when progress is recorded. For example a 5 day cadence goes (1, 2, 3, 4, 5), then repeats.",
+			section = sailingSkill
+	)
+	default DayCadence sailingDayCadence() { return DayCadence.NONE; }
+
+	@ConfigItem(
+			keyName = "sailingCadenceDay",
+			position = 14,
+			name = "Cadence Day",
+			description = "Configures on which day in the cadence progress is recorded.",
+			section = sailingSkill
+	)
+	default DayCadence sailingDayCadenceDay() { return DayCadence.NONE; }
+
+	@ConfigItem(
+			keyName = "SailingVisibilityPatterns",
+			position = 15,
+			name = "Custom Patterns",
+			description = "Configures custom record patterns. See plugin page about making custom patterns.",
+			section = sailingSkill
+	)
+	default String sailingPattens() { return ""; }
+
+	@ConfigSection(
 			name = "Total Xp",
 			description = "Total Xp",
 			position = -1,

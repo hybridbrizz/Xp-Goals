@@ -196,6 +196,7 @@ skills = [
     'firemaking',
     'woodcutting',
     'farming',
+    'sailing'
     'totalxp'
 ]
 

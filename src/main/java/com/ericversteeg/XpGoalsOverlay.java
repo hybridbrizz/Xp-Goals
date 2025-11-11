@@ -76,6 +76,7 @@ class XpGoalsOverlay extends Overlay {
 	int tooltipHeight = 120;
 
 	private BufferedImage totalXpIcon;
+	private BufferedImage sailingIcon;
 
 	@Inject
 	private XpGoalsOverlay(
@@ -90,6 +91,7 @@ class XpGoalsOverlay extends Overlay {
 		this.iconManager = iconManager;
 
 		totalXpIcon = ImageUtil.loadImageResource(getClass(), "totalxp.png");
+		sailingIcon = ImageUtil.loadImageResource(getClass(), "sailing.png");
 
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -441,13 +443,18 @@ class XpGoalsOverlay extends Overlay {
 		Skill skill = getSkillForId(goal.skillId);
 
 		BufferedImage icon;
-		if (goal.skillId != TOTAL_XP_SKILL_ID)
+		if (goal.skillId == TOTAL_XP_SKILL_ID)
 		{
-			icon = iconManager.getSkillImage(skill);
+			icon = totalXpIcon;
+		}
+		else if (goal.skillId == Skill.SAILING.ordinal())
+		{
+			// TODO: Remove once icon comes from API
+			icon = sailingIcon;
 		}
 		else
 		{
-			icon = totalXpIcon;
+			icon = iconManager.getSkillImage(skill);
 		}
 		icon = ImageUtil.resizeImage(icon, ICON_SIZE, ICON_SIZE, true);
 
@@ -467,7 +474,15 @@ class XpGoalsOverlay extends Overlay {
 		Skill skill = plugin.skillForSkillId(goal.skillId);
 		if (skill != null)
 		{
-			progressColor = SkillColor.find(skill).getColor();
+			// TODO: Remove once color comes from API
+			if (skill != Skill.SAILING)
+			{
+				progressColor = SkillColor.find(skill).getColor();
+			}
+			else
+			{
+				progressColor = Color.decode("#0E87CC");
+			}
 		}
 		else
 		{
