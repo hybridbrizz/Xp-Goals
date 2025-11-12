@@ -177,6 +177,7 @@ public class XpGoalsPlugin extends Plugin
 
 			if (totalXpGoal != null && totalXpGoal.track)
 			{
+				if (totalXpGoal.progressXp < 0) totalXpGoal.progressXp = 0;
 				totalXpGoal.progressXp += earnedXp;
 				progressUpdated = true;
 			}
